@@ -4,12 +4,16 @@
 ## 1. Braki danych (NaN)
 
 ### Reprezentacja braków
+
 ```python
 np.nan
 ```
 
-- standardowa reprezentacja braków danych w NumPy / Pandas
-- większość algorytmów ML **nie obsługuje NaN** → trzeba je uzupełnić
+* standardowa reprezentacja braków danych w NumPy i Pandas
+* większość algorytmów ML **nie obsługuje wartości NaN**
+* **braki muszą zostać obsłużone przed trenowaniem modelu** (inaczej błąd lub zniekształcone wyniki)
+
+**Złota zasada:** brak danych to też informacja – najpierw zrozum *dlaczego* brakuje wartości, a dopiero potem je uzupełniaj.
 
 ---
 
@@ -19,6 +23,10 @@ np.nan
 from sklearn.impute import SimpleImputer
 ```
 
+Imputacja polega na **zastąpieniu braków danych wartościami zastępczymi**, w sposób kontrolowany i powtarzalny.
+
+---
+
 ### 2.1 Imputacja średnią (cechy numeryczne)
 
 ```python
@@ -27,8 +35,15 @@ df['weight'] = imputer.fit_transform(df[['weight']])
 ```
 
 **Stosuj gdy:**
-- cecha ciągła
-- brak wyraźnej wartości zastępczej
+
+* cecha jest ciągła (np. waga, wzrost, cena)
+* braki są losowe
+* nie ma sensownej wartości domyślnej
+
+**Uwaga:**
+
+* średnia może być wrażliwa na outliery
+* w takich przypadkach rozważ `median`
 
 ---
 
@@ -40,8 +55,10 @@ df['price'] = imputer.fit_transform(df[['price']])
 ```
 
 **Stosuj gdy:**
-- brak danych sam w sobie niesie informację
-- potrzebny placeholder
+
+* brak danych sam w sobie niesie informację
+* chcesz jawnie zaznaczyć „brak” (placeholder)
+* planujesz później stworzyć flagę typu `is_missing`
 
 ---
 
@@ -52,19 +69,29 @@ imputer = SimpleImputer(strategy="constant", fill_value='L')
 df['size'] = imputer.fit_transform(df[['size']]).ravel()
 ```
 
-**Uwaga:**
-- `ravel()` spłaszcza tablicę do 1D
+**Dlaczego `ravel()`?**
+
+* `SimpleImputer` zwraca tablicę 2D
+* kolumna Pandas musi być 1D
+
+**Dobra praktyka:**
+
+* używaj jawnych etykiet typu `"UNKNOWN"`, `"MISSING"`
 
 ---
 
 ## 3. Braki danych w szeregach czasowych
 
 ### Dane czasowe
+
 ```python
 pd.date_range(start, end, periods)
 ```
 
+Szeregi czasowe rządzą się innymi prawami niż dane statyczne – **kolejność obserwacji ma znaczenie**.
+
 ### Metody uzupełniania
+
 ```python
 fillna(0)
 fillna(mean)
@@ -73,13 +100,19 @@ fillna(method='bfill')
 fillna(method='ffill')
 ```
 
-**Zasada:**
-- szeregi czasowe → interpolacja / ffill / bfill
-- dane statyczne → mean / constant
+**Zasady praktyczne:**
+
+* dane czasowe → interpolacja / `ffill` / `bfill`
+* dane statyczne → `mean` / `median` / `constant`
+* nigdy nie mieszaj przyszłości z przeszłością (data leakage!)
 
 ---
 
 ## 4. Feature engineering – generowanie nowych cech
+
+Feature engineering to **jeden z najważniejszych etapów ML** – często ważniejszy niż sam wybór algorytmu.
+
+---
 
 ### 4.1 Cechy czasowe
 
@@ -90,8 +123,13 @@ df['year'] = df.index.year
 ```
 
 **Cel:**
-- wydobycie informacji z daty
-- lepsza reprezentacja czasu dla modelu
+
+* wydobycie informacji ukrytej w dacie
+* umożliwienie modelowi uczenia się sezonowości i trendów
+
+**Tip:**
+
+* często warto dodać też `dayofweek`, `is_weekend`
 
 ---
 
@@ -104,8 +142,10 @@ pd.cut(df.height, bins=(...), labels=[...])
 ```
 
 **Zastosowanie:**
-- zamiana wartości ciągłych na kategorie
-- uproszczenie problemu decyzyjnego
+
+* zamiana wartości ciągłych na kategorie
+* uproszczenie problemu decyzyjnego
+* poprawa interpretowalności modelu
 
 ---
 
@@ -114,6 +154,11 @@ pd.cut(df.height, bins=(...), labels=[...])
 ```python
 pd.get_dummies(df, drop_first=True)
 ```
+
+**Dlaczego `drop_first=True`?**
+
+* unikasz pułapki zmiennych fikcyjnych
+* redukujesz nadmiarowość cech
 
 ---
 
@@ -125,6 +170,9 @@ pd.get_dummies(df, drop_first=True)
 df['lang_number'] = df['lang'].apply(len)
 ```
 
+* zamiana złożonej struktury na prostą cechę liczbową
+* często bardzo skuteczna technika
+
 ---
 
 ### 6.2 Flagi binarne
@@ -132,6 +180,9 @@ df['lang_number'] = df['lang'].apply(len)
 ```python
 df['PL_flag'] = df['lang'].apply(lambda x: 1 if 'PL' in x else 0)
 ```
+
+* sygnał typu TAK/NIE
+* bardzo dobrze współpracuje z modelami liniowymi
 
 ---
 
@@ -141,8 +192,9 @@ df['PL_flag'] = df['lang'].apply(lambda x: 1 if 'PL' in x else 0)
 df.website.str.split('.', expand=True)
 ```
 
-- ekstrakcja domeny
-- ekstrakcja rozszerzenia
+* ekstrakcja domeny
+* ekstrakcja rozszerzenia
+* pierwszy krok do feature engineeringu tekstu
 
 ---
 
@@ -152,8 +204,9 @@ df.website.str.split('.', expand=True)
 from sklearn.datasets import load_iris, load_breast_cancer
 ```
 
-- gotowe datasety do nauki
-- struktura: `data`, `target`, `DESCR`
+* gotowe datasety do nauki i testów
+* struktura: `data`, `target`, `DESCR`
+* idealne do eksperymentów i porównań modeli
 
 ---
 
@@ -164,7 +217,9 @@ target = df.pop('target')
 ```
 
 **Zasada:**
-- cechy i target przechowywane osobno
+
+* cechy (X) i target (y) zawsze trzymane osobno
+* zapobiega przypadkowemu „podglądaniu” odpowiedzi przez model
 
 ---
 
@@ -181,17 +236,23 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-**Dlaczego:**
-- `stratify` → zachowanie proporcji klas
-- `random_state` → powtarzalność wyników
+**Dlaczego to ważne:**
+
+* `test_size` → kontrola ilości danych testowych
+* `random_state` → powtarzalność eksperymentów
+* `stratify=y` → zachowanie proporcji klas
+
+Bez poprawnego podziału **nie da się rzetelnie ocenić modelu**.
 
 ---
 
 ## 10. TL;DR – przygotowanie danych
 
-- NaN → imputacja lub interpolacja
-- Dane czasowe ≠ dane statyczne
-- Feature engineering to kluczowy etap ML
-- `pd.cut` → dyskretyzacja
-- `get_dummies` → encoding
-- `train_test_split + stratify` → poprawny podział
+* NaN → zawsze świadoma imputacja lub interpolacja
+* Dane czasowe ≠ dane statyczne
+* Feature engineering często decyduje o jakości modelu
+* `pd.cut` → dyskretyzacja
+* `get_dummies` → encoding kategorii
+* `train_test_split + stratify` → uczciwa walidacja
+
+> Dobry model zaczyna się od dobrych danych – algorytm jest dopiero na końcu.
