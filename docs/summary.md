@@ -1,4 +1,5 @@
 # Data Science Handbook – przygotowanie danych (Pandas + scikit-learn)
+
 ---
 
 ## 1. Braki danych (NaN)
@@ -246,13 +247,85 @@ Bez poprawnego podziału **nie da się rzetelnie ocenić modelu**.
 
 ---
 
-## 10. TL;DR – przygotowanie danych
+## 10. Regresja liniowa od zera (NumPy)
+
+Ten przykład pokazuje **matematyczne podstawy regresji liniowej** – bez użycia gotowych modeli ML.
+
+### Dane wejściowe
+
+```python
+import numpy as np
+
+X1 = np.array([1, 2, 3, 4, 5, 6])
+Y = np.array([3000, 3250, 3500, 3750, 4000, 4250])
+m = len(X1)
+```
+
+* `X1` – cecha (np. lata pracy)
+* `Y` – target (wynagrodzenie)
+* `m` – liczba próbek
+
+---
+
+### Przygotowanie macierzy cech
+
+```python
+X1 = X1.reshape(m, 1)
+bias = np.ones((m, 1))
+X = np.append(bias, X1, axis=1)
+```
+
+* `reshape(m, 1)` → kolumna
+* `bias` → wyraz wolny (intercept)
+* `X` → pełna macierz projektu
+
+---
+
+### Równanie normalne (Normal Equation)
+
+```python
+L = np.linalg.inv(np.dot(X.T, X))
+P = np.dot(X.T, Y)
+theta = np.dot(L, P)
+```
+
+To implementacja wzoru:
+
+**θ = (XᵀX)⁻¹ Xᵀy**
+
+* `theta[0]` → intercept
+* `theta[1]` → współczynnik kierunkowy
+
+---
+
+## 11. Regresja liniowa w scikit-learn
+
+```python
+from sklearn.linear_model import LinearRegression
+
+regression = LinearRegression()
+regression.fit(X1, Y)
+
+regression.intercept_
+regression.coef_[0]
+```
+
+**Co się dzieje pod spodem:**
+
+* scikit-learn robi dokładnie to samo
+* ale dodaje stabilność numeryczną i walidację
+* API jest spójne z całym ekosystemem ML
+
+---
+
+## 12. TL;DR – przygotowanie danych
 
 * NaN → zawsze świadoma imputacja lub interpolacja
 * Dane czasowe ≠ dane statyczne
 * Feature engineering często decyduje o jakości modelu
 * `pd.cut` → dyskretyzacja
 * `get_dummies` → encoding kategorii
-* `train_test_split + stratify` → uczciwa walidacja
+* Regresja liniowa = algebra liniowa + dane
+* scikit-learn = wygodne, bezpieczne API
 
 > Dobry model zaczyna się od dobrych danych – algorytm jest dopiero na końcu.
