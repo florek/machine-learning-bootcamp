@@ -318,6 +318,62 @@ regression.coef_[0]
 
 ---
 
+## 11.1 Generowanie danych syntetycznych
+
+```python
+from sklearn.datasets import make_regression
+
+data, target = make_regression(
+    n_samples=100, 
+    n_features=1, 
+    n_informative=1, 
+    noise=10, 
+    random_state=42
+)
+```
+
+**Zastosowanie:**
+
+* szybkie testowanie modeli bez zbierania danych
+* kontrola nad złożonością problemu (szum, liczba cech)
+* idealne do nauki i demonstracji
+
+**Parametry:**
+
+* `n_samples` → liczba obserwacji
+* `n_features` → liczba cech
+* `noise` → poziom szumu w danych
+* `random_state` → powtarzalność
+
+---
+
+## 11.2 Ocena i wizualizacja modelu
+
+```python
+regressor.score(data, target)
+y_pred = regressor.predict(data)
+```
+
+**`score()` zwraca R²:**
+
+* 1.0 = idealne dopasowanie
+* 0.0 = model nie lepszy niż średnia
+* < 0 = model gorszy niż średnia
+
+**Wizualizacja:**
+
+* `scatter()` → punkty danych
+* `plot()` → linia regresji
+* porównanie pokazuje jakość dopasowania
+
+**Równanie modelu:**
+
+```
+y = intercept_ + coef_[0] * x
+```
+
+---
+
 ## 12. TL;DR – przygotowanie danych
 
 * NaN → zawsze świadoma imputacja lub interpolacja
