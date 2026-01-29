@@ -18,7 +18,7 @@ np.set_printoptions(
 sns.set(font_scale=1.3)
 print(sklearn.__version__)
 
-data, target = make_regression(n_samples=100, n_features=1, n_informative=1, noise=15.0, random_state=42)
+data, target = make_regression(n_samples=1000, n_features=1, n_informative=1, noise=15.0, random_state=42)
 
 print('Data shape:', data.shape)
 print('Target shape:', target.shape)

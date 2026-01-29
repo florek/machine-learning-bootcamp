@@ -248,6 +248,34 @@ predictions_df['error'].plot(kind='hist', bins=50, figsize=(8, 6))
 plt.show()
 ```
 
+**Metoda `plot()` w pandas:**
+
+* `Series.plot()` → wbudowana metoda pandas do tworzenia wykresów
+* automatycznie używa matplotlib pod spodem
+* wygodniejsza niż bezpośrednie użycie matplotlib dla danych z DataFrame/Series
+
+**Parametr `kind`:**
+
+* określa **typ wykresu** do narysowania
+* dostępne opcje:
+  * `'hist'` → histogram (rozkład wartości)
+  * `'line'` → wykres liniowy
+  * `'bar'` → wykres słupkowy
+  * `'box'` → wykres pudełkowy (boxplot)
+  * `'scatter'` → wykres punktowy
+  * `'pie'` → wykres kołowy
+  * `'area'` → wykres powierzchniowy
+
+**Inne parametry:**
+
+* `bins=50` → liczba przedziałów w histogramie
+  * więcej bins → bardziej szczegółowy wykres
+  * mniej bins → bardziej ogólny wykres
+* `figsize=(8, 6)` → rozmiar wykresu (szerokość, wysokość w calach)
+* `title='Tytuł'` → tytuł wykresu
+* `xlabel='Etykieta X'` → etykieta osi X
+* `ylabel='Etykieta Y'` → etykieta osi Y
+
 **Co pokazuje:**
 
 * rozkład błędów predykcji
@@ -264,6 +292,12 @@ plt.show()
 * symetryczny wokół zera
 * wąski (małe błędy)
 * dzwonowy kształt (rozkład normalny)
+
+**Dlaczego `_ =` przed `plot()`:**
+
+* `plot()` zwraca obiekt Axes
+* `_ =` oznacza, że ignorujemy zwracaną wartość
+* nie jest konieczne, ale dobry styl (unika nieużywanych zmiennych)
 
 ---
 
