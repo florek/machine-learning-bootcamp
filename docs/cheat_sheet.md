@@ -1,0 +1,305 @@
+# Cheat Sheet – szybkie przypomnienie kluczowych konceptów
+
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p6.md - summary_p10.md.
+
+---
+
+## 📚 Importy (standardowe)
+
+```python
+import numpy as np
+import pandas as pd
+import sklearn
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+import statsmodels.api as sm
+```
+
+**Konfiguracja:**
+```python
+np.random.seed(42)
+sns.set(font_scale=1.3)
+```
+
+---
+
+## 📊 Przygotowanie danych
+
+### Wczytanie danych
+```python
+df = pd.read_csv('path/to/file.csv')
+df = df_raw.copy()
+```
+
+### Eksploracja danych (EDA)
+```python
+df.info()
+df.describe()
+df.describe(include='category')
+df.isnull().sum()
+df.duplicated()
+df.drop_duplicates()
+```
+
+### Podział na cechy i target
+```python
+target = data.pop('charges')
+X_train, X_test, y_train, y_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
+)
+```
+
+---
+
+## 🔢 Kodowanie zmiennych kategorycznych
+
+### One-Hot Encoding
+```python
+df_dummies = pd.get_dummies(df, drop_first=True)
+```
+
+**Dlaczego `drop_first=True`:**
+- Unika pułapki zmiennych fikcyjnych (dummy variable trap)
+- Redukuje kolinearność
+- Jedna kategoria jest referencyjna (domyślna)
+
+**Przykład:**
+- `sex`: ['male', 'female'] → `sex_male` (0 lub 1)
+- `region`: 4 kategorie → 3 kolumny (jedna usunięta)
+
+### Konwersja na kategorie
+```python
+cat_cols = [col for col in df.columns if df[col].dtype == 'O']
+for cat in cat_cols:
+    df[cat] = df[cat].astype('category')
+```
+
+---
+
+## 🤖 Regresja liniowa (scikit-learn)
+
+### Podstawowy model
+```python
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
+```
+
+### Parametry modelu
+```python
+regressor.coef_
+regressor.intercept_
+```
+
+**Równanie:** `y = intercept_ + coef_[0] * x1 + coef_[1] * x2 + ...`
+
+### Ocena modelu
+```python
+regressor.score(X_train, y_train)
+regressor.score(X_test, y_test)
+```
+
+**`score()` zwraca R²:**
+- 1.0 = idealne dopasowanie
+- 0.0 = model nie lepszy niż średnia
+- < 0 = model gorszy niż średnia
+
+### Metryki błędów
+```python
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+```
+
+---
+
+## 📈 Regresja OLS (statsmodels)
+
+### Przygotowanie danych
+```python
+X_train_ols = pd.get_dummies(X_train, drop_first=True)
+predictors = ['const'] + list(X_train_ols.columns)
+X_train_ols = X_train_ols.values.astype(float)
+X_train_ols = sm.add_constant(X_train_ols)
+```
+
+### Model OLS
+```python
+ols = sm.OLS(endog=y_train.values, exog=X_train_ols).fit()
+print(ols.summary(xname=predictors))
+```
+
+**Interpretacja p-value:**
+- **p < 0.05** → zmienna istotna statystycznie
+- **p ≥ 0.05** → zmienna nieistotna (można usunąć)
+
+---
+
+## 📉 Wizualizacje
+
+### Podstawowe (matplotlib)
+```python
+plt.figure(figsize=(8, 6))
+plt.scatter(X, y, label='dane')
+plt.plot(X, y_pred, color='red', label='model')
+plt.legend()
+plt.show()
+```
+
+### Histogram (pandas)
+```python
+df['column'].plot(kind='hist', bins=50, figsize=(8, 6))
+```
+
+### Wykresy pandas
+```python
+df.plot(kind='hist')    # histogram
+df.plot(kind='line')    # liniowy
+df.plot(kind='bar')     # słupkowy
+df.plot(kind='barh')    # poziomy słupkowy
+df.plot(kind='box')     # pudełkowy
+df.plot(kind='scatter') # punktowy
+df.plot(kind='pie')     # kołowy
+```
+
+### Heatmap korelacji (seaborn)
+```python
+corr = df.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.show()
+```
+
+### Plotly Express (interaktywne)
+```python
+import plotly.express as px
+
+fig = px.histogram(df, x='charges', facet_col='smoker')
+fig.show()
+```
+
+---
+
+## 🔍 Analiza danych
+
+### Statystyki opisowe
+```python
+df.describe().T
+df.value_counts()
+df['column'].value_counts()
+```
+
+### Korelacja
+```python
+df.corr()
+df.corr()['target'].sort_values(ascending=False)
+```
+
+### Analiza błędów
+```python
+predictions = pd.DataFrame({
+    'y_true': y_test,
+    'y_pred': y_pred
+})
+predictions['error'] = predictions['y_true'] - predictions['y_pred']
+predictions['error'].plot(kind='hist', bins=50)
+```
+
+---
+
+## 🎯 Gradient Descent (ręczna implementacja)
+
+```python
+eta = 0.01
+weights = np.random.randn(2, 1)
+
+for i in range(3000):
+    gradient = (2 / m) * X.T.dot(X.dot(weights) - Y)
+    weights = weights - eta * gradient
+```
+
+**Co się dzieje:**
+1. Predykcja: `X.dot(weights)`
+2. Błąd: `X.dot(weights) - Y`
+3. Gradient: `(2/m) * X.T.dot(błąd)`
+4. Aktualizacja: `weights = weights - eta * gradient`
+
+---
+
+## 🔄 Selekcja zmiennych
+
+### Backward Elimination
+1. Start z pełnym modelem
+2. Sprawdź p-value dla każdej zmiennej
+3. Usuń zmienną z najwyższym p-value (jeśli ≥ 0.05)
+4. Powtórz dla nowego modelu
+
+### Usuwanie kolumn (numpy)
+```python
+X_selected = X_train_ols[:, [0, 1, 2, 3, 5]]
+predictors.remove('column_name')
+```
+
+---
+
+## ⚠️ Najczęstsze błędy i rozwiązania
+
+### Problem: TypeError z stringami w statsmodels
+**Rozwiązanie:** `X_train_ols.values.astype(float)`
+
+### Problem: Pandas Series w statsmodels
+**Rozwiązanie:** `y_train.values` (konwersja na numpy array)
+
+### Problem: Boolean w numpy array
+**Rozwiązanie:** `.astype(float)` po `get_dummies()`
+
+### Problem: Kolinearność w one-hot encoding
+**Rozwiązanie:** `drop_first=True` w `get_dummies()`
+
+---
+
+## 📝 Dobre praktyki
+
+1. **Zawsze używaj `random_state`** dla powtarzalności
+2. **Zachowaj oryginalne dane:** `df = df_raw.copy()`
+3. **Trenuj na train, oceniaj na test** – nigdy odwrotnie!
+4. **Sprawdzaj overfitting:** porównaj score na train vs test
+5. **EDA przed modelowaniem** – zrozum dane najpierw
+6. **Usuwaj duplikaty** przed trenowaniem
+7. **Koduj kategorie** przed użyciem w modelach ML
+
+---
+
+## 🎓 Kluczowe koncepty
+
+### Overfitting vs Underfitting
+- **Overfitting:** score(train) >> score(test) → model zapamiętał dane
+- **Underfitting:** oba niskie → model za prosty
+- **Idealnie:** podobne wyniki na train i test
+
+### R² vs MAE
+- **R²:** procent wyjaśnionej wariancji (0-1)
+- **MAE:** średni błąd w jednostkach targetu (łatwiejsze do zrozumienia)
+
+### Train/Test Split
+- **80/20** lub **75/25** to standard
+- **random_state** dla powtarzalności
+- **Nigdy nie oceniaj na danych treningowych!**
+
+---
+
+## 📚 Mapowanie konceptów do plików
+
+- **p6.py** → Gradient Descent (ręczna implementacja)
+- **p7.py** → Regresja liniowa scikit-learn (syntetyczne dane)
+- **p8.py** → Train/test split, ocena modelu
+- **p9.py** → Rzeczywiste dane, EDA, feature engineering
+- **p10.py** → OLS statsmodels, selekcja zmiennych
+
+---
+
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p*.md.
