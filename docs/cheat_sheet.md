@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p6.md - summary_p10.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p6.md - summary_p11.md.
 
 ---
 
@@ -232,16 +232,37 @@ for i in range(3000):
 
 ## 🔄 Selekcja zmiennych
 
-### Backward Elimination
-1. Start z pełnym modelem
-2. Sprawdź p-value dla każdej zmiennej
-3. Usuń zmienną z najwyższym p-value (jeśli ≥ 0.05)
-4. Powtórz dla nowego modelu
+### Automatyczna Backward Elimination
+```python
+sl = 0.05
+while True:
+    ols = sm.OLS(endog=y_train.values, exog=X_train_numpy).fit()
+    max_pval = max(ols.pvalues.astype('float'))
+    if max_pval > sl:
+        max_idx = np.argmax(ols.pvalues.astype('float'))
+        X_train_numpy = np.delete(X_train_numpy, max_idx, axis=1)
+        predictors.remove(predictors[max_idx])
+    else:
+        break
+```
 
-### Usuwanie kolumn (numpy)
+**Funkcje NumPy:**
+- `np.argmax(array)` → indeks elementu z najwyższą wartością
+- `np.delete(array, idx, axis=1)` → usuwa kolumnę o indeksie idx
+
+### Ręczne usuwanie kolumn (numpy)
 ```python
 X_selected = X_train_ols[:, [0, 1, 2, 3, 5]]
 predictors.remove('column_name')
+```
+
+### Zapis modelu do pliku
+```python
+ols.save('model.pickle')
+
+import pickle
+with open('model.pickle', 'rb') as f:
+    loaded_model = pickle.load(f)
 ```
 
 ---

@@ -69,14 +69,14 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ## 📌 P10: OLS statsmodels + selekcja zmiennych
 
-**Co robi:** Model OLS z analizą statystyczną i backward elimination
+**Co robi:** Model OLS z analizą statystyczną i ręczną backward elimination
 
 **Kluczowe elementy:**
 - `pd.get_dummies().values.astype(float)` → przygotowanie danych
 - `sm.add_constant()` → dodanie intercept
 - `sm.OLS().fit()` → model OLS
 - `ols.summary()` → statystyki (p-value, R²)
-- Backward elimination → usuwanie nieistotnych zmiennych (p ≥ 0.05)
+- Ręczna backward elimination → krok po kroku usuwanie nieistotnych zmiennych
 
 **Interpretacja p-value:**
 - **p < 0.05** → istotna statystycznie ✅
@@ -84,8 +84,30 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 **Proces selekcji:**
 1. Pełny model → sprawdź p-value
-2. Usuń zmienną z najwyższym p ≥ 0.05
+2. Usuń zmienną z najwyższym p ≥ 0.05 (ręcznie)
 3. Powtórz dla nowego modelu
+
+---
+
+## 📌 P11: Automatyczna backward elimination
+
+**Co robi:** Automatyczna selekcja zmiennych w pętli while
+
+**Kluczowe elementy:**
+- `while True:` → automatyczna pętla eliminacji
+- `max(ols.pvalues)` → najwyższe p-value
+- `np.argmax()` → indeks zmiennej z najwyższym p-value
+- `np.delete(array, idx, axis=1)` → usunięcie kolumny
+- `ols.save('model.pickle')` → zapis modelu do pliku
+
+**Proces automatyczny:**
+1. Dopasuj model → znajdź max p-value
+2. Jeśli max p-value > 0.05 → usuń zmienną
+3. Powtórz, dopóki wszystkie zmienne są istotne (p ≤ 0.05)
+
+**Różnica od P10:**
+- P10: ręczne usuwanie (3 kroki)
+- P11: automatyczna pętla (działa dla dowolnej liczby zmiennych)
 
 ---
 
@@ -138,6 +160,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed P9:** EDA → czyszczenie → encoding → modelowanie
 
 **Przed P10:** `drop_first=True` w get_dummies, `.astype(float)` przed statsmodels, p-value < 0.05 = istotna
+
+**Przed P11:** `while True` z `break`, `np.argmax()` do znajdowania indeksu, `np.delete()` do usuwania kolumn
 
 ---
 
