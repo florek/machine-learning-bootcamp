@@ -1,6 +1,6 @@
 # Automatyczna selekcja zmiennych – Backward Elimination (statsmodels)
 
-Ten plik opisuje **automatyczną implementację backward elimination** do selekcji zmiennych w modelu OLS. W przeciwieństwie do p10.py, gdzie zmienne były usuwane ręcznie, tutaj proces jest zautomatyzowany w pętli.
+Ten plik opisuje **automatyczną implementację backward elimination** do selekcji zmiennych w modelu OLS. W przeciwieństwie do ręcznej selekcji (krok po kroku), tutaj proces jest zautomatyzowany w pętli.
 
 ---
 
@@ -13,7 +13,7 @@ df_raw = pd.read_csv('https://storage.googleapis.com/esmartdata-courses-files/ml
 df = df.drop_duplicates()
 ```
 
-Identyczny proces jak w p9.py i p10.py – wczytanie danych insurance.csv i usunięcie duplikatów.
+Identyczny proces jak w lekcjach z rzeczywistymi danymi: wczytanie zbioru (np. insurance), usunięcie duplikatów.
 
 ### 1.2 Podział na zbiory treningowy i testowy
 
@@ -119,21 +119,21 @@ while True:
 
 ---
 
-## 4. Różnice między p10.py a p11.py
+## 4. Różnice między selekcją ręczną a automatyczną
 
-### p10.py (ręczna selekcja)
+### Selekcja ręczna (krok po kroku)
 - Zmienne usuwane ręcznie, krok po kroku
 - Trzy iteracje z ręcznym wyborem zmiennych
 - Kod powtarzalny dla każdego kroku
 - Wymaga ręcznej analizy p-values
 
-### p11.py (automatyczna selekcja)
+### Selekcja automatyczna (pętla)
 - Pętla `while True` automatycznie usuwa zmienne
 - Proces kontynuuje się, dopóki wszystkie zmienne są istotne
 - Kod bardziej zwięzły i elastyczny
 - Automatyczna analiza p-values
 
-**Zalety p11.py:**
+**Zalety automatyzacji:**
 - Mniej kodu
 - Automatyczny proces
 - Łatwiejsze do utrzymania
@@ -283,7 +283,7 @@ Po `np.delete()`:
 
 ## 10. Porównanie z innymi metodami selekcji
 
-### Backward Elimination (p11.py)
+### Backward Elimination (wersja automatyczna)
 - Start: wszystkie zmienne
 - Proces: usuwa najmniej istotne
 - Zakończenie: gdy wszystkie istotne

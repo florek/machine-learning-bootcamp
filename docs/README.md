@@ -10,6 +10,12 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`pre_lesson_review.md`** → Ultra-skondensowane przypomnienie przed każdą lekcją
 - **`cheat_sheet.md`** → Szybkie przypomnienie kluczowych konceptów i składni
 
+### Quizy i wyniki
+- **`docs/quiz/questions/*.md`** → Pytania quizowe z konkretnych dat
+- **`docs/quiz/answers/*.md`** → Oficjalne odpowiedzi i wyjaśnienia
+- **`docs/quiz/my_answers/*.md`** → Twoje odpowiedzi i auto-feedback
+- **`docs/quiz/results/*.md`** + `docs/quiz/results/README.md` → Podsumowania wyników
+
 ### Szczegółowe wyjaśnienia (używaj do nauki)
 - **`summary_p6.md`** → Gradient Descent (ręczna implementacja)
 - **`summary_p7.md`** → Regresja liniowa scikit-learn
@@ -17,6 +23,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p9.md`** → Rzeczywiste dane, EDA, feature engineering
 - **`summary_p10.md`** → OLS statsmodels, ręczna selekcja zmiennych
 - **`summary_p11.md`** → Automatyczna backward elimination
+- **`summary_p12.md`** → Regresja wielomianowa (rozszerzenie cech, PolynomialFeatures)
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -57,6 +64,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P9 | `summary_p9.md` | EDA, feature engineering, rzeczywiste dane |
 | P10 | `summary_p10.md` | OLS statsmodels, ręczna selekcja zmiennych |
 | P11 | `summary_p11.md` | Automatyczna backward elimination, zapis modelu |
+| P12 | `summary_p12.md` | Regresja wielomianowa, PolynomialFeatures |
 
 ---
 
@@ -89,7 +97,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 ```
 1. Otwórz odpowiedni summary_p*.md
 2. Przeczytaj szczegółowe wyjaśnienia
-3. Porównaj z kodem w p*.py
+3. Porównaj z kodem ćwiczeń z danej lekcji
 4. Zrozum koncepty i metodologię
 ```
 
@@ -105,7 +113,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -114,6 +122,7 @@ Każda lekcja buduje na poprzedniej:
 - **P9:** Praca z rzeczywistymi danymi (EDA, feature engineering)
 - **P10:** Zaawansowana analiza statystyczna (OLS, ręczna selekcja zmiennych)
 - **P11:** Automatyzacja selekcji zmiennych (backward elimination w pętli)
+- **P12:** Regresja wielomianowa (nieliniowa zależność, rozszerzenie cech)
 
 ---
 
@@ -127,6 +136,7 @@ Każda lekcja buduje na poprzedniej:
 - [P9: Rzeczywiste dane + EDA](summary_p9.md)
 - [P10: OLS + ręczna selekcja zmiennych](summary_p10.md)
 - [P11: Automatyczna backward elimination](summary_p11.md)
+- [P12: Regresja wielomianowa](summary_p12.md)
 
 ---
 

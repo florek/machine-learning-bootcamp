@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p6.md - summary_p11.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p12.md.
 
 ---
 
@@ -137,6 +137,37 @@ print(ols.summary(xname=predictors))
 **Interpretacja p-value:**
 - **p < 0.05** → zmienna istotna statystycznie
 - **p ≥ 0.05** → zmienna nieistotna (można usunąć)
+
+---
+
+## 📐 Regresja wielomianowa
+
+Gdy zależność jest nieliniowa (np. wielomianowa), rozszerz cechy i użyj zwykłej regresji liniowej.
+
+### Kształt danych (jedna cecha)
+```python
+X = X.reshape(n, 1)
+```
+scikit-learn oczekuje macierzy 2D (próbki × cechy).
+
+### Rozszerzenie cech (PolynomialFeatures)
+```python
+from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=3, include_bias=True)
+X_poly = poly.fit_transform(X)
+regressor = LinearRegression()
+regressor.fit(X_poly, y)
+y_pred = regressor.predict(X_poly)
+```
+
+**Uwaga:** przy wysokim stopniu i małej liczbie obserwacji ryzyko przeuczenia; rozważ regularyzację (Ridge/Lasso) lub niższy stopień.
+
+### Ocena
+```python
+from sklearn.metrics import r2_score
+r2_score(y, y_pred)
+```
 
 ---
 
@@ -313,14 +344,16 @@ with open('model.pickle', 'rb') as f:
 
 ---
 
-## 📚 Mapowanie konceptów do plików
+## 📚 Mapowanie konceptów do lekcji
 
-- **p6.py** → Gradient Descent (ręczna implementacja)
-- **p7.py** → Regresja liniowa scikit-learn (syntetyczne dane)
-- **p8.py** → Train/test split, ocena modelu
-- **p9.py** → Rzeczywiste dane, EDA, feature engineering
-- **p10.py** → OLS statsmodels, selekcja zmiennych
+- **P6** → Gradient Descent (ręczna implementacja)
+- **P7** → Regresja liniowa scikit-learn (syntetyczne dane)
+- **P8** → Train/test split, ocena modelu
+- **P9** → Rzeczywiste dane, EDA, feature engineering
+- **P10** → OLS statsmodels, selekcja zmiennych
+- **P11** → Automatyczna backward elimination, zapis modelu
+- **P12** → Regresja wielomianowa (PolynomialFeatures)
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia znajdziesz w plikach summary_p*.md.
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p12.md.

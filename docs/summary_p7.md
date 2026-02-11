@@ -216,14 +216,14 @@ dir(regressor)
 
 ## 10. Porównanie: scikit-learn vs implementacja ręczna
 
-**scikit-learn (p7.py):**
+**scikit-learn (ta lekcja):**
 
 * gotowy model
 * walidacja danych
 * stabilność numeryczna
 * spójne API
 
-**Implementacja ręczna (p6.py):**
+**Implementacja ręczna (gradient descent):**
 
 * pełna kontrola nad algorytmem
 * zrozumienie matematyki

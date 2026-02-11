@@ -438,11 +438,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 * `test_size=0.2` → 20% danych do testów, 80% do treningu
 * `random_state=42` → powtarzalność podziału
 
-**Różnica z p8.py:**
+**Różnica w stosunku do lekcji z syntetycznymi danymi:**
 
-* p8.py: `test_size=0.25` (25% testowych)
-* p9.py: `test_size=0.2` (20% testowych)
-* więcej danych treningowych dla większego datasetu
+* Tam często: `test_size=0.25` (25% testowych)
+* Tutaj: `test_size=0.2` (20% testowych)
+* Więcej danych treningowych przy większym zbiorze
 
 ---
 
@@ -588,23 +588,23 @@ print(data.columns)
 
 ---
 
-## 20. Różnice między p8.py a p9.py
+## 20. Różnice: syntetyczne dane vs rzeczywiste
 
-**p8.py (syntetyczne dane):**
+**Lekcja z syntetycznymi danymi (train/test):**
 
 * dane wygenerowane (`make_regression`)
 * proste, kontrolowane dane
 * jedna cecha numeryczna
 * szybkie testy i nauka
 
-**p9.py (rzeczywiste dane):**
+**Lekcja z rzeczywistymi danymi (EDA + model):**
 
 * dane z pliku CSV
 * rzeczywiste, złożone dane
 * wiele cech (numeryczne i kategoryczne)
 * pełny pipeline: EDA → feature engineering → modelowanie
 
-**Nowe elementy w p9.py:**
+**Nowe elementy w tej lekcji:**
 
 * wczytanie danych z pliku
 * eksploracja danych (EDA)

@@ -111,6 +111,21 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P12: Regresja wielomianowa
+
+**Co robi:** Uchwycenie nieliniowej zależności (wielomianowej) przez rozszerzenie cech (X, X², X³) i zwykłą regresję liniową
+
+**Kluczowe elementy:**
+- `np.random.seed(42)` → powtarzalność danych i szumu
+- `X.reshape(n, 1)` → kształt 2D (próbki × cechy) dla scikit-learn
+- Regresja liniowa na jednej cesze → słabe R² przy zależności wielomianowej
+- `PolynomialFeatures(degree=k)` → tworzy cechy 1, X, X², …; potem `LinearRegression`
+- `r2_score(y, y_pred)` / `score()` → ocena dopasowania
+
+**Zasada:** Model pozostaje liniowy względem parametrów; nieliniowość wynika z transformacji cech. Przy wysokim stopniu i małej liczbie danych – ryzyko przeuczenia (regularyzacja lub niższy stopień).
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -163,6 +178,8 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed P11:** `while True` z `break`, `np.argmax()` do znajdowania indeksu, `np.delete()` do usuwania kolumn
 
+**Przed P12:** `reshape(n, 1)` dla jednej cechy, regresja wielomianowa = rozszerzenie cech + LinearRegression, R² przy nieliniowej zależności
+
 ---
 
 ## 🎯 Najważniejsze zasady
@@ -176,4 +193,4 @@ score_test = regressor.score(X_test, y_test)
 
 ---
 
-> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p*.md, szczegóły techniczne w cheat_sheet.md.
+> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p12.md, szczegóły techniczne w cheat_sheet.md.

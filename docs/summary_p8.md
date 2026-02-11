@@ -44,7 +44,7 @@ data, target = make_regression(
 
 * `n_samples=100` → 100 obserwacji
 * `n_features=1` → jedna cecha (prosta regresja)
-* `noise=15.0` → poziom szumu (wyższy niż w p7.py)
+* `noise=15.0` → poziom szumu (np. wyższy niż w prostym przykładzie regresji)
 * `random_state=42` → powtarzalność
 
 **Zwracane wartości:**
@@ -301,15 +301,15 @@ plt.show()
 
 ---
 
-## 11. Różnice między p7.py a p8.py
+## 11. Różnice: bez podziału vs z podziałem train/test
 
-**p7.py (bez podziału):**
+**Regresja bez podziału (szybkie prototypy):**
 
 * trenowanie i ocena na tych samych danych
 * nierealistyczna ocena jakości
 * nie pokazuje, jak model działa na nowych danych
 
-**p8.py (z podziałem):**
+**Regresja z podziałem train/test:**
 
 * trenowanie na danych treningowych
 * ocena na danych testowych
@@ -318,8 +318,8 @@ plt.show()
 
 **Kiedy używać:**
 
-* **p7.py** → szybkie prototypy, zrozumienie podstaw
-* **p8.py** → właściwa ocena modelu, przygotowanie do produkcji
+* Bez podziału → szybkie prototypy, zrozumienie podstaw
+* Z podziałem → właściwa ocena modelu, przygotowanie do produkcji
 
 ---
 
@@ -331,7 +331,7 @@ plt.show()
 * interpretacja: jaka część wariancji jest wyjaśniona przez model
 * 1.0 = 100% wariancji wyjaśnionej
 
-**Inne metryki (nie używane w p8.py, ale ważne):**
+**Inne metryki (nie omawiane w tej lekcji, ale ważne):**
 
 * **MSE (Mean Squared Error)** → średni błąd kwadratowy
 * **MAE (Mean Absolute Error)** → średni błąd bezwzględny
