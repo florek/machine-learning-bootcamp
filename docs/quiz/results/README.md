@@ -1,15 +1,17 @@
 # Historia wyników
 
-| Data      | Wynik  | %   | Braki | Link                                      |
-|-----------|--------|-----|-------|-------------------------------------------|
-| 11.02.2026 | 16/20 | 80% | brak  | docs/quiz/results/11.02.2026_results.md |
-| 05.02.2026 | 17/20 | 85% | ?     | docs/quiz/results/05.02.2026.md         |
+| Data      | Wynik  | %    | Braki | Link                                      |
+|-----------|--------|------|-------|-------------------------------------------|
+| 12.02.2026 | 20/20 | 100% | brak  | docs/quiz/results/12.02.2026_results.md |
+| 11.02.2026 | 16/20 | 80%  | brak  | docs/quiz/results/11.02.2026_results.md |
+| 05.02.2026 | 17/20 | 85%  | ?     | docs/quiz/results/05.02.2026.md         |
 
 ## Statystyki
-- Najlepszy wynik: 17/20 (85%) – 05.02.2026
+- Najlepszy wynik: 20/20 (100%) – 12.02.2026
 - Najgorszy wynik: 16/20 (80%) – 11.02.2026
-- Średnia ze wszystkich prób: 82.5%
+- Średnia ze wszystkich prób: 88,3%
 - Ostatnie 5 wyników:
+  - 12.02.2026 – 20/20 (100%)
   - 11.02.2026 – 16/20 (80%)
   - 05.02.2026 – 17/20 (85%)
 
