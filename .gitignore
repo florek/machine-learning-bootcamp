@@ -208,3 +208,7 @@ __marimo__/
 .idea/
 model.pickle
 .cursor
+
+# Generated PNG (scripts output)
+tree.png
+tree_depth_*.png
