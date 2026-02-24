@@ -353,7 +353,27 @@ with open('model.pickle', 'rb') as f:
 - **P10** → OLS statsmodels, selekcja zmiennych
 - **P11** → Automatyczna backward elimination, zapis modelu
 - **P12** → Regresja wielomianowa (PolynomialFeatures)
+- **P13** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p12.md.
+## 🌳 Regresja drzewa decyzyjnego
+
+```python
+from sklearn.tree import DecisionTreeRegressor, plot_tree
+
+regressor_tree = DecisionTreeRegressor(max_depth=2)
+regressor_tree.fit(data, target)
+y_pred = regressor_tree.predict(plot_data)
+
+plt.figure(figsize=(12, 8))
+plot_tree(regressor_tree, filled=True, rounded=True, feature_names=['cecha x'])
+plt.tight_layout()
+plt.show()
+```
+
+**max_depth:** ogranicza głębokość; małe = prostszy model, duże = lepsze dopasowanie, ryzyko przeuczenia. Krzywa predykcji ma postać „schodków”.
+
+---
+
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p13.md.

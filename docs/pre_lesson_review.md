@@ -126,6 +126,20 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P13: Regresja drzewa decyzyjnego
+
+**Co robi:** Model regresji, który dzieli oś cechy na przedziały i w każdym przewiduje stałą (średnią); przy nieliniowej zależności daje „schodkową” krzywą zamiast prostej.
+
+**Kluczowe elementy:**
+- `DecisionTreeRegressor(max_depth=k)` → drzewo o ograniczonej głębokości
+- `fit(data, target)`, `predict(plot_data)` → API jak w LinearRegression
+- `plot_tree(regressor, filled=True, rounded=True, feature_names=[...])` → wizualizacja struktury drzewa
+- Większe max_depth → więcej schodków, lepsze dopasowanie, większe ryzyko przeuczenia
+
+**Porównanie:** Regresja liniowa = jedna prosta; drzewo = schodki dopasowane do krzywej. Do wizualizacji krzywej używa się gęstej siatki punktów (np. np.arange().reshape(-1, 1)).
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -179,6 +193,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed P11:** `while True` z `break`, `np.argmax()` do znajdowania indeksu, `np.delete()` do usuwania kolumn
 
 **Przed P12:** `reshape(n, 1)` dla jednej cechy, regresja wielomianowa = rozszerzenie cech + LinearRegression, R² przy nieliniowej zależności
+
+**Przed P13:** DecisionTreeRegressor(max_depth=k), plot_tree do wizualizacji struktury, krzywa predykcji = schodki; max_depth kontroluje złożoność i przeuczenie
 
 ---
 
