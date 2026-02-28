@@ -140,6 +140,17 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P14: Metryki regresji i wizualizacja
+
+**Co robi:** Ocena modelu regresji za pomocą MAE, MSE, RMSE, max_error, R² oraz wizualizacja: wykres y_true vs y_pred (z linią y=x) i histogram błędów.
+
+**Kluczowe elementy:**
+- `mean_absolute_error`, `mean_squared_error`, `r2_score`, `max_error` z sklearn.metrics
+- RMSE: `mean_squared_error(y_true, y_pred, squared=False)`
+- Wykres punktowy true vs pred + linia y=x; histogram kolumny error
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -195,6 +206,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed P12:** `reshape(n, 1)` dla jednej cechy, regresja wielomianowa = rozszerzenie cech + LinearRegression, R² przy nieliniowej zależności
 
 **Przed P13:** DecisionTreeRegressor(max_depth=k), plot_tree do wizualizacji struktury, krzywa predykcji = schodki; max_depth kontroluje złożoność i przeuczenie
+
+**Przed P14:** MAE, MSE, RMSE (squared=False), max_error, r2_score; wykres true vs pred z linią y=x, histogram błędów
 
 ---
 

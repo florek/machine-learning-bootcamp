@@ -25,6 +25,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p11.md`** → Automatyczna backward elimination
 - **`summary_p12.md`** → Regresja wielomianowa (rozszerzenie cech, PolynomialFeatures)
 - **`summary_p13.md`** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
+- **`summary_p14.md`** → Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -67,6 +68,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P11 | `summary_p11.md` | Automatyczna backward elimination, zapis modelu |
 | P12 | `summary_p12.md` | Regresja wielomianowa, PolynomialFeatures |
 | P13 | `summary_p13.md` | Regresja drzewa decyzyjnego, DecisionTreeRegressor, plot_tree |
+| P14 | `summary_p14.md` | Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja |
 
 ---
 
@@ -115,7 +117,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -126,6 +128,7 @@ Każda lekcja buduje na poprzedniej:
 - **P11:** Automatyzacja selekcji zmiennych (backward elimination w pętli)
 - **P12:** Regresja wielomianowa (nieliniowa zależność, rozszerzenie cech)
 - **P13:** Regresja drzewa decyzyjnego (DecisionTreeRegressor, wizualizacja drzewa)
+- **P14:** Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 
 ---
 
@@ -141,6 +144,7 @@ Każda lekcja buduje na poprzedniej:
 - [P11: Automatyczna backward elimination](summary_p11.md)
 - [P12: Regresja wielomianowa](summary_p12.md)
 - [P13: Regresja drzewa decyzyjnego](summary_p13.md)
+- [P14: Metryki regresji i wizualizacja](summary_p14.md)
 
 ---
 

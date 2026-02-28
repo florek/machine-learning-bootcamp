@@ -109,11 +109,13 @@ regressor.score(X_test, y_test)
 
 ### Metryki błędów
 ```python
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import max_error, mean_absolute_error, mean_squared_error, r2_score
 
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+max_err = max_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 ```
 
 ---
@@ -354,6 +356,7 @@ with open('model.pickle', 'rb') as f:
 - **P11** → Automatyczna backward elimination, zapis modelu
 - **P12** → Regresja wielomianowa (PolynomialFeatures)
 - **P13** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
+- **P14** → Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja
 
 ---
 
@@ -376,4 +379,4 @@ plt.show()
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p13.md.
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p14.md.
