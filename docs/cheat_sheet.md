@@ -357,6 +357,24 @@ with open('model.pickle', 'rb') as f:
 - **P12** → Regresja wielomianowa (PolynomialFeatures)
 - **P13** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **P14** → Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja
+- **P15** → Regresja logistyczna (funkcja straty, binary cross-entropy, sigmoida, próg 0,5)
+
+---
+
+## 📊 Regresja logistyczna – funkcja straty
+
+**Strata dla jednej obserwacji (postać kawałkowa):**
+- y = 1: l(y_pred) = −log(y_pred)
+- y = 0: l(y_pred) = −log(1 − y_pred)
+
+**Postać zwarta (binary cross-entropy):**  
+l(y_pred_i) = −y_i·log(y_pred_i) − (1−y_i)·log(1−y_pred_i)
+
+**Funkcja kosztu (średnia po m obserwacjach):**  
+L = −(1/m) Σ [ y_i·log(y_pred_i) + (1−y_i)·log(1−y_pred_i) ]  
+Minimalizowana w trakcie uczenia. y_pred_i to wynik sigmoidy (prawdopodobieństwo klasy 1).
+
+**Klasyfikacja binarna:** Sigmoida mapuje scoring na prawdopodobieństwo (0–1). Próg 0,5: powyżej → klasa 1, poniżej → klasa 0. Punkt przecięcia sigmoidy z y=0,5 wyznacza granicę decyzyjną w przestrzeni cech.
 
 ---
 
@@ -379,4 +397,4 @@ plt.show()
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p14.md.
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p15.md.

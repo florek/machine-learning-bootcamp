@@ -151,6 +151,20 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P15: Regresja logistyczna – funkcja straty i klasyfikacja binarna
+
+**Co robi:** Klasyfikacja binarna z prawdopodobieństwem; funkcja straty (binary cross-entropy) i jej minimalizacja.
+
+**Kluczowe elementy:**
+- Strata dla jednej obserwacji: gdy y=1 → −log(y_pred); gdy y=0 → −log(1−y_pred)
+- Postać zwarta: −y·log(y_pred) − (1−y)·log(1−y_pred) (binary cross-entropy)
+- Funkcja kosztu: średnia ze strat po wszystkich obserwacjach; minimalizowana w treningu
+- Sigmoida: mapuje scoring na prawdopodobieństwo (0–1); próg 0,5 → decyzja klasa 0 vs 1
+
+**Wykresy straty:** Dla y=1 strata maleje, gdy y_pred→1; dla y=0 strata maleje, gdy y_pred→0. Duża strata przy złej predykcji.
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -208,6 +222,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed P13:** DecisionTreeRegressor(max_depth=k), plot_tree do wizualizacji struktury, krzywa predykcji = schodki; max_depth kontroluje złożoność i przeuczenie
 
 **Przed P14:** MAE, MSE, RMSE (squared=False), max_error, r2_score; wykres true vs pred z linią y=x, histogram błędów
+
+**Przed P15:** Funkcja straty: postać kawałkowa (y=1 / y=0) i zwarta (binary cross-entropy); funkcja kosztu = średnia strat; sigmoida, próg 0,5
 
 ---
 

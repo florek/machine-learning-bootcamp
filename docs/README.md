@@ -26,6 +26,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p12.md`** → Regresja wielomianowa (rozszerzenie cech, PolynomialFeatures)
 - **`summary_p13.md`** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **`summary_p14.md`** → Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
+- **`summary_p15.md`** → Regresja logistyczna: funkcja straty (binary cross-entropy), funkcja kosztu, klasyfikacja binarna (sigmoida, próg 0,5)
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -69,6 +70,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P12 | `summary_p12.md` | Regresja wielomianowa, PolynomialFeatures |
 | P13 | `summary_p13.md` | Regresja drzewa decyzyjnego, DecisionTreeRegressor, plot_tree |
 | P14 | `summary_p14.md` | Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja |
+| P15 | `summary_p15.md` | Regresja logistyczna: funkcja straty, binary cross-entropy, sigmoida, próg decyzyjny |
 
 ---
 
@@ -117,7 +119,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -129,6 +131,7 @@ Każda lekcja buduje na poprzedniej:
 - **P12:** Regresja wielomianowa (nieliniowa zależność, rozszerzenie cech)
 - **P13:** Regresja drzewa decyzyjnego (DecisionTreeRegressor, wizualizacja drzewa)
 - **P14:** Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
+- **P15:** Regresja logistyczna – funkcja straty (binary cross-entropy), sigmoida, klasyfikacja binarna, próg 0,5
 
 ---
 
@@ -145,6 +148,7 @@ Każda lekcja buduje na poprzedniej:
 - [P12: Regresja wielomianowa](summary_p12.md)
 - [P13: Regresja drzewa decyzyjnego](summary_p13.md)
 - [P14: Metryki regresji i wizualizacja](summary_p14.md)
+- [P15: Regresja logistyczna](summary_p15.md)
 
 ---
 

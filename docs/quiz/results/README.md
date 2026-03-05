@@ -2,6 +2,7 @@
 
 | Data      | Wynik  | %    | Braki | Link                                      |
 |-----------|--------|------|-------|-------------------------------------------|
+| 05.03.2026 | 19/20 | 95%  | brak  | docs/quiz/results/05.03.2026_results.md |
 | 02.03.2026 | 19/20 | 95%  | brak  | docs/quiz/results/02.03.2026_results.md |
 | 28.02.2026 | 19/20 | 95%  | brak  | docs/quiz/results/28.02.2026_results.md |
 | 25.02.2026 | 20/20 | 100% | brak  | docs/quiz/results/25.02.2026_results.md |
@@ -14,17 +15,17 @@
 ## Statystyki
 - Najlepszy wynik: 20/20 (100%) – 12.02.2026, 13.02.2026, 25.02.2026
 - Najgorszy wynik: 14/20 (70%) – 24.02.2026
-- Średnia ze wszystkich prób: 89%
+- Średnia ze wszystkich prób: 91%
 - Ostatnie 5 wyników:
+  - 05.03.2026 – 19/20 (95%)
   - 02.03.2026 – 19/20 (95%)
   - 28.02.2026 – 19/20 (95%)
   - 25.02.2026 – 20/20 (100%)
   - 24.02.2026 – 14/20 (70%)
-  - 13.02.2026 – 20/20 (100%)
 
 ## Najczęstsze obszary do poprawy
 - trudne – regresja drzewa (plot_tree, średnia w liściu, kształt krzywej), OLS p-value, numpy (np.delete)
-- łatwe – równanie LinearRegression, kształt krzywej drzewa (schodki), metryki (MSE vs MAE)
+- łatwe – równanie LinearRegression, kształt krzywej drzewa (schodki), metryki (MSE vs MAE), random_state vs stratify
 - średnie – interpretacja metryk, backward/forward elimination, regresja wielomianowa
 
 ---
