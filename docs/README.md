@@ -26,7 +26,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p12.md`** → Regresja wielomianowa (rozszerzenie cech, PolynomialFeatures)
 - **`summary_p13.md`** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **`summary_p14.md`** → Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
-- **`summary_p15.md`** → Regresja logistyczna: funkcja straty (binary cross-entropy), funkcja kosztu, klasyfikacja binarna (sigmoida, próg 0,5)
+- **`summary_p15.md`** → Regresja logistyczna: binary cross-entropy, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -70,7 +70,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P12 | `summary_p12.md` | Regresja wielomianowa, PolynomialFeatures |
 | P13 | `summary_p13.md` | Regresja drzewa decyzyjnego, DecisionTreeRegressor, plot_tree |
 | P14 | `summary_p14.md` | Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja |
-| P15 | `summary_p15.md` | Regresja logistyczna: funkcja straty, binary cross-entropy, sigmoida, próg decyzyjny |
+| P15 | `summary_p15.md` | Regresja logistyczna: strata, sigmoida, skalowanie, LogisticRegression, accuracy, confusion matrix |
 
 ---
 
@@ -131,7 +131,7 @@ Każda lekcja buduje na poprzedniej:
 - **P12:** Regresja wielomianowa (nieliniowa zależność, rozszerzenie cech)
 - **P13:** Regresja drzewa decyzyjnego (DecisionTreeRegressor, wizualizacja drzewa)
 - **P14:** Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
-- **P15:** Regresja logistyczna – funkcja straty (binary cross-entropy), sigmoida, klasyfikacja binarna, próg 0,5
+- **P15:** Regresja logistyczna – binary cross-entropy, sigmoida, pipeline sklearn (skalowanie, LogisticRegression, metryki klasyfikacji)
 
 ---
 

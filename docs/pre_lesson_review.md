@@ -151,17 +151,21 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
-## 📌 P15: Regresja logistyczna – funkcja straty i klasyfikacja binarna
+## 📌 P15: Regresja logistyczna – teoria i klasyfikacja w sklearn
 
-**Co robi:** Klasyfikacja binarna z prawdopodobieństwem; funkcja straty (binary cross-entropy) i jej minimalizacja.
+**Co robi:** Klasyfikacja binarna – teoria straty (binary cross-entropy), sigmoida, pipeline z LogisticRegression i metrykami.
 
-**Kluczowe elementy:**
-- Strata dla jednej obserwacji: gdy y=1 → −log(y_pred); gdy y=0 → −log(1−y_pred)
-- Postać zwarta: −y·log(y_pred) − (1−y)·log(1−y_pred) (binary cross-entropy)
-- Funkcja kosztu: średnia ze strat po wszystkich obserwacjach; minimalizowana w treningu
-- Sigmoida: mapuje scoring na prawdopodobieństwo (0–1); próg 0,5 → decyzja klasa 0 vs 1
+**Kluczowe elementy (teoria):**
+- Strata: y=1 → −log(y_pred); y=0 → −log(1−y_pred); postać zwarta binary cross-entropy
+- Funkcja kosztu = średnia strat; minimalizowana w treningu
+- Sigmoida σ(x)=1/(1+e^(−x)); próg 0,5 → klasa 0 vs 1
 
-**Wykresy straty:** Dla y=1 strata maleje, gdy y_pred→1; dla y=0 strata maleje, gdy y_pred→0. Duża strata przy złej predykcji.
+**Kluczowe elementy (praktyka):**
+- `load_breast_cancer()` → data + target (klasy 0/1)
+- `train_test_split` → train / test
+- `StandardScaler`: fit na train, transform na train i test (bez leakage)
+- `LogisticRegression`: fit, predict (etykiety), predict_proba (prawdopodobieństwa)
+- `accuracy_score`, `confusion_matrix`, `classification_report`
 
 ---
 
@@ -223,7 +227,7 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed P14:** MAE, MSE, RMSE (squared=False), max_error, r2_score; wykres true vs pred z linią y=x, histogram błędów
 
-**Przed P15:** Funkcja straty: postać kawałkowa (y=1 / y=0) i zwarta (binary cross-entropy); funkcja kosztu = średnia strat; sigmoida, próg 0,5
+**Przed P15:** Binary cross-entropy, sigmoida, próg 0,5; StandardScaler (fit train); LogisticRegression; accuracy i macierz pomyłek
 
 ---
 

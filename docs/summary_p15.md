@@ -78,9 +78,73 @@ Na wykresie **Scoring (oś X)** vs **Decyzja (oś Y)**:
 
 ---
 
-## 6. Podsumowanie
+## 6. Funkcja sigmoidalna
+
+Sigmoida mapuje dowolną wartość rzeczywistą na przedział (0, 1):
+
+**σ(x) = 1 / (1 + e^(−x))**
+
+- Dla ujemnego x wynik zbliża się do 0; dla dodatniego x – do 1.
+- Wykres ma kształt litery S; punkt przecięcia z y = 0,5 odpowiada x = 0.
+- W regresji logistycznej sigmoida przekształca wynik liniowy (scoring) na prawdopodobieństwo klasy 1.
+
+---
+
+## 7. Zbiór danych do klasyfikacji binarnej
+
+Gotowy zbiór z scikit-learn (np. dane o nowotworze piersi) zwraca słownik z kluczami m.in. `data` (macierz cech), `target` (etykiety 0/1) oraz opisem `DESCR`. Cechy są numeryczne; target to klasy binarne – typowy punkt startowy do nauki klasyfikacji.
+
+---
+
+## 8. Podział i skalowanie cech
+
+**Podział train/test:** `train_test_split` oddziela cechy i etykiety na zbiór treningowy i testowy. Model uczy się wyłącznie na train; ocena na test symuluje nowe dane.
+
+**StandardScaler:** standaryzacja (średnia 0, odchylenie 1). Kolejność:
+1. `fit` **tylko** na `X_train` – parametry (średnia, std) liczone z danych treningowych.
+2. `transform` na `X_train` i `X_test` – oba zbiory skalowane tymi samymi parametrami.
+
+**Pułapka:** `fit` na połączonych train+test lub osobny `fit` na test → **data leakage** (model pośrednio „widzi” test). Poprawnie: fit na train, transform na obu.
+
+---
+
+## 9. LogisticRegression w scikit-learn
+
+**LogisticRegression** służy do **klasyfikacji** (nie regresji ciągłej). API jak w innych estymatorach sklearn:
+- `fit(X_train, y_train)` – uczenie (minimalizacja funkcji kosztu / binary cross-entropy).
+- `predict(X_test)` – przewidywane **etykiety** klas (0 lub 1) po progu domyślnym 0,5.
+- `predict_proba(X_test)` – **prawdopodobieństwa** dla każdej klasy (np. kolumna dla klasy 0 i dla klasy 1); suma w wierszu = 1.
+
+Regresja logistyczna zakłada zależność liniową między cechami a logitem szansy; skalowanie cech często poprawia zbieżność i stabilność.
+
+---
+
+## 10. Metryki klasyfikacji
+
+**Accuracy (dokładność):** odsetek poprawnych predykcji – `accuracy_score(y_test, y_pred)`. Prosta metryka; przy niezbalansowanych klasach może być myląca.
+
+**Macierz pomyłek (confusion matrix):** tabela 2×2 (dla dwóch klas):
+- wiersze → prawdziwe etykiety,
+- kolumny → predykcje modelu,
+- elementy na diagonali → poprawne klasyfikacje,
+- poza diagonalą → błędy (fałszywe pozytywy / fałszywe negatywy).
+
+**ConfusionMatrixDisplay** – wizualizacja macierzy w matplotlib.
+
+**classification_report** – zestawienie precision, recall, F1-score i support per klasa; uzupełnia samą accuracy o jakość na poziomie klas.
+
+---
+
+## 11. Wizualizacja macierzy pomyłek (Plotly)
+
+Macierz można przedstawić jako heatmapę z adnotacjami (np. Plotly `create_annotated_heatmap`). Czasem odwraca się kolejność wierszy (`cm[::-1]`), aby oś Y odpowiadała intuicyjnej kolejności klas (np. true_1 u góry). Etykiety osi: kolumny = predykcje, wiersze = prawdziwe klasy.
+
+---
+
+## 12. Podsumowanie
 
 - **Funkcja straty (obserwacja)**: postać kawałkowa dla y=1 i y=0; postać zwarta = binary cross-entropy dla jednej próbki.
 - **Funkcja kosztu**: średnia z binary cross-entropy po wszystkich obserwacjach; jest minimalizowana w trakcie uczenia.
 - **Wykresy straty**: dla y=1 strata maleje, gdy y_pred → 1; dla y=0 strata maleje, gdy y_pred → 0.
-- **Klasyfikacja binarna**: sigmoida mapuje Scoring na prawdopodobieństwo; próg 0,5 wyznacza decyzję (klasa 0 vs 1) i granicę w przestrzeni cech.
+- **Klasyfikacja binarna**: sigmoida mapuje scoring na prawdopodobieństwo; próg 0,5 wyznacza decyzję (klasa 0 vs 1) i granicę w przestrzeni cech.
+- **Pipeline praktyczny**: podział train/test → StandardScaler (fit train) → LogisticRegression → predict / predict_proba → accuracy, confusion matrix, classification_report.

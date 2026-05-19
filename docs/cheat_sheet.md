@@ -357,7 +357,7 @@ with open('model.pickle', 'rb') as f:
 - **P12** → Regresja wielomianowa (PolynomialFeatures)
 - **P13** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **P14** → Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja
-- **P15** → Regresja logistyczna (funkcja straty, binary cross-entropy, sigmoida, próg 0,5)
+- **P15** → Regresja logistyczna (strata, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji)
 
 ---
 
@@ -375,6 +375,44 @@ L = −(1/m) Σ [ y_i·log(y_pred_i) + (1−y_i)·log(1−y_pred_i) ]
 Minimalizowana w trakcie uczenia. y_pred_i to wynik sigmoidy (prawdopodobieństwo klasy 1).
 
 **Klasyfikacja binarna:** Sigmoida mapuje scoring na prawdopodobieństwo (0–1). Próg 0,5: powyżej → klasa 1, poniżej → klasa 0. Punkt przecięcia sigmoidy z y=0,5 wyznacza granicę decyzyjną w przestrzeni cech.
+
+**Sigmoida:** `1 / (1 + np.exp(-x))`
+
+### Pipeline klasyfikacji (sklearn)
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+)
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+raw_data = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(
+    raw_data['data'],
+    raw_data['target'],
+    random_state=42,
+)
+scaler = StandardScaler()
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+y_pred = log_reg.predict(X_test)
+y_prob = log_reg.predict_proba(X_test)
+accuracy_score(y_test, y_pred)
+confusion_matrix(y_test, y_pred)
+classification_report(y_test, y_pred)
+```
+
+**StandardScaler:** `fit` tylko na train, `transform` na train i test (bez fit na test – data leakage).
+
+**predict vs predict_proba:** `predict` → etykiety klas; `predict_proba` → prawdopodobieństwa per klasa.
 
 ---
 
