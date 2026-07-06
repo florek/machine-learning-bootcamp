@@ -106,6 +106,8 @@ fillna(method='ffill')
 * dane czasowe → interpolacja / `ffill` / `bfill`
 * dane statyczne → `mean` / `median` / `constant`
 * nigdy nie mieszaj przyszłości z przeszłością (data leakage!)
+* `ffill` (forward fill) – uzupełnia braki wartościami z **wcześniejszych** obserwacji
+* `bfill` (backward fill) – uzupełnia braki wartościami z **późniejszych** obserwacji; w prognozowaniu szeregów czasowych może wprowadzić leakage
 
 ---
 

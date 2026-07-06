@@ -2,6 +2,7 @@
 
 | Data       | Wynik  | %    | Braki        | Link                                        |
 |------------|--------|------|--------------|---------------------------------------------|
+| 06.07.2026 | 11/20  | 55%  | 9, 13, 17    | docs/quiz/results/06.07.2026_results.md   |
 | 19.05.2026 | 15/20  | 75%  | 1, 7, 14, 15 | docs/quiz/results/19.05.2026_results.md   |
 | 05.03.2026 | 19/20  | 95%  | brak         | docs/quiz/results/05.03.2026_results.md   |
 | 02.03.2026 | 19/20  | 95%  | brak         | docs/quiz/results/02.03.2026_results.md   |
@@ -15,21 +16,21 @@
 
 ## Statystyki
 - Najlepszy wynik: 20/20 (100%) – 12.02.2026, 13.02.2026, 25.02.2026
-- Najgorszy wynik: 14/20 (70%) – 24.02.2026
-- Średnia ze wszystkich prób: 90%
+- Najgorszy wynik: 11/20 (55%) – 06.07.2026
+- Średnia ze wszystkich prób: 86%
 - Ostatnie 5 wyników:
+  - 06.07.2026 – 11/20 (55%)
   - 19.05.2026 – 15/20 (75%)
   - 05.03.2026 – 19/20 (95%)
   - 02.03.2026 – 19/20 (95%)
   - 28.02.2026 – 19/20 (95%)
-  - 25.02.2026 – 20/20 (100%)
 
 ## Najczęstsze obszary do poprawy
-- [ML] – regresja logistyczna (strata, funkcja kosztu, sigmoida, StandardScaler, predict vs predict_proba, accuracy)
-- trudne – regresja drzewa (plot_tree, średnia w liściu), OLS p-value, numpy (np.delete)
-- łatwe – równanie LinearRegression, metryki (MSE vs MAE vs RMSE), random_state vs stratify
-- średnie – interpretacja metryk, backward/forward elimination, regresja wielomianowa
-- łatwe/trudne – rozróżnienie metryk regresji i klasyfikacji po przejściu do P15
+- [ML] – binary cross-entropy (obie gałęzie y=0/y=1), metryki regresji vs klasyfikacji (R² vs accuracy)
+- [ML] – classification_report, confusion matrix (orientacja wierszy/kolumn), accuracy przy niezbalansowanych klasach
+- [ML] – regresja logistyczna (strata, funkcja kosztu, StandardScaler, predict vs predict_proba)
+- [Python] – obsługa NaN przed ML, ffill vs bfill w szeregach czasowych
+- [ML] – gradient descent (kierunek aktualizacji wag), interpretacja ujemnego R²
 
 ---
 

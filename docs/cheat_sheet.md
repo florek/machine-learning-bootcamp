@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p12.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p15.md.
 
 ---
 

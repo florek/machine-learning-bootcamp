@@ -242,4 +242,4 @@ score_test = regressor.score(X_test, y_test)
 
 ---
 
-> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p12.md, szczegóły techniczne w cheat_sheet.md.
+> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p15.md, szczegóły techniczne w cheat_sheet.md.

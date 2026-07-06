@@ -46,8 +46,15 @@ Histogram kolumny error pokazuje rozkład błędów. Przy dobrym modelu rozkład
 
 ---
 
-## 8. Podsumowanie
+## 8. R² ujemny
+
+Gdy **R² < 0**, model regresji jest **gorszy** niż przewidywanie średnią wartością targetu – predykcje systematycznie odbiegają od rzeczywistości bardziej niż prosta linia pozioma na poziomie średniej.
+
+---
+
+## 9. Podsumowanie
 
 - MAE, MSE, RMSE, max_error, r2_score – wszystkie z sklearn.metrics (odpowiednie importy).
 - RMSE: mean_squared_error(..., squared=False).
+- MAE ma te same jednostki co target; MSE i RMSE karzą duże błędy mocniej (kwadrat / pierwiastek z kwadratu).
 - Wizualizacje: wykres true vs pred (z linią y=x) i histogram błędów pomagają w ocenie jakości regresji.

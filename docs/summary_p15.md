@@ -133,6 +133,14 @@ Regresja logistyczna zakłada zależność liniową między cechami a logitem sz
 
 **classification_report** – zestawienie precision, recall, F1-score i support per klasa; uzupełnia samą accuracy o jakość na poziomie klas.
 
+**Precision (precyzja):** spośród obserwacji przewidzianych jako dana klasa, jaki odsetek faktycznie do niej należy. Wysoka precyzja oznacza mało fałszywych alarmów.
+
+**Recall (czułość):** spośród obserwacji faktycznie należących do klasy, jaki odsetek model poprawnie wykrył. Wysoki recall oznacza mało przeoczonych przypadków pozytywnych.
+
+**F1-score:** średnia harmoniczna precision i recall; przydatna, gdy klasy są niezbalansowane i sama accuracy może być myląca.
+
+**Support:** liczba prawdziwych obserwacji danej klasy w zbiorze oceny.
+
 ---
 
 ## 11. Wizualizacja macierzy pomyłek (Plotly)
@@ -148,3 +156,4 @@ Macierz można przedstawić jako heatmapę z adnotacjami (np. Plotly `create_ann
 - **Wykresy straty**: dla y=1 strata maleje, gdy y_pred → 1; dla y=0 strata maleje, gdy y_pred → 0.
 - **Klasyfikacja binarna**: sigmoida mapuje scoring na prawdopodobieństwo; próg 0,5 wyznacza decyzję (klasa 0 vs 1) i granicę w przestrzeni cech.
 - **Pipeline praktyczny**: podział train/test → StandardScaler (fit train) → LogisticRegression → predict / predict_proba → accuracy, confusion matrix, classification_report.
+- **Precision / recall / F1**: metryki per klasa; F1 łączy precyzję i czułość; przy niezbalansowanych klasach lepsze niż sama accuracy.
