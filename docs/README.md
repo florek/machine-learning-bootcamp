@@ -27,6 +27,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p13.md`** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **`summary_p14.md`** → Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 - **`summary_p15.md`** → Regresja logistyczna: binary cross-entropy, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji
+- **`summary_p16.md`** → K-Nearest Neighbors: KNeighborsClassifier, n_neighbors, granice decyzyjne, klasyfikacja wieloklasowa (Iris)
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -71,6 +72,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P13 | `summary_p13.md` | Regresja drzewa decyzyjnego, DecisionTreeRegressor, plot_tree |
 | P14 | `summary_p14.md` | Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja |
 | P15 | `summary_p15.md` | Regresja logistyczna: strata, sigmoida, skalowanie, LogisticRegression, accuracy, confusion matrix |
+| P16 | `summary_p16.md` | KNN: KNeighborsClassifier, n_neighbors, lazy learning, granice decyzyjne, Iris |
 
 ---
 
@@ -119,7 +121,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -132,6 +134,7 @@ Każda lekcja buduje na poprzedniej:
 - **P13:** Regresja drzewa decyzyjnego (DecisionTreeRegressor, wizualizacja drzewa)
 - **P14:** Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 - **P15:** Regresja logistyczna – binary cross-entropy, sigmoida, pipeline sklearn (skalowanie, LogisticRegression, metryki klasyfikacji)
+- **P16:** K-Nearest Neighbors – klasyfikacja wieloklasowa, parametr n_neighbors, wizualizacja granic decyzyjnych
 
 ---
 
@@ -149,6 +152,7 @@ Każda lekcja buduje na poprzedniej:
 - [P13: Regresja drzewa decyzyjnego](summary_p13.md)
 - [P14: Metryki regresji i wizualizacja](summary_p14.md)
 - [P15: Regresja logistyczna](summary_p15.md)
+- [P16: K-Nearest Neighbors](summary_p16.md)
 
 ---
 

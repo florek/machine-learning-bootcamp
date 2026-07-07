@@ -166,6 +166,24 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 - `StandardScaler`: fit na train, transform na train i test (bez leakage)
 - `LogisticRegression`: fit, predict (etykiety), predict_proba (prawdopodobieństwa)
 - `accuracy_score`, `confusion_matrix`, `classification_report`
+- Confusion matrix: wiersze = prawdziwe etykiety, kolumny = predykcje
+- Accuracy przy niezbalansowanych klasach może być myląco wysoka – patrz na F1 i recall
+
+---
+
+## 📌 P16: K-Nearest Neighbors (KNN)
+
+**Co robi:** Klasyfikacja wieloklasowa na zbiorze Iris z wizualizacją granic decyzyjnych dla różnych k.
+
+**Kluczowe elementy:**
+- `KNeighborsClassifier(n_neighbors=k)` → klasyfikacja przez głosowanie k najbliższych sąsiadów
+- `load_iris()` → 4 cechy, 3 klasy (klasyfikacja wieloklasowa)
+- `fit()` zapamiętuje dane (lazy learning); `predict()` wyszukuje sąsiadów
+- Małe k (np. 1) → poszarpane granice, ryzyko overfittingu; duże k → wygładzone granice
+- Wizualizacja granic: `meshgrid` + `predict` na siatce + `contourf` / `scatter`
+- EDA: `pairplot` z `hue='class'`, `corr()`, redukcja do 2 cech do wykresu 2D
+
+**Porównanie:** LogisticRegression = granice liniowe; KNN = nieregularne granice zależne od k i rozkładu punktów.
 
 ---
 
@@ -227,7 +245,9 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed P14:** MAE, MSE, RMSE (squared=False), max_error, r2_score; wykres true vs pred z linią y=x, histogram błędów
 
-**Przed P15:** Binary cross-entropy, sigmoida, próg 0,5; StandardScaler (fit train); LogisticRegression; accuracy i macierz pomyłek
+**Przed P15:** Binary cross-entropy (y=1 → −log(y_pred), y=0 → −log(1−y_pred)), sigmoida, próg 0,5; StandardScaler (fit train); LogisticRegression; classification_report; confusion matrix (wiersze=prawda, kolumny=pred); accuracy przy imbalance
+
+**Przed P16:** KNeighborsClassifier, n_neighbors, lazy learning; granice decyzyjne (meshgrid + predict); Iris = klasyfikacja wieloklasowa; małe k vs duże k
 
 ---
 
@@ -242,4 +262,4 @@ score_test = regressor.score(X_test, y_test)
 
 ---
 
-> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p15.md, szczegóły techniczne w cheat_sheet.md.
+> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p16.md, szczegóły techniczne w cheat_sheet.md.

@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p15.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p16.md.
 
 ---
 
@@ -50,6 +50,24 @@ target = data.pop('charges')
 X_train, X_test, y_train, y_test = train_test_split(
     data, target, test_size=0.2, random_state=42
 )
+```
+
+### Braki danych (NaN) i imputacja
+```python
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(strategy="mean")
+df['weight'] = imputer.fit_transform(df[['weight']])
+```
+
+**Zasady:**
+- większość algorytmów ML **nie akceptuje NaN** – braki trzeba obsłużyć przed `fit()`
+- `strategy="mean"` / `"median"` / `"constant"` – wybór zależy od typu cechy i obecności outlierów
+- w szeregach czasowych: `ffill` (z przeszłości), `bfill` (z przyszłości – ryzyko leakage w prognozowaniu)
+
+```python
+df['col'].fillna(method='ffill')
+df['col'].fillna(method='bfill')
 ```
 
 ---
@@ -336,8 +354,18 @@ with open('model.pickle', 'rb') as f:
 - **Idealnie:** podobne wyniki na train i test
 
 ### R² vs MAE
-- **R²:** procent wyjaśnionej wariancji (0-1)
+- **R²:** procent wyjaśnionej wariancji; 1.0 = idealnie, 0.0 = poziom średniej, **< 0 = gorszy niż średnia**
 - **MAE:** średni błąd w jednostkach targetu (łatwiejsze do zrozumienia)
+
+### Regresja vs klasyfikacja – metryki
+| Typ zadania | Typowe metryki | score() w estymatorze |
+|-------------|----------------|----------------------|
+| Regresja (LinearRegression) | R², MAE, MSE, RMSE | R² |
+| Klasyfikacja (LogisticRegression, KNN) | accuracy, precision, recall, F1, confusion matrix | accuracy (domyślnie) |
+
+**Confusion matrix (sklearn):** wiersze = prawdziwe etykiety, kolumny = predykcje; diagonala = trafienia.
+
+**Accuracy przy niezbalansowanych klasach:** może być myląco wysoka – analizuj precision/recall/F1 per klasa.
 
 ### Train/Test Split
 - **80/20** lub **75/25** to standard
@@ -358,6 +386,27 @@ with open('model.pickle', 'rb') as f:
 - **P13** → Regresja drzewa decyzyjnego (DecisionTreeRegressor, plot_tree)
 - **P14** → Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja
 - **P15** → Regresja logistyczna (strata, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji)
+- **P16** → K-Nearest Neighbors (KNeighborsClassifier, n_neighbors, granice decyzyjne, Iris)
+
+---
+
+## 🎯 K-Nearest Neighbors (KNN)
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+
+raw_data = load_iris()
+classifier = KNeighborsClassifier(n_neighbors=5)
+classifier.fit(X_train, y_train)
+y_pred = classifier.predict(X_test)
+```
+
+**Kluczowe koncepty:**
+- **lazy learning:** `fit()` zapamiętuje dane; decyzja przy `predict()` na podstawie k sąsiadów
+- **`n_neighbors`:** małe k → poszarpane granice, ryzyko overfittingu; duże k → wygładzone granice
+- **granice decyzyjne:** siatka `meshgrid` + `predict()` na każdym punkcie + `contourf` / `scatter`
+- **Iris:** klasyfikacja wieloklasowa (3 klasy, 4 cechy); do wykresu 2D wybierz 2 cechy
 
 ---
 
@@ -435,4 +484,4 @@ plt.show()
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p15.md.
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p16.md.
