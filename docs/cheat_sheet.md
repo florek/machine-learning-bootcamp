@@ -387,6 +387,7 @@ with open('model.pickle', 'rb') as f:
 - **P14** → Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja
 - **P15** → Regresja logistyczna (strata, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji)
 - **P16** → K-Nearest Neighbors (KNeighborsClassifier, n_neighbors, granice decyzyjne, Iris)
+- **P17** → Wskaźnik Gini, entropia Shannona, zysk informacyjny (kryteria podziału drzew)
 
 ---
 
@@ -484,4 +485,41 @@ plt.show()
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p16.md.
+## 🌿 Drzewo klasyfikacyjne – Gini, entropia, zysk informacyjny
+
+**Wskaźnik Gini (węzeł z K klasami, udziały p_i):**
+```
+Gini = 1 - Σ p_i²
+```
+- Gini = 0 → węzeł czysty (jedna klasa)
+- wyższe Gini → większe mieszanie klas
+
+**Entropia Shannona (log₂, wynik w bitach):**
+```
+H = -Σ p_i · log₂(p_i)
+```
+- H = 0 → węzeł czysty
+- dla dwóch klas p = q = 0,5 → H = 1 bit (maksimum)
+
+**scipy / NumPy:**
+```python
+from scipy.stats import entropy
+entropy([0.5, 0.5], base=2)  # 1.0
+
+def entropy_manual(probabilities):
+    return -np.sum(probabilities * np.log2(probabilities))
+```
+
+**Zysk informacyjny (IG):**
+```
+IG = H_rodzic - Σ (n_dziecko / n_rodzic) · H_dziecko
+```
+Drzewo wybiera podział z **największym IG** (największy spadek ważonej entropii).
+
+**DecisionTreeClassifier:**
+- `criterion='gini'` (domyślnie) lub `criterion='entropy'`
+- konwencja: p_i = 0 → składnik entropii = 0
+
+---
+
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p17.md.

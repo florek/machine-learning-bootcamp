@@ -249,6 +249,8 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed P16:** KNeighborsClassifier, n_neighbors, lazy learning; granice decyzyjne (meshgrid + predict); Iris = klasyfikacja wieloklasowa; małe k vs duże k
 
+**Przed P17:** Gini = 1 − Σp_i²; entropia = −Σ p_i·log₂(p_i); IG = spadek ważonej entropii po podziale; criterion='gini' vs 'entropy'; scipy.stats.entropy(..., base=2)
+
 ---
 
 ## 🎯 Najważniejsze zasady
@@ -262,4 +264,4 @@ score_test = regressor.score(X_test, y_test)
 
 ---
 
-> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p16.md, szczegóły techniczne w cheat_sheet.md.
+> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p17.md, szczegóły techniczne w cheat_sheet.md.

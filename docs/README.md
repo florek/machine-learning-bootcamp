@@ -28,6 +28,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p14.md`** → Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 - **`summary_p15.md`** → Regresja logistyczna: binary cross-entropy, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji
 - **`summary_p16.md`** → K-Nearest Neighbors: KNeighborsClassifier, n_neighbors, granice decyzyjne, klasyfikacja wieloklasowa (Iris)
+- **`summary_p17.md`** → Wskaźnik Gini, entropia Shannona, zysk informacyjny – kryteria podziału drzew decyzyjnych
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -73,6 +74,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P14 | `summary_p14.md` | Metryki regresji (MAE, MSE, RMSE, max_error, R²), wizualizacja |
 | P15 | `summary_p15.md` | Regresja logistyczna: strata, sigmoida, skalowanie, LogisticRegression, accuracy, confusion matrix |
 | P16 | `summary_p16.md` | KNN: KNeighborsClassifier, n_neighbors, lazy learning, granice decyzyjne, Iris |
+| P17 | `summary_p17.md` | Wskaźnik Gini, entropia, zysk informacyjny, kryteria podziału drzew klasyfikacyjnych |
 
 ---
 
@@ -121,7 +123,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -135,6 +137,7 @@ Każda lekcja buduje na poprzedniej:
 - **P14:** Metryki regresji (MAE, MSE, RMSE, max_error, R²) i wizualizacja wyników
 - **P15:** Regresja logistyczna – binary cross-entropy, sigmoida, pipeline sklearn (skalowanie, LogisticRegression, metryki klasyfikacji)
 - **P16:** K-Nearest Neighbors – klasyfikacja wieloklasowa, parametr n_neighbors, wizualizacja granic decyzyjnych
+- **P17:** Wskaźnik Gini, entropia Shannona, zysk informacyjny – miary nieczystości węzła drzewa klasyfikacyjnego
 
 ---
 
@@ -153,6 +156,7 @@ Każda lekcja buduje na poprzedniej:
 - [P14: Metryki regresji i wizualizacja](summary_p14.md)
 - [P15: Regresja logistyczna](summary_p15.md)
 - [P16: K-Nearest Neighbors](summary_p16.md)
+- [P17: Gini, entropia, zysk informacyjny](summary_p17.md)
 
 ---
 
