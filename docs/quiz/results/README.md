@@ -2,6 +2,7 @@
 
 | Data       | Wynik  | %    | Braki        | Link                                        |
 |------------|--------|------|--------------|---------------------------------------------|
+| 09.07.2026 | 13/20  | 65%  | 2, 10, 12, 13, 14, 16 | docs/quiz/results/09.07.2026_results.md |
 | 08.07.2026 | 12/20  | 60%  | 4, 6, 7, 11, 16 | docs/quiz/results/08.07.2026_results.md   |
 | 07.07.2026 | 17/20  | 85%  | 14           | docs/quiz/results/07.07.2026_results.md   |
 | 06.07.2026 | 11/20  | 55%  | 9, 13, 17    | docs/quiz/results/06.07.2026_results.md   |
@@ -20,20 +21,20 @@
 ## Statystyki
 - Najlepszy wynik: 20/20 (100%) – 12.02.2026, 13.02.2026, 25.02.2026
 - Najgorszy wynik: 11/20 (55%) – 06.07.2026
-- Średnia ze wszystkich prób: 83%
+- Średnia ze wszystkich prób: 81%
 - Ostatnie 5 wyników:
+  - 09.07.2026 – 13/20 (65%)
   - 08.07.2026 – 12/20 (60%)
   - 07.07.2026 – 17/20 (85%)
   - 06.07.2026 – 11/20 (55%)
   - 18.06.2026 – 12/20 (60%)
-  - 19.05.2026 – 15/20 (75%)
 
 ## Najczęstsze obszary do poprawy
-- [ML] – entropia Shannona i wskaźnik Gini (wzory, wartości graniczne, różnica między miarami), zysk informacyjny (IG)
-- [ML] – binary cross-entropy (obie gałęzie y=0/y=1), metryki regresji vs klasyfikacji (R² vs accuracy)
-- [ML] – KNN (wpływ n_neighbors na granice decyzyjne), StandardScaler (fit tylko na train)
-- [Python] – scipy.stats.entropy (base=2), mean_squared_error (squared=False → RMSE)
-- [ML] – classification_report, confusion matrix (orientacja wierszy/kolumn), accuracy przy niezbalansowanych klasach
+- [ML] – metryki regresji (R² vs accuracy, MAE/MSE/max_error, `score()` w LinearRegression)
+- [ML] – entropia Shannona i wskaźnik Gini (wzory, wartości graniczne, zysk informacyjny)
+- [ML] – regresja logistyczna (predict vs predict_proba, F1-score, binary cross-entropy)
+- [ML] – KNN i drzewa decyzyjne (lazy learning, granice schodkowe, wpływ max_depth)
+- [Python] – scipy.stats.entropy (base=2), mean_squared_error (squared=False → RMSE), bfill/ffill w szeregach czasowych
 
 ---
 
