@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p16.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p17.md.
 
 ---
 
@@ -493,6 +493,7 @@ Gini = 1 - Σ p_i²
 ```
 - Gini = 0 → węzeł czysty (jedna klasa)
 - wyższe Gini → większe mieszanie klas
+- klasyfikacja binarna: Gini ∈ [0, 0,5]; maksimum przy p = q = 0,5
 
 **Entropia Shannona (log₂, wynik w bitach):**
 ```
@@ -505,6 +506,7 @@ H = -Σ p_i · log₂(p_i)
 ```python
 from scipy.stats import entropy
 entropy([0.5, 0.5], base=2)  # 1.0
+# bez base=2 scipy używa logarytmu naturalnego – inna skala niż bity Shannona
 
 def entropy_manual(probabilities):
     return -np.sum(probabilities * np.log2(probabilities))

@@ -187,6 +187,23 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P17: Wskaźnik Gini, entropia, zysk informacyjny
+
+**Co robi:** Miary nieczystości węzła drzewa klasyfikacyjnego – obliczenia Gini, entropii i zysku informacyjnego przy wyborze podziału.
+
+**Kluczowe elementy:**
+- Gini = 1 − Σp_i²; Gini = 0 → węzeł czysty (jedna klasa)
+- Klasyfikacja binarna: Gini ∈ [0, 0,5]; maksimum 0,5 przy rozkładzie 50/50
+- Entropia H = −Σ p_i·log₂(p_i); H = 0 → czysty węzeł; binarna maksimum 1 bit przy 50/50
+- `scipy.stats.entropy(..., base=2)` → wynik w bitach; bez `base=2` → logarytm naturalny (inna skala)
+- IG = H_rodzic − ważona średnia H_dzieci; drzewo wybiera podział z **największym IG**
+- `criterion='gini'` (domyślnie) lub `criterion='entropy'` w DecisionTreeClassifier
+- `max_depth`, `min_samples_split`, `min_samples_leaf` – ograniczanie przeuczenia
+
+**Porównanie:** Gini szybsze (bez logarytmów); drzewa z Gini i entropii często dają bardzo podobne wyniki.
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)

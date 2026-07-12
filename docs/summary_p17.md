@@ -43,6 +43,7 @@ Gini jest **niższe** niż przy równomiernym rozkładzie – węzeł jest **czy
 **Właściwości:**
 
 - wartość zawsze w przedziale **[0, 1)** dla klasyfikacji wieloklasowej,
+- dla **klasyfikacji binarnej** Gini ∈ **[0, 0,5]**; maksimum 0,5 przy rozkładzie 50/50,
 - szybka obliczeniowo (brak logarytmów),
 - domyślne kryterium w `DecisionTreeClassifier` w scikit-learn (`criterion='gini'`).
 
@@ -113,7 +114,7 @@ entropy([0.8, 0.2], base=2)   # niższa wartość – bardziej nierównomierny r
 entropy([0.95, 0.05], base=2) # blisko zera – prawie czysty węzeł
 ```
 
-Parametr **`base=2`** daje wynik w bitach, zgodnie ze wzorem Shannona w kontekście drzew decyzyjnych.
+Parametr **`base=2`** daje wynik w bitach, zgodnie ze wzorem Shannona w kontekście drzew decyzyjnych. Bez `base=2` funkcja `scipy.stats.entropy` domyślnie stosuje **logarytm naturalny** – wynik ma inną skalę niż wzór z log₂.
 
 ---
 
@@ -125,7 +126,7 @@ Dla dwóch klas z prawdopodobieństwem \(p\) i \(q = 1 - p\):
 - **maksimum** przy \(p = 0{,}5\) (maksymalna niepewność),
 - **minimum** przy \(p \to 0\) lub \(p \to 1\) (pewność co do klasy).
 
-Wizualizacja: wykres entropii w funkcji \(p\) ma kształt **„dzwonu”** – rośnie od 0 do 1 bit, potem maleje z powrotem do 0.
+Wizualizacja: wykres entropii w funkcji \(p\) ma kształt **„dzwonu”** – rośnie od 0 do 1 bit, potem maleje z powrotem do 0. Do narysowania krzywej można wygenerować serię wartości \(p\) (np. od 0,01 do 0,99) z komplementarnym \(q = 1 - p\) i obliczyć entropię dla każdej pary \([p, q]\).
 
 ---
 
