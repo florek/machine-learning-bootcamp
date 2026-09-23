@@ -204,6 +204,23 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 P18: Klasyfikacyjne drzewo decyzyjne
+
+**Co robi:** `DecisionTreeClassifier` na Iris (2 cechy), wizualizacja granic i grafu drzewa, porównanie `max_depth`.
+
+**Kluczowe elementy:**
+- `DecisionTreeClassifier(max_depth=k)` → klasyfikacja; w liściu klasa większościowa
+- Redukcja Iris do 2 cech → wizualizacja granic na płaszczyźnie
+- `plot_decision_regions` → kolorowe regiony klas (podziały prostopadłe do osi)
+- `export_graphviz` (+ render) → graf drzewa z `feature_names` i `class_names`
+- `score()` klasyfikatora → accuracy
+- Większe `max_depth` → bardziej złożone regiony, wyższa accuracy na train, ryzyko overfittingu
+- Ocena tylko na danych treningowych **nie** wykrywa przeuczenia
+
+**Porównanie:** LogisticRegression = granica liniowa; KNN = nieregularne; drzewo = prostokątne / schodkowe regiony.
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -268,6 +285,8 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed P17:** Gini = 1 − Σp_i²; entropia = −Σ p_i·log₂(p_i); IG = spadek ważonej entropii po podziale; criterion='gini' vs 'entropy'; scipy.stats.entropy(..., base=2)
 
+**Przed P18:** DecisionTreeClassifier(max_depth=k), score=accuracy; 2 cechy do granic 2D; plot_decision_regions; export_graphviz; duże max_depth + ocena tylko na train = ryzyko ukrytego overfittingu
+
 ---
 
 ## 🎯 Najważniejsze zasady
@@ -281,4 +300,4 @@ score_test = regressor.score(X_test, y_test)
 
 ---
 
-> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p17.md, szczegóły techniczne w cheat_sheet.md.
+> **Użycie:** Przeczytaj sekcję dla danej lekcji przed zajęciami. Pełne wyjaśnienia w summary_p6.md – summary_p18.md, szczegóły techniczne w cheat_sheet.md.

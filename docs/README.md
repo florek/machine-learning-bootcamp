@@ -15,6 +15,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`docs/quiz/answers/*.md`** → Oficjalne odpowiedzi i wyjaśnienia
 - **`docs/quiz/my_answers/*.md`** → Twoje odpowiedzi i auto-feedback
 - **`docs/quiz/results/*.md`** + `docs/quiz/results/README.md` → Podsumowania wyników
+- **`docs/quiz/web/*.html`** → Self-contained quiz w przeglądarce (sprawdzanie + pobieranie MD)
 
 ### Szczegółowe wyjaśnienia (używaj do nauki)
 - **`summary_p6.md`** → Gradient Descent (ręczna implementacja)
@@ -29,6 +30,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p15.md`** → Regresja logistyczna: binary cross-entropy, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji
 - **`summary_p16.md`** → K-Nearest Neighbors: KNeighborsClassifier, n_neighbors, granice decyzyjne, klasyfikacja wieloklasowa (Iris)
 - **`summary_p17.md`** → Wskaźnik Gini, entropia Shannona, zysk informacyjny – kryteria podziału drzew decyzyjnych
+- **`summary_p18.md`** → DecisionTreeClassifier: granice decyzyjne 2D, export_graphviz, wpływ max_depth
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -75,6 +77,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | P15 | `summary_p15.md` | Regresja logistyczna: strata, sigmoida, skalowanie, LogisticRegression, accuracy, confusion matrix |
 | P16 | `summary_p16.md` | KNN: KNeighborsClassifier, n_neighbors, lazy learning, granice decyzyjne, Iris |
 | P17 | `summary_p17.md` | Wskaźnik Gini, entropia, zysk informacyjny, kryteria podziału drzew klasyfikacyjnych |
+| P18 | `summary_p18.md` | DecisionTreeClassifier, granice 2D (plot_decision_regions), export_graphviz, max_depth |
 
 ---
 
@@ -123,7 +126,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -138,6 +141,7 @@ Każda lekcja buduje na poprzedniej:
 - **P15:** Regresja logistyczna – binary cross-entropy, sigmoida, pipeline sklearn (skalowanie, LogisticRegression, metryki klasyfikacji)
 - **P16:** K-Nearest Neighbors – klasyfikacja wieloklasowa, parametr n_neighbors, wizualizacja granic decyzyjnych
 - **P17:** Wskaźnik Gini, entropia Shannona, zysk informacyjny – miary nieczystości węzła drzewa klasyfikacyjnego
+- **P18:** Klasyfikacyjne drzewo decyzyjne – DecisionTreeClassifier, granice 2D, export_graphviz, wpływ max_depth
 
 ---
 
@@ -157,6 +161,7 @@ Każda lekcja buduje na poprzedniej:
 - [P15: Regresja logistyczna](summary_p15.md)
 - [P16: K-Nearest Neighbors](summary_p16.md)
 - [P17: Gini, entropia, zysk informacyjny](summary_p17.md)
+- [P18: Klasyfikacyjne drzewo decyzyjne](summary_p18.md)
 
 ---
 

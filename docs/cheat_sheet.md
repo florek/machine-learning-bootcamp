@@ -388,6 +388,7 @@ with open('model.pickle', 'rb') as f:
 - **P15** → Regresja logistyczna (strata, sigmoida, StandardScaler, LogisticRegression, metryki klasyfikacji)
 - **P16** → K-Nearest Neighbors (KNeighborsClassifier, n_neighbors, granice decyzyjne, Iris)
 - **P17** → Wskaźnik Gini, entropia Shannona, zysk informacyjny (kryteria podziału drzew)
+- **P18** → DecisionTreeClassifier, granice 2D, export_graphviz, wpływ max_depth
 
 ---
 
@@ -521,7 +522,11 @@ Drzewo wybiera podział z **największym IG** (największy spadek ważonej entro
 **DecisionTreeClassifier:**
 - `criterion='gini'` (domyślnie) lub `criterion='entropy'`
 - konwencja: p_i = 0 → składnik entropii = 0
+- `score()` → accuracy; `max_depth` ogranicza głębokość
+- granice w 2D: regiony prostopadłe do osi (`plot_decision_regions`)
+- struktura: `export_graphviz(..., feature_names=..., class_names=..., filled=True, rounded=True)`
+- ocena tylko na train nie wykrywa overfittingu przy dużym `max_depth`
 
 ---
 
-> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p17.md.
+> **Tip:** Używaj tego cheat sheet jako szybkiego przypomnienia. Szczegółowe wyjaśnienia w summary_p6.md – summary_p18.md.

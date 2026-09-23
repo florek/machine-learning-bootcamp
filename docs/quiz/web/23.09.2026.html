@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ML Bootcamp Quiz — 23.09.2026</title>
+<style>
+:root {
+  --bg: #f4f1ea;
+  --bg-accent: #e8f0e9;
+  --surface: #ffffff;
+  --surface-2: #f0ebe3;
+  --border: #d5cfc4;
+  --text: #1c1917;
+  --muted: #6b6560;
+  --accent: #0f6b4c;
+  --accent-soft: #d8ebe2;
+  --accent-hover: #0b553c;
+  --ok: #1a7f4b;
+  --ok-bg: #e6f5ec;
+  --bad: #b42318;
+  --bad-bg: #fcebea;
+  --easy: #1d6fa5;
+  --mid: #b45309;
+  --hard: #9f1239;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.06);
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(ellipse 70% 45% at 0% 0%, #dceee4 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 100% 0%, #f3e6d0 0%, transparent 50%),
+    var(--bg);
+  line-height: 1.55;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+header .eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+.sub { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.progress {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.progress strong { color: var(--accent); }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+.card.ok {
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--border));
+  background: linear-gradient(180deg, var(--ok-bg), var(--surface) 40%);
+}
+.card.bad {
+  border-color: color-mix(in srgb, var(--bad) 40%, var(--border));
+  background: linear-gradient(180deg, var(--bad-bg), var(--surface) 40%);
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
+}
+.tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.tag.diff-łatwe { color: var(--easy); background: #e8f3fa; border-color: #c5dde9; }
+.tag.diff-średnie { color: var(--mid); background: #faf0e4; border-color: #ead5b8; }
+.tag.diff-trudne { color: var(--hard); background: #fce8ef; border-color: #e9c0cd; }
+.q-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.9rem;
+  font-weight: 600;
+}
+.q-title .num { color: var(--accent); margin-right: 0.35rem; }
+.prompt { margin: 0 0 1rem; white-space: pre-wrap; }
+.options { display: grid; gap: 0.45rem; }
+label.opt {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fafaf8;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+label.opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: var(--accent-soft);
+}
+label.opt:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+label.opt input { margin-top: 0.25rem; accent-color: var(--accent); }
+.letter {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 1.1rem;
+}
+.confidence {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.confidence select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.55rem;
+}
+.why {
+  margin-top: 0.85rem;
+  padding: 0.8rem 0.95rem;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.why strong { color: var(--text); }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  position: sticky;
+  bottom: 1rem;
+}
+button, .btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15, 107, 76, 0.25);
+}
+button.primary:hover { background: var(--accent-hover); }
+button.ghost, .btn.ghost {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+button.ghost:hover, .btn.ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#results { display: none; margin-bottom: 1.5rem; }
+#results.show { display: block; }
+#results .score-line {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0 0 0.35rem;
+}
+#results .score-line span { color: var(--accent); }
+.hint { color: var(--muted); font-size: 0.85rem; margin: 0.5rem 0 0; }
+code {
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Machine Learning Bootcamp</p>
+      <h1>Quiz — 23.09.2026</h1>
+      <p class="sub">20 pytań (10 ostatnia lekcja + 10 powtórka) · A–D · opcjonalnie pewność 1–5 · sprawdź i pobierz markdown</p>
+    </header>
+
+    <div class="progress" id="progress">
+      <span>Udzielone: <strong id="answered-count">0</strong> / 20</span>
+      <span id="status-label">W trakcie</span>
+    </div>
+
+    <section id="results">
+      <div class="card">
+        <p class="score-line">Wynik: <span id="score-text">0/20</span></p>
+        <p class="sub" id="pct-text"></p>
+        <p class="hint">Pobierz pliki i zapisz je w <code>docs/quiz/my_answers/</code> oraz <code>docs/quiz/results/</code>.</p>
+        <div class="actions" style="position:static;margin-top:1rem">
+          <button type="button" class="ghost" id="dl-answers">Pobierz my_answers.md</button>
+          <button type="button" class="ghost" id="dl-results">Pobierz results.md</button>
+        </div>
+      </div>
+    </section>
+
+    <form id="quiz-form"></form>
+
+    <div class="actions">
+      <button type="button" class="primary" id="submit-btn">Sprawdź wynik</button>
+      <button type="button" class="ghost" id="reset-btn">Wyczyść</button>
+    </div>
+  </div>
+
+<script>
+const QUIZ = {"date": "23.09.2026", "questions": [{"n": 1, "difficulty": "łatwe", "category": "ML", "prompt": "Metoda `score()` wytrenowanego `DecisionTreeClassifier` zwraca:", "options": {"A": "współczynnik determinacji R²", "B": "średni błąd absolutny (MAE)", "C": "accuracy (odsetek poprawnych etykiet)", "D": "entropię Shannona liści"}}, {"n": 2, "difficulty": "łatwe", "category": "ML", "prompt": "Przy `DecisionTreeClassifier(max_depth=1)` drzewo:", "options": {"A": "wykonuje co najwyżej jeden poziom podziału (jeden próg na jednej cesze)", "B": "zawsze używa wszystkich czterech cech Iris jednocześnie", "C": "nie wykonuje żadnego podziału i przewiduje losową klasę", "D": "buduje dokładnie 15 liści niezależnie od danych"}}, {"n": 3, "difficulty": "łatwe", "category": "ML", "prompt": "W liściu `DecisionTreeClassifier` model przewiduje:", "options": {"A": "średnią wartość ciągłego targetu w regionie", "B": "medianę odległości do sąsiadów", "C": "współczynnik R² dla tego regionu", "D": "klasę większościową wśród obserwacji w tym liściu"}}, {"n": 4, "difficulty": "średnie", "category": "ML", "prompt": "Funkcja `plot_decision_regions` służy przede wszystkim do:", "options": {"A": "obliczania zysku informacyjnego dla każdego możliwego progu", "B": "rysowania kolorowych regionów klas i punktów w przestrzeni cech", "C": "eksportu drzewa do formatu DOT", "D": "skalowania cech przed `fit()`"}}, {"n": 5, "difficulty": "łatwe", "category": "ML", "prompt": "`export_graphviz` z nazwami cech i klas służy do:", "options": {"A": "wygenerowania opisu struktury drzewa (węzły, progi, klasy) do wizualizacji", "B": "automatycznego podziału danych na train i test", "C": "obliczania accuracy na zbiorze testowym", "D": "zamiany cech kategorycznych na dummy variables"}}, {"n": 6, "difficulty": "średnie", "category": "ML", "prompt": "W przestrzeni dwóch cech granice `DecisionTreeClassifier` mają typowo kształt:", "options": {"A": "gładkiej linii prostej jak w regresji logistycznej", "B": "nieregularnych, „poszarpanych” regionów jak przy KNN z k=1", "C": "regionów prostokątnych / schodkowych (podziały prostopadłe do osi)", "D": "okręgów wokół centroidów klas"}}, {"n": 7, "difficulty": "średnie", "category": "ML", "prompt": "Zwiększanie `max_depth` drzewa klasyfikacyjnego przy ocenie wyłącznie na danych treningowych zwykle:", "options": {"A": "zawsze obniża accuracy na train", "B": "zwiększa złożoność regionów i często podnosi accuracy na train", "C": "wymusza użycie kryterium `'entropy'` zamiast `'gini'`", "D": "usuwa potrzebę ustawiania `random_state`"}}, {"n": 8, "difficulty": "trudne", "category": "ML", "prompt": "Dlaczego samo `classifier.score(X, y)` na tych samych danych, na których trenowano głębokie drzewo, jest niewystarczające?", "options": {"A": "bo wysoka accuracy na train może ukrywać overfitting – brakuje oceny na zbiorze testowym", "B": "bo `score()` klasyfikatora zawsze zwraca R², nie accuracy", "C": "bo drzewo nie ma metody `score()`", "D": "bo `max_depth` nie wpływa na dopasowanie do train"}}, {"n": 9, "difficulty": "trudne", "category": "ML", "prompt": "Redukcja Iris do pary cech przed trenowaniem drzewa pod wizualizację granic oznacza, że:", "options": {"A": "model automatycznie odzyskuje pozostałe cechy przy `predict()`", "B": "accuracy na dwóch cechach jest zawsze identyczna jak na czterech", "C": "`max_depth` przestaje mieć znaczenie", "D": "tracimy informację z odrzuconych atrybutów – obraz jest uproszczony"}}, {"n": 10, "difficulty": "trudne", "category": "ML", "prompt": "Które zestawienie kształtów granic w 2D jest poprawne?", "options": {"A": "drzewo → linia prosta; KNN → prostokąty; regresja logistyczna → okręgi", "B": "drzewo → okręgi; KNN → linia prosta; regresja logistyczna → schodki", "C": "drzewo i KNN → zawsze ta sama linia prosta; regresja logistyczna → schodki", "D": "drzewo → regiony prostopadłe do osi; KNN → nieregularne (zależne od k); regresja logistyczna → granica liniowa"}}, {"n": 11, "difficulty": "łatwe", "category": "ML", "prompt": "Dla klasyfikacji binarnej z rozkładem klas 50/50 wskaźnik Gini osiąga maksimum równe:", "options": {"A": "1,0", "B": "0,5", "C": "0,667", "D": "0,0"}}, {"n": 12, "difficulty": "średnie", "category": "ML", "prompt": "Zysk informacyjny (IG) przy podziale węzła to:", "options": {"A": "nieczystość rodzica minus ważona średnia nieczystości dzieci", "B": "suma Gini wszystkich liści bez wag", "C": "różnica accuracy train − accuracy test", "D": "iloczyn `max_depth` i liczby cech"}}, {"n": 13, "difficulty": "średnie", "category": "ML", "prompt": "Poprawne użycie `StandardScaler` w pipeline klasyfikacji to:", "options": {"A": "`fit` na train i test osobno (inne μ i σ dla każdego zbioru)", "B": "`fit` tylko na test, `transform` na train", "C": "`fit` tylko na train, `transform` na train i test", "D": "`fit` i `transform` wyłącznie na całym zbiorze po połączeniu train+test"}}, {"n": 14, "difficulty": "trudne", "category": "ML", "prompt": "Wywołanie `scipy.stats.entropy([...])` bez `base=2`:", "options": {"A": "zawsze zwraca wynik w bitach Shannona", "B": "używa logarytmu naturalnego – inna skala niż entropia z log₂", "C": "jest równoważne `criterion='gini'`", "D": "wymusza `max_depth=1` w drzewie"}}, {"n": 15, "difficulty": "średnie", "category": "ML", "prompt": "W porównaniu z MAE, metryka MSE:", "options": {"A": "ignoruje znaki błędów poprzez wartość bezwzględną, bez kwadratów", "B": "zawsze zwraca wynik w przedziale [0, 1]", "C": "jest tożsama z accuracy klasyfikatora", "D": "kwadratuje błędy, więc silniej karze duże odchylenia"}}, {"n": 16, "difficulty": "trudne", "category": "ML", "prompt": "Wartość R² < 0 oznacza, że:", "options": {"A": "model idealnie przewiduje każdą obserwację", "B": "model jest gorszy niż przewidywanie średnią wartością targetu", "C": "dane nie mają żadnej wariancji", "D": "konieczne jest użycie `DecisionTreeClassifier` zamiast regresji"}}, {"n": 17, "difficulty": "średnie", "category": "ML", "prompt": "Regresja wielomianowa w typowym workflow scikit-learn polega na:", "options": {"A": "rozszerzeniu cech o potęgi (`PolynomialFeatures`) i dopasowaniu `LinearRegression`", "B": "zastąpieniu `LinearRegression` przez `DecisionTreeClassifier`", "C": "użyciu wyłącznie `StandardScaler` bez modelu", "D": "ustawieniu `max_depth` w `LinearRegression`"}}, {"n": 18, "difficulty": "trudne", "category": "ML", "prompt": "Uzupełnianie braków metodą `bfill` w kontekście prognozowania szeregów czasowych jest ryzykowne, bo:", "options": {"A": "zawsze usuwa wszystkie wiersze z brakami", "B": "działa wyłącznie na cechach kategorycznych", "C": "korzysta z przyszłych wartości, co może wprowadzić data leakage", "D": "wymusza użycie `drop_first=True`"}}, {"n": 19, "difficulty": "łatwe", "category": "ML", "prompt": "KNN podczas `fit()` przede wszystkim:", "options": {"A": "zapamiętuje dane treningowe (lazy learning) – klasyfikacja następuje przy `predict()`", "B": "buduje głębokie drzewo decyzyjne z podziałami osiowymi", "C": "minimalizuje binary cross-entropy metodą gradientu", "D": "dopasowuje prostą linię w przestrzeni cech"}}, {"n": 20, "difficulty": "średnie", "category": "ML", "prompt": "W backward elimination w każdej iteracji usuwa się zmienną:", "options": {"A": "o najniższym współczynniku R²", "B": "o najwyższym p-value (najmniej istotną przy ustalonym progu, np. 0,05)", "C": "o najwyższej wartości `max_depth`", "D": "wylosowaną ze zbioru testowego"}}], "answers": {"1": {"correct": "C", "why": "Dla klasyfikatora `score()` zwraca accuracy – odsetek poprawnie przewidzianych etykiet."}, "2": {"correct": "A", "why": "`max_depth=1` ogranicza drzewo do jednego poziomu podziału (jeden próg na wybranej cesze)."}, "3": {"correct": "D", "why": "W klasyfikacji liść przewiduje klasę większościową wśród obserwacji w danym regionie."}, "4": {"correct": "B", "why": "`plot_decision_regions` rysuje kolorowe regiony klas oraz punkty w przestrzeni cech."}, "5": {"correct": "A", "why": "`export_graphviz` generuje opis DOT struktury drzewa (progi, węzły, nazwy cech i klas) do renderowania grafu."}, "6": {"correct": "C", "why": "Drzewo dzieli przestrzeń podziałami prostopadłymi do osi – regiony są prostokątne / schodkowe."}, "7": {"correct": "B", "why": "Większa głębokość daje bardziej złożone regiony i zwykle wyższą accuracy na zbiorze treningowym."}, "8": {"correct": "A", "why": "Wysoki wynik na train przy głębokim drzewie może oznaczać overfitting – potrzebna ocena na teście."}, "9": {"correct": "D", "why": "Odrzucenie cech upraszcza wizualizację, ale traci się informację z pozostałych atrybutów."}, "10": {"correct": "D", "why": "Drzewo: regiony osiowe; KNN: nieregularne zależne od k; regresja logistyczna: granica liniowa."}, "11": {"correct": "B", "why": "Dla klasyfikacji binarnej Gini ∈ [0, 0,5]; maksimum 0,5 przy rozkładzie 50/50."}, "12": {"correct": "A", "why": "IG = nieczystość rodzica − ważona średnia nieczystości dzieci; drzewo wybiera największy IG."}, "13": {"correct": "C", "why": "Skaler dopasowuje się tylko na train; te same parametry stosuje się przez `transform` do train i test."}, "14": {"correct": "B", "why": "Bez `base=2` scipy stosuje logarytm naturalny – to inna skala niż entropia Shannona w bitach."}, "15": {"correct": "D", "why": "MSE kwadratuje błędy, więc duże odchylenia są karane mocniej niż przy MAE."}, "16": {"correct": "B", "why": "Ujemne R² oznacza model gorszy od naiwnego przewidywania średnią targetu."}, "17": {"correct": "A", "why": "Typowy pipeline: `PolynomialFeatures` rozszerza cechy, potem `LinearRegression` na macierzy rozszerzonej."}, "18": {"correct": "C", "why": "`bfill` wypełnia braki wartościami z przyszłości – w prognozowaniu grozi to data leakage."}, "19": {"correct": "A", "why": "KNN to lazy learning: `fit()` zapamiętuje dane, decyzja zapada przy `predict()`."}, "20": {"correct": "B", "why": "Backward elimination usuwa w iteracji zmienną o najwyższym p-value (przy progu istotności)."}}};
+
+const form = document.getElementById('quiz-form');
+const answeredCount = document.getElementById('answered-count');
+const statusLabel = document.getElementById('status-label');
+const resultsEl = document.getElementById('results');
+let graded = false;
+let lastGrade = null;
+
+function esc(s) {
+  return String(s)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function renderForm() {
+  form.innerHTML = QUIZ.questions.map(q => {
+    const opts = ['A','B','C','D'].map(L => `
+      <label class="opt">
+        <input type="radio" name="q${q.n}" value="${L}" />
+        <span class="letter">${L})</span>
+        <span>${esc(q.options[L] || '')}</span>
+      </label>`).join('');
+    return `
+      <article class="card" id="card-${q.n}" data-n="${q.n}">
+        <div class="meta">
+          <span class="tag">#${q.n}</span>
+          <span class="tag diff-${esc(q.difficulty)}">${esc(q.difficulty)}</span>
+          <span class="tag">${esc(q.category)}</span>
+        </div>
+        <h2 class="q-title"><span class="num">${q.n}.</span></h2>
+        <p class="prompt">${esc(q.prompt)}</p>
+        <div class="options">${opts}</div>
+        <div class="confidence">
+          <span>Pewność:</span>
+          <select name="c${q.n}" aria-label="Pewność pytania ${q.n}">
+            <option value="">—</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="why" id="why-${q.n}" hidden></div>
+      </article>`;
+  }).join('');
+}
+
+function collect() {
+  return QUIZ.questions.map(q => {
+    const picked = form.querySelector(`input[name="q${q.n}"]:checked`);
+    const conf = form.querySelector(`select[name="c${q.n}"]`);
+    return {
+      n: q.n,
+      answer: picked ? picked.value : '',
+      confidence: conf && conf.value ? conf.value : '—',
+    };
+  });
+}
+
+function updateProgress() {
+  const n = collect().filter(x => x.answer).length;
+  answeredCount.textContent = String(n);
+}
+
+function grade() {
+  const rows = collect();
+  const missing = rows.filter(r => !r.answer).map(r => r.n);
+  if (missing.length) {
+    alert('Brak odpowiedzi w pytaniach: ' + missing.join(', '));
+    return null;
+  }
+  let ok = 0;
+  const detail = rows.map(r => {
+    const key = QUIZ.answers[r.n];
+    const correct = key.correct;
+    const isOk = r.answer === correct;
+    if (isOk) ok += 1;
+    const card = document.getElementById('card-' + r.n);
+    const why = document.getElementById('why-' + r.n);
+    card.classList.remove('ok', 'bad');
+    card.classList.add(isOk ? 'ok' : 'bad');
+    why.hidden = false;
+    why.innerHTML = `<strong>${isOk ? 'OK' : 'BŁĄD'}</strong> · Twoja: ${r.answer} · Poprawna: ${correct}<br>${esc(key.why)}`;
+    return { ...r, correct, isOk, why: key.why };
+  });
+  const pct = Math.round((ok / 20) * 100);
+  document.getElementById('score-text').textContent = `${ok}/20`;
+  document.getElementById('pct-text').textContent = `Skuteczność: ${pct}%`;
+  resultsEl.classList.add('show');
+  statusLabel.textContent = 'Sprawdzono';
+  graded = true;
+  lastGrade = { ok, pct, detail };
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return lastGrade;
+}
+
+function download(filename, content) {
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function buildMyAnswers(detail) {
+  const lines = [
+    `# Moje odpowiedzi – ${QUIZ.date}`,
+    '',
+    '| # | Twoja odpowiedź (A/B/C/D) | Pewność (1-5) | Uwagi |',
+    '|---|---------------------------|---------------|-------|',
+  ];
+  for (const r of detail) {
+    lines.push(`| ${r.n} | ${r.answer} | ${r.confidence === '—' ? '' : r.confidence} | |`);
+  }
+  lines.push('', '## Notatki', '');
+  return lines.join('\n');
+}
+
+function buildResults(grade) {
+  const lines = [
+    `# Wynik quizu — ${QUIZ.date}`,
+    '',
+    '## Wynik',
+    '',
+    `- Poprawne odpowiedzi: ${grade.ok}/20`,
+    `- Skuteczność: ${grade.pct}%`,
+    '',
+    '## Szczegóły',
+    '',
+    '| # | Twoja odpowiedź | Poprawna odpowiedź | Wynik | Pewność | Komentarz |',
+    '|---|---|---|---|---|---|',
+  ];
+  for (const r of grade.detail) {
+    const wynik = r.isOk ? 'OK' : 'BŁĄD';
+    const pew = r.confidence === '—' ? '—' : r.confidence;
+    lines.push(`| ${r.n} | ${r.answer} | ${r.correct} | ${wynik} | ${pew} | ${r.why} |`);
+  }
+  const wrong = grade.detail.filter(r => !r.isOk);
+  lines.push('', '## Mocne strony', '');
+  if (grade.ok >= 15) {
+    lines.push('- Wysoki wynik ogólny — solidne opanowanie większości zagadnień z notatek.');
+  } else if (grade.ok >= 10) {
+    lines.push('- Część zagadnień opanowana poprawnie — warto utrwalić błędne pytania poniżej.');
+  } else {
+    lines.push('- Warto wrócić do notatek i powtórzyć pytania oznaczone jako BŁĄD.');
+  }
+  lines.push('', '## Obszary do powtórki', '');
+  if (!wrong.length) {
+    lines.push('- Brak — pełny wynik.');
+  } else {
+    for (const r of wrong) {
+      lines.push(`- Pyt. ${r.n}: ${r.why}`);
+    }
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+form.addEventListener('change', updateProgress);
+document.getElementById('submit-btn').addEventListener('click', () => grade());
+document.getElementById('reset-btn').addEventListener('click', () => {
+  form.reset();
+  graded = false;
+  lastGrade = null;
+  resultsEl.classList.remove('show');
+  statusLabel.textContent = 'W trakcie';
+  QUIZ.questions.forEach(q => {
+    const card = document.getElementById('card-' + q.n);
+    const why = document.getElementById('why-' + q.n);
+    card.classList.remove('ok', 'bad');
+    why.hidden = true;
+    why.innerHTML = '';
+  });
+  updateProgress();
+});
+document.getElementById('dl-answers').addEventListener('click', () => {
+  const g = lastGrade || grade();
+  if (!g) return;
+  download(`${QUIZ.date}_my_answers.md`, buildMyAnswers(g.detail));
+});
+document.getElementById('dl-results').addEventListener('click', () => {
+  const g = lastGrade || grade();
+  if (!g) return;
+  download(`${QUIZ.date}_results.md`, buildResults(g));
+});
+
+renderForm();
+updateProgress();
+</script>
+</body>
+</html>
