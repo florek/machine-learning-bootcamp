@@ -1,6 +1,6 @@
 # Cheat Sheet – szybkie przypomnienie kluczowych konceptów
 
-Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p17.md.
+Szybkie przypomnienie najważniejszych konceptów z bootcampu ML. Szczegółowe wyjaśnienia w summary_p6.md – summary_p18.md.
 
 ---
 
@@ -524,7 +524,8 @@ Drzewo wybiera podział z **największym IG** (największy spadek ważonej entro
 - konwencja: p_i = 0 → składnik entropii = 0
 - `score()` → accuracy; `max_depth` ogranicza głębokość
 - granice w 2D: regiony prostopadłe do osi (`plot_decision_regions`)
-- struktura: `export_graphviz(..., feature_names=..., class_names=..., filled=True, rounded=True)`
+- struktura: `export_graphviz(..., feature_names=..., class_names=..., filled=True, rounded=True)` → DOT → render PNG (np. pydotplus)
+- Iris: klasy zrównoważone (po 50); przy 2 cechach działka `versicolor`/`virginica` często się nakładają
 - ocena tylko na train nie wykrywa overfittingu przy dużym `max_depth`
 
 ---

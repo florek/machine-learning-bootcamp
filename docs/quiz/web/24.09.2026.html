@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ML Bootcamp Quiz — 24.09.2026</title>
+<style>
+:root {
+  --bg: #f7f4ef;
+  --bg-accent: #e7f1ea;
+  --surface: #ffffff;
+  --surface-2: #f1ece4;
+  --border: #d5cfc4;
+  --text: #1c1917;
+  --muted: #6b6560;
+  --accent: #0f6b4c;
+  --accent-soft: #d8ebe2;
+  --accent-hover: #0b553c;
+  --ok: #1a7f4b;
+  --ok-bg: #e6f5ec;
+  --bad: #b42318;
+  --bad-bg: #fcebea;
+  --easy: #1d6fa5;
+  --mid: #b45309;
+  --hard: #9f1239;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.06);
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(ellipse 70% 45% at 0% 0%, #dceee4 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 100% 0%, #f3e6d0 0%, transparent 50%),
+    var(--bg);
+  line-height: 1.55;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+header .eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+.sub { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.progress {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.progress strong { color: var(--accent); }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+.card.ok {
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--border));
+  background: linear-gradient(180deg, var(--ok-bg), var(--surface) 40%);
+}
+.card.bad {
+  border-color: color-mix(in srgb, var(--bad) 40%, var(--border));
+  background: linear-gradient(180deg, var(--bad-bg), var(--surface) 40%);
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
+}
+.tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.tag.diff-łatwe { color: var(--easy); background: #e8f3fa; border-color: #c5dde9; }
+.tag.diff-średnie { color: var(--mid); background: #faf0e4; border-color: #ead5b8; }
+.tag.diff-trudne { color: var(--hard); background: #fce8ef; border-color: #e9c0cd; }
+.q-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.9rem;
+  font-weight: 600;
+}
+.q-title .num { color: var(--accent); margin-right: 0.35rem; }
+.prompt { margin: 0 0 1rem; white-space: pre-wrap; }
+.options { display: grid; gap: 0.45rem; }
+label.opt {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fafaf8;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+label.opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: var(--accent-soft);
+}
+label.opt:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+label.opt input { margin-top: 0.25rem; accent-color: var(--accent); }
+.letter { font-weight: 700; min-width: 1.4rem; }
+.confidence {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.confidence select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.25rem 0.45rem;
+  background: #fff;
+}
+.feedback {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border);
+}
+.feedback .status-ok {
+  color: var(--ok);
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+.feedback .status-bad {
+  color: var(--bad);
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+.lesson {
+  display: grid;
+  gap: 0.65rem;
+}
+.lesson-block {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+}
+.lesson-block h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lesson-block p { margin: 0; font-size: 0.95rem; }
+.lesson-block.wrong-pick { border-color: color-mix(in srgb, var(--bad) 35%, var(--border)); }
+.lesson-block.remember {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+.actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 1rem 0 0;
+  margin-top: 1rem;
+  background: linear-gradient(180deg, transparent, var(--bg) 30%);
+}
+button, .btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15, 107, 76, 0.25);
+}
+button.primary:hover { background: var(--accent-hover); }
+button.ghost, .btn.ghost {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+button.ghost:hover, .btn.ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#results { display: none; margin-bottom: 1.5rem; }
+#results.show { display: block; }
+#results .score-line {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0 0 0.35rem;
+}
+#results .score-line span { color: var(--accent); }
+.hint { color: var(--muted); font-size: 0.85rem; margin: 0.5rem 0 0; }
+code {
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.card.learn {
+  border-color: color-mix(in srgb, #1d6fa5 40%, var(--border));
+  background: linear-gradient(180deg, #e8f3fa, var(--surface) 40%);
+}
+label.opt.idk-opt {
+  background: #f3f7fa;
+  border-style: dashed;
+}
+label.opt.idk-opt:has(input:checked) {
+  border-color: #1d6fa5;
+  background: #e8f3fa;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #1d6fa5 35%, transparent);
+}
+.status-idk {
+  font-weight: 700;
+  color: #1d6fa5;
+  margin: 0 0 0.5rem;
+}
+.lesson.learn-lesson {
+  background: #f3f8fc;
+  border-color: #c5dde9;
+}
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Machine Learning Bootcamp</p>
+      <h1>Quiz — 24.09.2026</h1>
+      <p class="sub">20 pytań · A–D lub „Nie mam pojęcia” · mini-lekcje przy BŁĄD / NIE WIEM</p>
+    </header>
+
+    <div class="progress" id="progress">
+      <span>Udzielone: <strong id="answered-count">0</strong> / 20</span>
+      <span id="status-label">W trakcie</span>
+    </div>
+
+    <section id="results">
+      <div class="card">
+        <p class="score-line">Wynik: <span id="score-text">0/20</span></p>
+        <p class="sub" id="pct-text"></p>
+        <p class="sub" id="idk-text"></p>
+        <p class="hint">Przy „Nie mam pojęcia” dostajesz mini-lekcję bez zgadywania. Pobierz pliki do <code>docs/quiz/my_answers/</code> i <code>docs/quiz/results/</code>.</p>
+        <div class="actions" style="position:static;margin-top:1rem">
+          <button type="button" class="ghost" id="dl-answers">Pobierz 24.09.2026_my_answers.md</button>
+          <button type="button" class="ghost" id="dl-results">Pobierz 24.09.2026_results.md</button>
+        </div>
+      </div>
+    </section>
+
+    <form id="quiz-form"></form>
+
+    <div class="actions">
+      <button type="button" class="primary" id="submit-btn">Sprawdź wynik</button>
+      <button type="button" class="ghost" id="reset-btn">Wyczyść</button>
+    </div>
+  </div>
+
+<script>
+const QUIZ = {"date": "24.09.2026", "questions": [{"n": 1, "difficulty": "łatwe", "category": "ML", "prompt": "Domyślne kryterium podziału w `DecisionTreeClassifier` to:", "options": {"A": "`'entropy'`", "B": "`'gini'`", "C": "`'mse'`", "D": "`'mae'`"}, "correct": "B", "why": "Domyślne kryterium podziału w DecisionTreeClassifier to 'gini' (alternatywa: 'entropy').", "lesson": {"correct": "Klasyfikacyjne drzewo w sklearn domyślnie mierzy nieczystość wskaźnikiem Gini. Możesz przełączyć na 'entropy', ale bez jawnego ustawienia dostajesz Gini.", "example": "DecisionTreeClassifier(max_depth=1) bez argumentu criterion → criterion='gini'. Dopiero DecisionTreeClassifier(criterion='entropy') używa entropii Shannona.", "remember": "Domyślnie: gini; opcjonalnie: entropy. MSE/MAE to świat regresji, nie klasyfikatora.", "wrong": {"A": "'entropy' jest dostępną alternatywą, ale nie domyślną.", "C": "'mse' to typowe kryterium/metryka z regresji, nie domyślne kryterium DecisionTreeClassifier.", "D": "'mae' też należy do świata błędów regresji, nie do domyślnego kryterium klasyfikatora."}}}, {"n": 2, "difficulty": "łatwe", "category": "ML", "prompt": "`DecisionTreeRegressor` w przeciwieństwie do `DecisionTreeClassifier` przewiduje:", "options": {"A": "wyłącznie etykietę klasy większościowej", "B": "prawdopodobieństwo klasy 1 z sigmoidy", "C": "liczbę sąsiadów k", "D": "wartość ciągłą (typowo średnią targetu w liściu)"}, "correct": "D", "why": "Regresor przewiduje wartość ciągłą – typowo średnią targetu w liściu; klasyfikator przewiduje etykietę klasy.", "lesson": {"correct": "Oba drzewa dzielą przestrzeń cech progami, ale różnią się wyjściem. Klasyfikator daje etykietę (klasa większościowa w liściu), regresor – liczbę ciągłą (zwykle średnia targetu w liściu).", "example": "Liść z targetami 10, 12, 14: regresor przewidzi ok. 12. Ten sam region z etykietami A,A,B: klasyfikator przewidzi A.", "remember": "Classifier → klasa; Regressor → wartość ciągła.", "wrong": {"A": "To opisuje DecisionTreeClassifier (klasa większościowa), nie regressor.", "B": "Prawdopodobieństwa z sigmoidy to świat regresji logistycznej, nie drzewa regresyjnego.", "C": "Liczba sąsiadów k należy do KNN, nie do DecisionTreeRegressor."}}}, {"n": 3, "difficulty": "łatwe", "category": "ML", "prompt": "Zrównoważone klasy w Iris (po 50 próbek na klasę) sprawiają, że:", "options": {"A": "accuracy jest łatwiejsza do interpretacji niż przy silnym niezbalansowaniu", "B": "drzewo musi używać `criterion='entropy'`", "C": "`max_depth` przestaje mieć znaczenie", "D": "model automatycznie odzyskuje 4 cechy przy wizualizacji 2D"}, "correct": "A", "why": "Przy zrównoważonych klasach (po 50) accuracy jest łatwiejsza do interpretacji niż przy silnym niezbalansowaniu.", "lesson": {"correct": "Gdy klasy mają podobną liczebność, accuracy sensownie oddaje jakość modelu. Przy silnym niezbalansowaniu wysoka accuracy może wynikać głównie z przewidywania klasy większościowej.", "example": "Iris: 50/50/50 – accuracy 66% oznacza realne pomyłki. Przy 90%/10% model „zawsze klasa A” ma 90% accuracy mimo że niczego nie nauczył się o klasie B.", "remember": "Zbalansowane klasy → accuracy łatwiej czytać; przy niezbalansowaniu uważaj na myląco wysoki wynik.", "wrong": {"B": "Zrównoważenie klas nie wymusza kryterium 'entropy' – nadal domyślnie można używać Gini.", "C": "max_depth nadal steruje złożonością drzewa niezależnie od balansu klas.", "D": "Redukcja do 2 cech traci pozostałe atrybuty – model ich sam nie odzyskuje."}}}, {"n": 4, "difficulty": "średnie", "category": "ML", "prompt": "Podziały „axis-aligned” w drzewie decyzyjnym oznaczają, że:", "options": {"A": "granice są zawsze okręgami wokół centroidów", "B": "model dzieli przestrzeń wyłącznie po przekątnej płaszczyzny", "C": "progi są prostopadłe do osi cech (regiony prostokątne / schodkowe)", "D": "każdy podział musi używać jednocześnie wszystkich cech"}, "correct": "C", "why": "Podziały axis-aligned są prostopadłe do osi cech, więc regiony w 2D są prostokątne / schodkowe.", "lesson": {"correct": "Każdy węzeł pyta o jedną cechę i jeden próg (np. sepal_length ≤ 5.5). W 2D daje to linie równoległe do osi i regiony jak prostokąty lub „schodki”.", "example": "Najpierw cięcie pionowe (długość działka), potem poziome (szerokość) – mapa klas wygląda jak kolorowe prostokąty, nie jak gładka ukośna linia.", "remember": "Axis-aligned = prostopadle do osi = prostokąty/schodki, nie ukośne hiperpłaszczyzny.", "wrong": {"A": "Okręgi wokół centroidów nie opisują standardowego drzewa z progami na pojedynczych cechach.", "B": "Przekątna płaszczyzny to raczej kierunek jak w modelu liniowym, nie typowy podział drzewa.", "D": "Jeden podział dotyczy zwykle jednej cechy i jednego progu, nie wszystkich cech naraz."}}}, {"n": 5, "difficulty": "średnie", "category": "ML", "prompt": "Bardzo duża wartość `max_depth` (np. 15) na małym zbiorze treningowym zwykle:", "options": {"A": "gwarantuje najlepszą generalizację na niewidzianych danych", "B": "pozwala niemal idealnie dopasować train i niesie silne ryzyko overfittingu", "C": "wymusza `criterion='entropy'`", "D": "powoduje, że `score()` przestaje zwracać accuracy"}, "correct": "B", "why": "Bardzo głębokie drzewo na małym zbiorze może niemal idealnie dopasować train → silne ryzyko overfittingu.", "lesson": {"correct": "Głębsze drzewo może wyciąć przestrzeń na drobne regiony i „zapamiętać” punkty treningowe. Wysoka accuracy na train nie oznacza dobrej generalizacji.", "example": "Na 150 próbkach Iris max_depth=15 może dać niemal 100% na train, ale granice wyglądają jak dopasowanie do szumu – bez testu nie widać przeuczenia.", "remember": "Duży max_depth + mały zbiór → często overfitting; sprawdzaj też zbiór testowy.", "wrong": {"A": "Idealne dopasowanie train nie gwarantuje najlepszej generalizacji – często jest wręcz przeciwnie.", "C": "Głębokość nie wymusza zmiany kryterium na entropy.", "D": "score() klasyfikatora nadal zwraca accuracy niezależnie od max_depth."}}}, {"n": 6, "difficulty": "średnie", "category": "ML", "prompt": "`plot_decision_regions` i `export_graphviz` odpowiadają na różne pytania, bo:", "options": {"A": "pierwszy pokazuje podział płaszczyzny cech, drugi – strukturę węzłów i progów drzewa", "B": "oba zawsze zwracają tę samą macierz confusion matrix", "C": "pierwszy liczy Gini, drugi liczy entropię", "D": "oba służą wyłącznie do skalowania cech"}, "correct": "A", "why": "plot_decision_regions pokazuje podział przestrzeni cech; export_graphviz – strukturę węzłów i progów.", "lesson": {"correct": "To dwa różne widoki tego samego modelu. Regiony na płaszczyźnie mówią „jak model dzieli przestrzeń”, graf DOT – „jakie reguły if/else zbudował algorytm”.", "example": "Na wykresie widzisz kolorowe prostokąty klas. W grafie widzisz węzeł: sepal_length ≤ 5.45 → lewo/prawo i rozkład klas w liściach.", "remember": "Regiony = mapa decyzji; graphviz = struktura drzewa.", "wrong": {"B": "Żadne z tych narzędzi nie jest confusion matrix – to wizualizacje, nie macierz pomyłek.", "C": "Nie służą do liczenia Gini vs entropy; to narzędzia wizualne.", "D": "Skalowanie cech to StandardScaler i podobne – nie te dwie funkcje."}}}, {"n": 7, "difficulty": "średnie", "category": "ML", "prompt": "Przy samej parze cech działka (`sepal_*`) w Iris typowo:", "options": {"A": "wszystkie trzy klasy są idealnie liniowo rozdzielone", "B": "`setosa` oddziela się wyraźniej, a `versicolor` i `virginica` mocno się nakładają", "C": "redukcja do 2 cech zwiększa liczbę klas z 3 do 4", "D": "płytkie drzewo musi osiągnąć 100% accuracy na train"}, "correct": "B", "why": "Na cechach działka setosa oddziela się wyraźniej, a versicolor i virginica mocno się nakładają.", "lesson": {"correct": "W przestrzeni sepal_length × sepal_width setosa zwykle tworzy osobny klaster, ale versicolor i virginica nachodzą na siebie. Dlatego płytkie drzewo ma ograniczoną accuracy mimo zrównoważonych klas.", "example": "Przy max_depth=1 jeden próg często oddziela setosę, ale dwa pozostałe gatunki nadal mieszają się w drugim regionie – accuracy daleka od 100%.", "remember": "Nakładanie klas na wybranych cechach ogranicza wynik nawet przy zbalansowanym Iris.", "wrong": {"A": "Versicolor i virginica na cechach działka zwykle nie są idealnie rozdzielone.", "C": "Redukcja cech nie zmienia liczby klas – nadal są trzy gatunki.", "D": "Przy nakładaniu klas płytkie drzewo raczej nie osiągnie 100% na train."}}}, {"n": 8, "difficulty": "trudne", "category": "ML", "prompt": "Funkcja pomocnicza, która dla zadanego `max_depth` trenuje model, rysuje granice i eksportuje graf, jest przydatna, bo:", "options": {"A": "zastępuje całkowicie potrzebę metryk klasyfikacji", "B": "gwarantuje brak overfittingu bez zbioru testowego", "C": "ułatwia systematyczne porównanie wpływu głębokości na złożoność i dopasowanie", "D": "automatycznie dodaje brakujące cechy Iris przy `predict()`"}, "correct": "C", "why": "Wspólna funkcja (train + granice + graf) ułatwia systematyczne porównanie różnych wartości max_depth.", "lesson": {"correct": "Gdy ten sam pipeline (fit → granice → graf) uruchamiasz dla głębokości 1, 2, 3…, łatwo zobaczyć, jak rosną regiony i jak zmienia się accuracy na train.", "example": "Wywołania dla max_depth=1, potem 2, 3, 5 i 15 pokazują coraz drobniejsze prostokąty i zwykle rosnącą accuracy – w jednym powtarzalnym wzorcu.", "remember": "Jedna funkcja porównawcza = szybsza intuicja o wpływie max_depth.", "wrong": {"A": "Wizualizacja nie zastępuje metryk – nadal patrzysz m.in. na accuracy.", "B": "Porównanie głębokości na samym train nie gwarantuje braku overfittingu.", "D": "Funkcja nie magicznie dopina odrzuconych cech – trenujesz na tym, co podałeś."}}}, {"n": 9, "difficulty": "trudne", "category": "ML", "prompt": "Po wygenerowaniu opisu DOT przez `export_graphviz` do uzyskania obrazu PNG potrzeba:", "options": {"A": "wyłącznie wywołania `classifier.score()`", "B": "narzędzia renderującego DOT (np. pydotplus) budującego graf z bufora tekstowego", "C": "zamiany `DecisionTreeClassifier` na `LinearRegression`", "D": "ustawienia `n_neighbors` w drzewie"}, "correct": "B", "why": "export_graphviz daje DOT; do PNG potrzeba renderu (np. pydotplus z bufora tekstowego).", "lesson": {"correct": "export_graphviz zapisuje tekstowy opis drzewa (DOT). Dopiero zewnętrzny renderer (np. pydotplus) zamienia ten opis na obraz PNG do wyświetlenia lub zapisu.", "example": "DOT trafia do bufora tekstowego → pydotplus buduje graf → write_png / create_png. Sam score() tego nie zrobi.", "remember": "DOT to opis; PNG powstaje po renderze (np. pydotplus).", "wrong": {"A": "score() liczy accuracy, nie renderuje grafu drzewa.", "C": "Zmiana modelu na liniową regresję nie jest krokiem renderowania DOT.", "D": "n_neighbors to parametr KNN, nie drzewa ani pipeline’u PNG."}}}, {"n": 10, "difficulty": "trudne", "category": "ML", "prompt": "W porównaniu z KNN drzewo decyzyjne:", "options": {"A": "buduje jawną strukturę podziałów już podczas `fit()`; predykcja to ścieżka od korzenia do liścia", "B": "zapamiętuje tylko dane w `fit()` i odkłada całą decyzję wyłącznie na `predict()` (lazy learning)", "C": "zawsze daje gładką liniową granicę jak regresja logistyczna", "D": "nie ma parametru `max_depth`"}, "correct": "A", "why": "Drzewo buduje strukturę podziałów w fit(); KNN to lazy learning z decyzją przy predict().", "lesson": {"correct": "Drzewo podczas uczenia wybiera progi i buduje reguły. Predykcja to przejście ścieżką korzeń → liść. KNN w fit() głównie zapamiętuje próbki i liczy sąsiadów dopiero przy predict().", "example": "Po fit() drzewa możesz wyeksportować graf z progami. Po fit() KNN nie masz takiej struktury reguł – dopiero przy nowym punkcie szukasz k sąsiadów.", "remember": "Drzewo = eager (struktura w fit); KNN = lazy (decyzja w predict).", "wrong": {"B": "To opis lazy learning KNN, nie drzewa.", "C": "Drzewo daje regiony osiowe (schodki), nie gładką linię jak regresja logistyczna.", "D": "max_depth jest kluczowym parametrem drzewa."}}}, {"n": 11, "difficulty": "łatwe", "category": "ML", "prompt": "Wskaźnik Gini równy 0 w węźle oznacza, że:", "options": {"A": "klasy są wymieszane po równo", "B": "entropia Shannona wynosi dokładnie 1 bit", "C": "model jest gorszy niż przewidywanie średnią", "D": "węzeł jest czysty (jedna klasa)"}, "correct": "D", "why": "Gini = 0 oznacza węzeł czysty – wszystkie obserwacje należą do jednej klasy.", "lesson": {"correct": "Gini mierzy nieczystość. Zero oznacza brak mieszania klas: wszystkie próbki w węźle mają tę samą etykietę.", "example": "Liść z 40 próbkami wyłącznie setosa → Gini = 0. Liść 20/20 dwóch klas → Gini daleki od zera.", "remember": "Gini 0 = węzeł czysty.", "wrong": {"A": "Równe wymieszanie to maksymalna (lub wysoka) nieczystość, nie Gini = 0.", "B": "Entropia 1 bit przy 50/50 to maksimum niepewności, nie odpowiednik Gini = 0.", "C": "To raczej interpretacja ujemnego R² w regresji, nie Gini = 0."}}}, {"n": 12, "difficulty": "łatwe", "category": "ML", "prompt": "Użycie `drop_first=True` w one-hot encoding ma na celu głównie:", "options": {"A": "zwiększenie liczby kolumn dummy o jedną", "B": "zamianę targetu na wartości ciągłe", "C": "uniknięcie pułapki zmiennych fikcyjnych i redukcję kolinearności", "D": "wymuszenie `criterion='gini'`"}, "correct": "C", "why": "drop_first=True unika pułapki zmiennych fikcyjnych i redukuje kolinearność.", "lesson": {"correct": "Dla K kategorii wystarczy K−1 kolumn dummy. Pełne K kolumn jest liniowo zależne (pułapka zmiennych fikcyjnych) i psuje interpretację w modelach liniowych.", "example": "Kolor: red/green/blue. Zamiast trzech flag wystarczą green i blue – jeśli obie 0, to red.", "remember": "drop_first=True → K−1 dummy, mniej kolinearności.", "wrong": {"A": "drop_first zmniejsza liczbę kolumn o jedną, nie zwiększa.", "B": "One-hot dotyczy kodowania kategorii, nie zamiany targetu na ciągły.", "D": "Nie ma związku z kryterium Gini w drzewie."}}}, {"n": 13, "difficulty": "średnie", "category": "ML", "prompt": "Dla klasyfikacji binarnej przy rozkładzie klas 50/50 entropia Shannona (log₂) osiąga maksimum równe:", "options": {"A": "1 bit", "B": "0 bitów", "C": "0,5 bita", "D": "2/3 bita"}, "correct": "A", "why": "Przy p = q = 0,5 entropia Shannona (log₂) osiąga maksimum 1 bit.", "lesson": {"correct": "Entropia H = −Σ p_i log₂(p_i). Dla dwóch klas przy równych prawdopodobieństwach 0,5 i 0,5 wynik to 1 bit – największa niepewność.", "example": "H(0.5, 0.5) = 1. H(1, 0) = 0 (pewność). H(0.9, 0.1) jest pomiędzy.", "remember": "50/50 przy log₂ → maksimum 1 bit.", "wrong": {"B": "0 bitów to węzeł czysty (pewność), nie maksimum przy 50/50.", "C": "0,5 to maksimum Gini dla dwóch klas, nie maksimum entropii Shannona.", "D": "2/3 nie jest wartością maksimum entropii binarnej przy log₂."}}}, {"n": 14, "difficulty": "średnie", "category": "ML", "prompt": "W klasyfikatorze sklearn metoda `predict_proba` zwraca:", "options": {"A": "wyłącznie etykiety klas (0/1)", "B": "prawdopodobieństwa przynależności do poszczególnych klas", "C": "współczynnik R² na zbiorze testowym", "D": "macierz korelacji cech"}, "correct": "B", "why": "predict_proba zwraca prawdopodobieństwa per klasa; predict – etykiety.", "lesson": {"correct": "predict daje twardą etykietę. predict_proba daje wektor prawdopodobieństw (po jednej wartości na klasę), przydatny gdy liczy się pewność decyzji.", "example": "Dla dwóch klas wynik [0.1, 0.9] oznacza silną skłonność do klasy 1; predict zwróciłoby 1.", "remember": "predict = etykieta; predict_proba = prawdopodobieństwa.", "wrong": {"A": "Etykiety zwraca predict, nie predict_proba.", "C": "R² to metryka regresji / score modelu regresyjnego, nie wyjście predict_proba.", "D": "Macierz korelacji cech to analiza danych, nie metoda klasyfikatora."}}}, {"n": 15, "difficulty": "średnie", "category": "ML", "prompt": "RMSE w stosunku do MSE to:", "options": {"A": "kwadrat MSE", "B": "wartość bezwzględna MSE", "C": "accuracy pomniejszona o MSE", "D": "pierwiastek kwadratowy z MSE"}, "correct": "D", "why": "RMSE to pierwiastek kwadratowy z MSE.", "lesson": {"correct": "MSE to średnia kwadratów błędów. RMSE bierze pierwiastek z MSE, więc wraca do skali targetu i jest często łatwiejszy do interpretacji.", "example": "Jeśli MSE = 25, to RMSE = 5 (w jednostkach y). Kwadrat MSE byłby 625 – to nie RMSE.", "remember": "RMSE = √MSE.", "wrong": {"A": "Kwadrat MSE to coś innego niż RMSE.", "B": "Wartość bezwzględna nie zamienia MSE w RMSE.", "C": "Accuracy i MSE to różne światy (klasyfikacja vs regresja); nie łączy się ich taką formułą."}}}, {"n": 16, "difficulty": "trudne", "category": "ML", "prompt": "Dopasowanie `StandardScaler` (`fit`) na całym zbiorze przed podziałem train/test jest ryzykowne, bo:", "options": {"A": "skalowanie zawsze niszczy informacje o klasach", "B": "`transform` przestaje działać na danych numerycznych", "C": "informacje ze zbioru testowego mogą „przeciec” do parametrów skalera (data leakage)", "D": "wymusza użycie drzewa zamiast regresji logistycznej"}, "correct": "C", "why": "fit skalera na całym zbiorze przed splitem może wprowadzić data leakage ze zbioru testowego.", "lesson": {"correct": "fit liczy średnią i odchylenie. Jeśli zrobi to na całym zbiorze, test wpływa na parametry skalowania – to wyciek informacji. Poprawnie: fit tylko na train, transform na train i test.", "example": "Outlier w teście zmienia globalne σ; po skalowaniu train „widzi” wpływ testu. Split najpierw, potem scaler.fit(X_train).", "remember": "Scaler: fit na train, transform na train i test.", "wrong": {"A": "Skalowanie nie „niszczy klas” – to transformacja cech numerycznych.", "B": "transform działa na danych numerycznych; problemem jest leakage, nie brak działania.", "D": "Wybór modelu nie jest wymuszany przez błąd w kolejności skalowania."}}}, {"n": 17, "difficulty": "trudne", "category": "ML", "prompt": "Przy budowie drzewa algorytm wybiera podział z:", "options": {"A": "największym zyskiem informacyjnym (największy spadek ważonej nieczystości)", "B": "najmniejszym zyskiem informacyjnym", "C": "najwyższym `max_depth` spośród liści", "D": "najniższą accuracy na zbiorze testowym"}, "correct": "A", "why": "Drzewo wybiera podział z największym zyskiem informacyjnym (największy spadek ważonej nieczystości).", "lesson": {"correct": "Zysk informacyjny to nieczystość rodzica minus ważona nieczystość dzieci. Algorytm szuka progu i cechy, które ten spadek maksymalizują.", "example": "Podział A: IG = 0.4; podział B: IG = 0.1 → wybierany jest A, bo bardziej „oczyszcza” węzły.", "remember": "Najlepszy podział = największy IG.", "wrong": {"B": "Najmniejszy IG to najgorszy z kandydatów, nie wybór algorytmu.", "C": "max_depth to ograniczenie głębokości, nie kryterium wyboru progu.", "D": "Przy budowie drzewa nie minimalizuje się accuracy testu jako kryterium podziału węzła."}}}, {"n": 18, "difficulty": "średnie", "category": "ML", "prompt": "W KNN mała wartość `n_neighbors` zwykle prowadzi do:", "options": {"A": "maksymalnie wygładzonych granic i silnego underfittingu", "B": "bardziej poszaranych granic i większego ryzyka overfittingu", "C": "zbudowania drzewa z podziałami prostopadłymi do osi", "D": "minimalizacji binary cross-entropy metodą gradientu"}, "correct": "B", "why": "Małe k daje poszarpane granice i większe ryzyko overfittingu; duże k wygładza.", "lesson": {"correct": "Przy małym k decyzja opiera się na kilku lokalnych sąsiadach – granice są poszarpane i model łatwiej dopasowuje się do szumu. Duże k uśrednia i wygładza.", "example": "k=1: każdy punkt „ciągnie” własny region – bardzo złożona mapa. k=15: granice spokojniejsze, mniej wrażliwe na pojedyncze outliery.", "remember": "Małe k → overfitting/poszarpane granice; duże k → wygładzenie.", "wrong": {"A": "To raczej efekt dużego k (wygładzenie), nie małego.", "C": "Podziały osiowe to drzewo, nie mechanizm KNN.", "D": "Binary cross-entropy i gradient to regresja logistyczna, nie KNN."}}}, {"n": 19, "difficulty": "łatwe", "category": "ML", "prompt": "Wartość R² równa 1,0 oznacza:", "options": {"A": "model gorszy niż przewidywanie średnią targetu", "B": "model nie lepszy niż średnia (R² = 0)", "C": "idealne dopasowanie przewidywań do obserwacji", "D": "konieczność użycia `bfill` na brakach"}, "correct": "C", "why": "R² = 1,0 oznacza idealne dopasowanie przewidywań do obserwowanych wartości.", "lesson": {"correct": "R² = 1 oznacza, że predykcje idealnie trafiają w obserwacje (wyjaśniona cała wariancja względem naiwnej średniej). R² = 0 to poziom średniej; R² < 0 – gorzej niż średnia.", "example": "Jeśli ŷ_i = y_i dla każdej próbki, R² = 1. Jeśli zawsze przewidujesz średnią ȳ, R² = 0.", "remember": "R² = 1 → idealne dopasowanie (na danym zbiorze).", "wrong": {"A": "Model gorszy od średniej to R² < 0, nie 1.", "B": "R² = 0 oznacza poziom średniej, nie idealne dopasowanie.", "D": "bfill dotyczy braków w danych, nie interpretacji R² = 1."}}}, {"n": 20, "difficulty": "trudne", "category": "ML", "prompt": "Wysoki stopień `PolynomialFeatures` przy małej liczbie obserwacji:", "options": {"A": "zwiększa ryzyko przeuczenia (model zbyt elastyczny względem danych)", "B": "zawsze poprawia generalizację na zbiorze testowym", "C": "jest równoważny ustawieniu `max_depth=1` w drzewie", "D": "usuwa potrzebę one-hot encodingu zmiennych kategorycznych"}, "correct": "A", "why": "Wysoki stopień wielomianu przy małej liczbie próbek zwiększa elastyczność modelu i ryzyko przeuczenia.", "lesson": {"correct": "Wysoki stopień tworzy dużo nowych cech (potęgi, interakcje). Przy małej liczbie próbek model łatwo dopasowuje się do szumu – wysoki wynik na train, słaby na teście.", "example": "10 punktów i wielomian stopnia 9 może przechodzić niemal przez każdy punkt treningowy, ale falować absurdalnie między nimi na nowych x.", "remember": "Wysoki stopień + mało danych → overfitting.", "wrong": {"B": "Nie zawsze poprawia generalizację – często ją pogarsza przez przeuczenie.", "C": "max_depth=1 to bardzo proste drzewo; wysoki stopień wielomianu to wręcz przeciwieństwo prostoty.", "D": "PolynomialFeatures nie zastępuje one-hot encodingu kategorii."}}}]};
+
+const form = document.getElementById('quiz-form');
+const answeredCount = document.getElementById('answered-count');
+const statusLabel = document.getElementById('status-label');
+const resultsEl = document.getElementById('results');
+let graded = false;
+let lastGrade = null;
+
+function esc(s) {
+  return String(s)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function renderForm() {
+  form.innerHTML = QUIZ.questions.map(q => {
+    const opts = ['A','B','C','D'].map(L => `
+      <label class="opt">
+        <input type="radio" name="q${q.n}" value="${L}" />
+        <span class="letter">${L})</span>
+        <span>${esc(q.options[L] || '')}</span>
+      </label>`).join('') + `
+      <label class="opt idk-opt">
+        <input type="radio" name="q${q.n}" value="?" />
+        <span class="letter">?</span>
+        <span>Nie mam pojęcia — chcę się nauczyć</span>
+      </label>`;
+    return `
+      <article class="card" id="card-${q.n}" data-n="${q.n}">
+        <div class="meta">
+          <span class="tag">#${q.n}</span>
+          <span class="tag diff-${esc(q.difficulty)}">${esc(q.difficulty)}</span>
+          <span class="tag">${esc(q.category)}</span>
+        </div>
+        <h2 class="q-title"><span class="num">${q.n}.</span></h2>
+        <p class="prompt">${esc(q.prompt)}</p>
+        <div class="options">${opts}</div>
+        <div class="confidence">
+          <span>Pewność:</span>
+          <select name="c${q.n}" aria-label="Pewność pytania ${q.n}">
+            <option value="">—</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="feedback" id="fb-${q.n}" hidden></div>
+      </article>`;
+  }).join('');
+}
+
+function collect() {
+  return QUIZ.questions.map(q => {
+    const picked = form.querySelector(`input[name="q${q.n}"]:checked`);
+    const conf = form.querySelector(`select[name="c${q.n}"]`);
+    return {
+      n: q.n,
+      answer: picked ? picked.value : '',
+      confidence: conf && conf.value ? conf.value : '—',
+    };
+  });
+}
+
+function updateProgress() {
+  const n = collect().filter(x => x.answer).length;
+  answeredCount.textContent = String(n);
+}
+
+function renderOk(why) {
+  return `<p class="status-ok">OK</p><p>${esc(why)}</p>`;
+}
+
+function renderBad(picked, correct, q) {
+  const wrongText = (q.lesson.wrong && q.lesson.wrong[picked]) || 'Ta opcja nie jest poprawna względem notatek.';
+  return `
+    <p class="status-bad">BŁĄD · Twoja: ${picked} · Poprawna: ${correct}</p>
+    <div class="lesson">
+      <div class="lesson-block wrong-pick">
+        <h3>Twoja odpowiedź</h3>
+        <p>${esc(wrongText)}</p>
+      </div>
+      <div class="lesson-block">
+        <h3>Poprawna myśl</h3>
+        <p>${esc(q.lesson.correct)}</p>
+      </div>
+      <div class="lesson-block">
+        <h3>Przykład</h3>
+        <p>${esc(q.lesson.example)}</p>
+      </div>
+      <div class="lesson-block remember">
+        <h3>Zapamiętaj</h3>
+        <p>${esc(q.lesson.remember)}</p>
+      </div>
+    </div>`;
+}
+
+function renderIdk(correct, q) {
+  return `
+    <p class="status-idk">NIE WIEM · Poprawna: ${correct}</p>
+    <p>Bez zgadywania — oto wyjaśnienie:</p>
+    <div class="lesson learn-lesson">
+      <div class="lesson-block">
+        <h3>Poprawna myśl</h3>
+        <p>${esc(q.lesson.correct)}</p>
+      </div>
+      <div class="lesson-block">
+        <h3>Przykład</h3>
+        <p>${esc(q.lesson.example)}</p>
+      </div>
+      <div class="lesson-block remember">
+        <h3>Zapamiętaj</h3>
+        <p>${esc(q.lesson.remember)}</p>
+      </div>
+    </div>`;
+}
+
+function grade() {
+  const rows = collect();
+  const missing = rows.filter(r => !r.answer).map(r => r.n);
+  if (missing.length) {
+    alert('Brak odpowiedzi w pytaniach: ' + missing.join(', '));
+    return null;
+  }
+  let ok = 0;
+  let idk = 0;
+  const detail = rows.map(r => {
+    const q = QUIZ.questions.find(x => x.n === r.n);
+    const correct = q.correct;
+    const isIdk = r.answer === '?';
+    const isOk = !isIdk && r.answer === correct;
+    if (isOk) ok += 1;
+    if (isIdk) idk += 1;
+    const card = document.getElementById('card-' + r.n);
+    const fb = document.getElementById('fb-' + r.n);
+    card.classList.remove('ok', 'bad', 'learn');
+    card.classList.add(isOk ? 'ok' : (isIdk ? 'learn' : 'bad'));
+    fb.hidden = false;
+    if (isOk) fb.innerHTML = renderOk(q.why);
+    else if (isIdk) fb.innerHTML = renderIdk(correct, q);
+    else fb.innerHTML = renderBad(r.answer, correct, q);
+    const wynik = isOk ? 'OK' : (isIdk ? 'NIE WIEM' : 'BŁĄD');
+    return { ...r, correct, isOk, isIdk, wynik, why: q.why };
+  });
+  const pct = Math.round((ok / 20) * 100);
+  document.getElementById('score-text').textContent = `${ok}/20`;
+  document.getElementById('pct-text').textContent = `Skuteczność: ${pct}%`;
+  const idkEl = document.getElementById('idk-text');
+  if (idkEl) idkEl.textContent = idk ? `Nie wiem: ${idk}` : '';
+  resultsEl.classList.add('show');
+  statusLabel.textContent = 'Sprawdzono';
+  graded = true;
+  lastGrade = { ok, pct, idk, detail };
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return lastGrade;
+}
+
+function download(filename, content) {
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function buildMyAnswers(detail) {
+  const lines = [
+    `# Moje odpowiedzi – ${QUIZ.date}`,
+    '',
+    '| # | Twoja odpowiedź (A/B/C/D/?) | Pewność (1-5) | Uwagi |',
+    '|---|----------------------------|---------------|-------|',
+  ];
+  for (const r of detail) {
+    lines.push(`| ${r.n} | ${r.answer} | ${r.confidence === '—' ? '' : r.confidence} | |`);
+  }
+  lines.push('', '## Notatki', '');
+  return lines.join('\n');
+}
+
+function buildResults(grade) {
+  const lines = [
+    `# Wynik quizu — ${QUIZ.date}`,
+    '',
+    '## Wynik',
+    '',
+    `- Poprawne odpowiedzi: ${grade.ok}/20`,
+    `- Skuteczność: ${grade.pct}%`,
+    `- Nie wiem: ${grade.idk || 0}`,
+    '',
+    '## Szczegóły',
+    '',
+    '| # | Twoja odpowiedź | Poprawna odpowiedź | Wynik | Pewność | Komentarz |',
+    '|---|---|---|---|---|---|',
+  ];
+  for (const r of grade.detail) {
+    const wynik = r.wynik || (r.isOk ? 'OK' : 'BŁĄD');
+    const pew = r.confidence === '—' ? '—' : r.confidence;
+    const ans = r.answer === '?' ? '?' : r.answer;
+    lines.push(`| ${r.n} | ${ans} | ${r.correct} | ${wynik} | ${pew} | ${r.why} |`);
+  }
+  const wrong = grade.detail.filter(r => !r.isOk);
+  lines.push('', '## Mocne strony', '');
+  if (grade.ok >= 15) {
+    lines.push('- Wysoki wynik ogólny — solidne opanowanie większości zagadnień z notatek.');
+  } else if (grade.ok >= 10) {
+    lines.push('- Część zagadnień opanowana poprawnie — warto utrwalić błędne pytania poniżej.');
+  } else {
+    lines.push('- Warto wrócić do notatek i powtórzyć pytania oznaczone jako BŁĄD / NIE WIEM.');
+  }
+  lines.push('', '## Obszary do powtórki', '');
+  if (!wrong.length) {
+    lines.push('- Brak — pełny wynik.');
+  } else {
+    for (const r of wrong) {
+      lines.push(`- Pyt. ${r.n}: ${r.why}`);
+    }
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+form.addEventListener('change', updateProgress);
+document.getElementById('submit-btn').addEventListener('click', () => grade());
+document.getElementById('reset-btn').addEventListener('click', () => {
+  form.reset();
+  graded = false;
+  lastGrade = null;
+  resultsEl.classList.remove('show');
+  statusLabel.textContent = 'W trakcie';
+  QUIZ.questions.forEach(q => {
+    const card = document.getElementById('card-' + q.n);
+    const fb = document.getElementById('fb-' + q.n);
+    card.classList.remove('ok', 'bad', 'learn');
+    fb.hidden = true;
+    fb.innerHTML = '';
+  });
+  updateProgress();
+});
+document.getElementById('dl-answers').addEventListener('click', () => {
+  const g = lastGrade || grade();
+  if (!g) return;
+  download(`${QUIZ.date}_my_answers.md`, buildMyAnswers(g.detail));
+});
+document.getElementById('dl-results').addEventListener('click', () => {
+  const g = lastGrade || grade();
+  if (!g) return;
+  download(`${QUIZ.date}_results.md`, buildResults(g));
+});
+
+renderForm();
+updateProgress();
+</script>
+</body>
+</html>

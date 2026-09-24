@@ -16,13 +16,15 @@ Oba modele dzielą przestrzeń cech **podziałami prostopadłymi do osi** (axis-
 
 ## 2. Dane: Iris i redukcja do dwóch cech
 
-`load_iris()` daje 150 próbek, 4 cechy i 3 klasy (`setosa`, `versicolor`, `virginica`).
+`load_iris()` daje 150 próbek, 4 cechy i 3 klasy (`setosa`, `versicolor`, `virginica`). Klasy są **zrównoważone** (po 50 próbek) – accuracy jest wtedy łatwiejsza do interpretacji niż przy silnym niezbalansowaniu.
 
 Do wizualizacji granic na płaszczyźnie wybiera się **dwie cechy** (np. `sepal_length`, `sepal_width`):
 
 - granice decyzyjne da się narysować jako mapę kolorów na wykresie 2D,
 - pełne 4 wymiary nie mieszczą się na jednym wykresie 2D,
 - redukcja cech upraszcza obraz, ale **tracimy informację** z pozostałych atrybutów.
+
+Przy samej parze cech działka (`sepal_*`) klasa `setosa` zwykle oddziela się wyraźniej, a `versicolor` i `virginica` mocno się **nakładają** – płytkie drzewo ma więc ograniczoną accuracy, mimo zrównoważonych klas.
 
 Target konwertuje się do liczb całkowitych (np. `astype('int16')`) przed trenowaniem.
 
@@ -75,9 +77,11 @@ Strukturę drzewa (węzły, progi, rozkład klas, przewidywaną klasę) można w
 - **`feature_names`** – nazwy cech przy progach podziału,
 - **`class_names`** – nazwy klas w liściach,
 - **`filled=True`, `rounded=True`** – czytelniejsze węzły (kolor, zaokrąglenia),
-- narzędzie zewnętrzne (np. pydotplus) renderuje graf do PNG.
+- typowy pipeline renderu: opis DOT trafia do bufora tekstowego → narzędzie zewnętrzne (np. **pydotplus**) buduje graf i zapisuje / wyświetla **PNG**.
 
 To uzupełnienie względem `plot_tree` używanego przy regresji drzewa – tu nacisk na **graf z nazwami klas** i porównanie głębokości.
+
+`plot_decision_regions` i eksport grafu odpowiadają na inne pytania: pierwszy pokazuje **jak model dzieli płaszczyznę cech**, drugi – **jaką strukturę podziałów** zbudował algorytm.
 
 ---
 

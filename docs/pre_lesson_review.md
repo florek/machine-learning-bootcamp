@@ -210,12 +210,14 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 **Kluczowe elementy:**
 - `DecisionTreeClassifier(max_depth=k)` → klasyfikacja; w liściu klasa większościowa
-- Redukcja Iris do 2 cech → wizualizacja granic na płaszczyźnie
+- Redukcja Iris do 2 cech → wizualizacja granic na płaszczyźnie (tracimy pozostałe atrybuty)
+- Iris: klasy zrównoważone (po 50); przy cechach działka `versicolor`/`virginica` często się nakładają
 - `plot_decision_regions` → kolorowe regiony klas (podziały prostopadłe do osi)
-- `export_graphviz` (+ render) → graf drzewa z `feature_names` i `class_names`
+- `export_graphviz` → DOT; render PNG (np. pydotplus) → graf z `feature_names` i `class_names`
 - `score()` klasyfikatora → accuracy
 - Większe `max_depth` → bardziej złożone regiony, wyższa accuracy na train, ryzyko overfittingu
 - Ocena tylko na danych treningowych **nie** wykrywa przeuczenia
+- Funkcja pomocnicza (train + granice + graf) ułatwia porównanie różnych `max_depth`
 
 **Porównanie:** LogisticRegression = granica liniowa; KNN = nieregularne; drzewo = prostokątne / schodkowe regiony.
 
