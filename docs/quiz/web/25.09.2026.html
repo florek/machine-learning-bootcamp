@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ML Bootcamp Quiz — 25.09.2026</title>
+<style>
+:root{--bg:#f7f4ef;--surface:#fff;--soft:#f1ece4;--border:#d5cfc4;--text:#1c1917;--muted:#6b6560;--accent:#0f6b4c;--accent-soft:#d8ebe2;--ok:#1a7f4b;--ok-bg:#e6f5ec;--bad:#b42318;--bad-bg:#fcebea;--idk:#1d6fa5;--idk-bg:#e8f3fa;--mid:#b45309;--hard:#9f1239;--radius:12px;--shadow:0 1px 2px rgba(28,25,23,.04),0 8px 24px rgba(28,25,23,.06);--display:Georgia,"Times New Roman",serif;--body:"Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:var(--body);color:var(--text);background:radial-gradient(ellipse 70% 45% at 0 0,#dceee4 0,transparent 55%),radial-gradient(ellipse 55% 40% at 100% 0,#f3e6d0 0,transparent 50%),var(--bg);line-height:1.55}
+.wrap{max-width:850px;margin:auto;padding:2rem 1.2rem 4rem}
+header{margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
+.eyebrow{margin:0 0 .35rem;color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+h1{margin:0 0 .5rem;font:700 clamp(1.8rem,4vw,2.4rem)/1.2 var(--display)}
+.sub,.hint{color:var(--muted)}
+.sub{margin:0}
+.hint{font-size:.86rem}
+.progress{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:1rem;margin-bottom:1.4rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.92);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.progress strong{color:var(--accent)}
+.card{margin-bottom:1rem;padding:1.25rem 1.35rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.card.ok{border-color:var(--ok);background:linear-gradient(180deg,var(--ok-bg),var(--surface) 38%)}
+.card.bad{border-color:var(--bad);background:linear-gradient(180deg,var(--bad-bg),var(--surface) 38%)}
+.card.idk{border-color:var(--idk);background:linear-gradient(180deg,var(--idk-bg),var(--surface) 38%)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.tag{padding:.2rem .55rem;border:1px solid var(--border);border-radius:999px;background:var(--soft);color:var(--muted);font-size:.7rem;font-weight:700;text-transform:uppercase}
+.diff-łatwe{color:var(--idk);background:#e8f3fa}.diff-średnie{color:var(--mid);background:#faf0e4}.diff-trudne{color:var(--hard);background:#fce8ef}
+.prompt{margin:.2rem 0 1rem;font:600 1.1rem/1.45 var(--display)}
+.options{display:grid;gap:.45rem}
+.opt{display:flex;align-items:flex-start;gap:.65rem;padding:.7rem .85rem;border:1px solid var(--border);border-radius:10px;background:#fafaf8;cursor:pointer}
+.opt:hover,.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt.idk-option{border-style:dashed;background:#f3f7fa}
+.opt.idk-option:has(input:checked){border-color:var(--idk);background:var(--idk-bg)}
+.opt input{margin-top:.25rem;accent-color:var(--accent)}
+.letter{min-width:1.4rem;font-weight:700}
+.confidence{display:flex;align-items:center;gap:.5rem;margin-top:.85rem;color:var(--muted);font-size:.9rem}
+select{padding:.25rem .45rem;border:1px solid var(--border);border-radius:8px;background:#fff}
+.feedback{margin-top:1rem;padding-top:.85rem;border-top:1px dashed var(--border)}
+.status-ok,.status-bad,.status-idk{margin:0 0 .6rem;font-weight:800}.status-ok{color:var(--ok)}.status-bad{color:var(--bad)}.status-idk{color:var(--idk)}
+.lesson{display:grid;gap:.65rem}
+.lesson-block{padding:.75rem .9rem;border:1px solid var(--border);border-radius:10px;background:#fff}
+.lesson-block h3{margin:0 0 .3rem;color:var(--accent);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.lesson-block p{margin:0}.lesson-block.wrong{border-color:var(--bad)}.lesson-block.remember{border-color:var(--accent);background:var(--accent-soft)}
+.actions{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem;padding:1rem 0;background:linear-gradient(180deg,transparent,var(--bg) 30%)}
+button{padding:.7rem 1.05rem;border:0;border-radius:10px;font:650 1rem var(--body);cursor:pointer}
+.primary{color:#fff;background:var(--accent)}.ghost{border:1px solid var(--border);background:#fff}.ghost:hover{border-color:var(--accent);color:var(--accent)}
+#results{display:none}#results.show{display:block}.score{margin:0 0 .35rem;font:700 1.75rem var(--display)}.score span{color:var(--accent)}
+@media(max-width:560px){.wrap{padding:1rem .7rem 3rem}.card{padding:1rem}.progress{font-size:.88rem}.actions{position:static}.opt{padding:.65rem}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header>
+<p class="eyebrow">Machine Learning Bootcamp</p>
+<h1>Quiz — 25.09.2026</h1>
+<p class="sub">10 pytań Random Forest + 10 pytań powtórkowych · A–D lub „Nie mam pojęcia”</p>
+</header>
+<div class="progress"><span>Udzielone: <strong id="answered">0</strong> / 20</span><span id="state">W trakcie</span></div>
+<section id="results">
+<div class="card">
+<p class="score">Wynik: <span id="score">0/20</span></p>
+<p class="sub" id="percentage"></p>
+<p class="sub" id="unknown"></p>
+<p class="hint">Pobierz zapis odpowiedzi albo pełny raport wyniku.</p>
+<div class="actions" style="position:static">
+<button type="button" class="ghost" id="download-answers">Pobierz 25.09.2026_my_answers.md</button>
+<button type="button" class="ghost" id="download-results">Pobierz 25.09.2026_results.md</button>
+</div>
+</div>
+</section>
+<form id="quiz"></form>
+<div class="actions">
+<button type="button" class="primary" id="grade">Sprawdź wynik</button>
+<button type="button" class="ghost" id="reset">Wyczyść</button>
+</div>
+</main>
+<script>
+const QUIZ={date:"25.09.2026",questions:[
+{n:1,difficulty:"łatwe",category:"ML",prompt:"Czym jest Random Forest?",options:{A:"Jednym bardzo głębokim drzewem decyzyjnym",B:"Modelem zespołowym łączącym wiele drzew decyzyjnych",C:"Metodą skalowania cech do średniej 0",D:"Regresją liniową z wieloma współczynnikami"},correct:"B",why:"Random Forest jest modelem zespołowym, który łączy odpowiedzi wielu drzew decyzyjnych.",lesson:{correct:"Random Forest oznacza las losowy. Las składa się z wielu drzew decyzyjnych. Każde drzewo tworzy własną predykcję. Model łączy te odpowiedzi w jeden wynik.",example:"Wyobraź sobie pięć drzew klasyfikujących kwiat. Trzy wskazują Setosa, a dwa Versicolor. Las wybiera Setosa. Decyzja pochodzi z grupy drzew.",remember:"Random Forest to wiele drzew pracujących razem.",wrong:{A:"Pojedyncze głębokie drzewo nie jest lasem. Random Forest zawiera wiele drzew.",C:"Skalowanie zmienia zakres cech. Random Forest jest modelem predykcyjnym, a nie metodą skalowania.",D:"Regresja liniowa dopasowuje współczynniki do prostej zależności. Random Forest łączy drzewa decyzyjne."}}},
+{n:2,difficulty:"łatwe",category:"ML",prompt:"Co określa parametr `n_estimators` w Random Forest?",options:{A:"Maksymalną liczbę cech w danych",B:"Liczbę klas przewidywanych przez model",C:"Maksymalną głębokość każdego drzewa",D:"Liczbę drzew decyzyjnych w lesie"},correct:"D",why:"Parametr n_estimators określa liczbę drzew budowanych w lesie.",lesson:{correct:"Parametr n_estimators steruje liczbą drzew. Każde z nich jest częścią lasu. Wartość 100 oznacza sto drzew. Nie określa liczby cech ani klas.",example:"Tworzysz RandomForestClassifier z n_estimators równym 100. Model buduje sto drzew. Każde drzewo głosuje podczas klasyfikacji. Ich głosy tworzą wynik lasu.",remember:"n_estimators równa się liczbie drzew.",wrong:{A:"Liczba cech pochodzi z danych. n_estimators nie zmienia liczby kolumn wejściowych.",B:"Liczba klas wynika ze zmiennej docelowej. n_estimators liczy drzewa, a nie klasy.",C:"Głębokość drzewa kontroluje inny parametr. n_estimators mówi, ile drzew znajduje się w lesie."}}},
+{n:3,difficulty:"łatwe",category:"ML",prompt:"Dlaczego przy wizualizacji granic decyzyjnych Iris wybiera się dwie cechy?",options:{A:"Dwie cechy można bezpośrednio przedstawić na wykresie 2D",B:"Random Forest nie obsługuje więcej niż dwóch cech",C:"Zbiór Iris zawiera tylko dwie cechy numeryczne",D:"Dwie cechy zawsze zapewniają najwyższą accuracy"},correct:"A",why:"Dwie cechy można umieścić na dwóch osiach zwykłego wykresu 2D.",lesson:{correct:"Wykres 2D ma dwie osie. Na każdej osi można umieścić jedną cechę. Dlatego dwie cechy pozwalają narysować granice decyzyjne. Pełne cztery cechy Iris tworzą przestrzeń czterowymiarową.",example:"Na osi poziomej umieszczasz sepal length. Na osi pionowej umieszczasz sepal width. Kolor tła pokazuje decyzję modelu. Czterech osi nie pokażesz wygodnie na takim wykresie.",remember:"Dwie cechy wybiera się dla czytelnej wizualizacji 2D.",wrong:{B:"Random Forest może korzystać ze wszystkich czterech cech Iris. Ograniczenie dotyczy zwykłego wykresu 2D.",C:"Iris ma cztery cechy numeryczne. Do rysowania wybiera się tylko dwie z nich.",D:"Dwie cechy ułatwiają rysowanie, ale nie gwarantują najlepszego wyniku. Pominięte cechy mogą nieść ważną informację."}}},
+{n:4,difficulty:"średnie",category:"ML",prompt:"Dlaczego `model.score(X, y)` obliczone na danych treningowych nie jest rzetelną oceną generalizacji?",options:{A:"`score()` dla klasyfikatora zwraca wyłącznie R²",B:"Dane treningowe nie zawierają etykiet klas",C:"Model widział te dane podczas uczenia, więc wynik może być zawyżony",D:"Wynik treningowy jest zawsze niższy od testowego"},correct:"C",why:"Model zna dane treningowe, więc wysoki wynik na nich nie dowodzi dobrego działania na nowych danych.",lesson:{correct:"Model uczy się na danych treningowych. Ocena na tych samych danych sprawdza znane przykłady. Model może je dobrze zapamiętać. Generalizację ocenia się na osobnym zbiorze testowym.",example:"Model ogląda sto kwiatów podczas treningu. Potem pytasz go ponownie o te same sto kwiatów. Wysoki wynik może wynikać z dopasowania do znanych przypadków. Nowe kwiaty stanowią uczciwszy test.",remember:"Trenuj na train, a oceniaj na niewidzianym test.",wrong:{A:"Score klasyfikatora zwraca accuracy. R² jest typowym wynikiem score dla regresora.",B:"Do treningu nadzorowanego dane treningowe zawierają etykiety. Problemem jest ponowne użycie tych samych przykładów do oceny.",D:"Wynik treningowy nie musi być niższy od testowego. Często jest wyższy, zwłaszcza przy przeuczeniu."}}},
+{n:5,difficulty:"średnie",category:"ML",prompt:"Dlaczego dodanie `petal length` i `petal width` zwykle pomaga klasyfikować gatunki Iris?",options:{A:"Usuwa potrzebę podziału danych na train i test",B:"Są to wartościowe cechy, które dobrze rozdzielają gatunki",C:"Zamienia problem klasyfikacji na regresję",D:"Gwarantuje identyczne głosowanie wszystkich drzew"},correct:"B",why:"Długość i szerokość płatka dobrze rozdzielają gatunki Iris i dostarczają ważnej informacji.",lesson:{correct:"Iris ma cztery cechy. Długość i szerokość płatka są zwykle bardzo informacyjne. Gatunki wyraźniej różnią się tymi wartościami. Model może dzięki nim łatwiej utworzyć trafne podziały.",example:"Dwa kwiaty mogą mieć podobne działki kielicha. Ich płatki mogą jednak wyraźnie różnić się długością i szerokością. Model wykorzystuje tę różnicę do rozdzielenia klas. Wynik klasyfikacji może się poprawić.",remember:"Petal length i petal width są wartościowymi predyktorami Iris.",wrong:{A:"Nawet z dobrymi cechami potrzebujesz osobnego testu. Bez niego nie oceniasz uczciwie generalizacji.",C:"Target nadal jest gatunkiem kwiatu. Problem pozostaje klasyfikacją.",D:"Drzewa mogą podejmować różne decyzje. Las właśnie łączy ich różne głosy."}}},
+{n:6,difficulty:"średnie",category:"ML",prompt:"Jak Random Forest ustala końcową klasę w klasyfikacji?",options:{A:"Wybiera klasę wskazaną przez większość drzew",B:"Uśrednia nazwy klas zapisane w liściach",C:"Korzysta wyłącznie z predykcji pierwszego drzewa",D:"Wybiera klasę z najmniejszą ważnością cechy"},correct:"A",why:"W klasyfikacji drzewa głosują, a las wybiera klasę wskazaną przez większość.",lesson:{correct:"Każde drzewo zwraca przewidywaną klasę. Las zbiera wszystkie głosy. Klasa z największą liczbą głosów zostaje wynikiem. To jest głosowanie większościowe.",example:"Pięć drzew zwraca kolejno A, A, B, A i B. Klasa A ma trzy głosy. Klasa B ma dwa głosy. Las przewiduje A.",remember:"Klasyfikacja w lesie kończy się głosowaniem drzew.",wrong:{B:"Nazw klas nie da się sensownie uśrednić. W klasyfikacji liczy się głosy na klasy.",C:"Pierwsze drzewo nie decyduje samo. Wynik wykorzystuje wiele drzew.",D:"Ważność cechy opisuje jej wpływ na decyzje. Nie wybiera bezpośrednio końcowej klasy."}}},
+{n:7,difficulty:"średnie",category:"ML",prompt:"Po co ustawia się `random_state` podczas podziału danych i budowy lasu?",options:{A:"Aby automatycznie zwiększyć accuracy do 1.0",B:"Aby ograniczyć model do jednego drzewa",C:"Aby wybrać tylko dwie cechy Iris",D:"Aby losowe operacje dawały powtarzalne wyniki"},correct:"D",why:"random_state utrwala losowość, dzięki czemu eksperyment można powtórzyć z tym samym wynikiem.",lesson:{correct:"Podział danych korzysta z losowości. Random Forest także wykonuje losowe operacje. random_state ustala ich powtarzalny przebieg. Kolejne uruchomienia łatwiej wtedy porównywać.",example:"Dwa razy uruchamiasz podział z random_state równym 42. Te same próbki trafiają do train i test. Las również odtwarza swoje losowe wybory. Wyniki eksperymentu są porównywalne.",remember:"random_state daje powtarzalność, a nie gwarancję lepszego wyniku.",wrong:{A:"Ziarno losowe nie podnosi automatycznie accuracy. Umożliwia odtworzenie tego samego eksperymentu.",B:"Liczbę drzew określa n_estimators. random_state nie zmniejsza lasu do jednego drzewa.",C:"Wybór cech do wykresu wykonuje osoba przygotowująca dane. random_state nie ogranicza liczby cech."}}},
+{n:8,difficulty:"trudne",category:"ML",prompt:"Dlaczego Random Forest jest zwykle stabilniejszy od pojedynczego drzewa?",options:{A:"Każde drzewo musi tworzyć dokładnie tę samą granicę",B:"Las zawsze trenuje się bez losowania próbek",C:"Łączy predykcje wielu różnych drzew, więc mniej zależy od jednego modelu",D:"Zastępuje dane testowe wynikami z treningu"},correct:"C",why:"Łączenie predykcji wielu różnych drzew ogranicza zależność wyniku od jednego drzewa.",lesson:{correct:"Pojedyncze drzewo może mocno reagować na szczegóły danych. Random Forest buduje wiele różnych drzew. Każde może popełniać trochę inne błędy. Wspólny głos daje zwykle bardziej stabilną decyzję.",example:"Jedno drzewo zmienia granicę po małej zmianie próbki. Inne drzewa reagują inaczej. Ich większościowy głos może pozostać taki sam. Las mniej zależy od jednego nietrafionego podziału.",remember:"Wiele zróżnicowanych drzew stabilizuje wynik całego lasu.",wrong:{A:"Drzewa nie muszą być identyczne. Ich zróżnicowanie pomaga ograniczać zależność od jednego modelu.",B:"Losowanie próbek jest częścią intuicji Random Forest. Dzięki niemu drzewa mogą różnić się od siebie.",D:"Dane testowe nadal służą do niezależnej oceny. Nie wolno zastępować ich wynikami treningowymi."}}},
+{n:9,difficulty:"trudne",category:"ML",prompt:"Jak należy interpretować `feature_importances_` w Random Forest?",options:{A:"Większa wartość oznacza większe względne znaczenie cechy w decyzjach modelu",B:"Wartość jest liczbą błędnych predykcji spowodowanych przez cechę",C:"Najmniejsza wartość zawsze wskazuje najlepszy predyktor",D:"Każda wartość jest prawdopodobieństwem konkretnej klasy"},correct:"A",why:"Większa wartość feature_importances_ wskazuje większe względne znaczenie cechy w decyzjach drzew.",lesson:{correct:"Random Forest udostępnia względne ważności cech. Większa liczba oznacza większy udział cechy w decyzjach modelu. Wartości sumują się w przybliżeniu do jednego. Nie są prawdopodobieństwami klas.",example:"Petal length ma ważność 0.44. Sepal width ma ważność 0.03. Pierwsza cecha miała większe znaczenie dla podziałów lasu. Nie oznacza to 44 procent szans na konkretny gatunek.",remember:"Duża feature importance oznacza duże względne znaczenie cechy.",wrong:{B:"Ważność nie liczy pomyłek przypisanych do cechy. Opisuje jej względny wpływ na decyzje modelu.",C:"Większa wartość oznacza większe znaczenie. Najmniejsza wartość wskazuje raczej słabszy udział cechy.",D:"Prawdopodobieństwa klas zwraca predict_proba. Feature importances dotyczą cech, a nie klas."}}},
+{n:10,difficulty:"trudne",category:"ML",prompt:"Dlaczego `accuracy = 1.0` na małym zbiorze testowym Iris nie dowodzi, że model jest idealny?",options:{A:"Accuracy 1.0 oznacza dokładnie połowę poprawnych odpowiedzi",B:"Wynik dotyczy tylko konkretnego, małego testu i nie gwarantuje braku błędów na nowych danych",C:"Random Forest nie może osiągnąć accuracy większej niż 0.5",D:"Każdy model z takim wynikiem musi być niedouczony"},correct:"B",why:"Perfekcyjny wynik na małym teście opisuje tylko te próbki i nie gwarantuje bezbłędnej generalizacji.",lesson:{correct:"Accuracy 1.0 oznacza brak błędów na sprawdzonym zbiorze. Iris jest małym i stosunkowo prostym zbiorem. Test może zawierać tylko kilkadziesiąt próbek. Na większej liczbie nowych danych model nadal może się pomylić.",example:"Model poprawnie klasyfikuje wszystkie 38 próbek testowych. Potem otrzymuje tysiące nowych kwiatów. Niektóre mogą być trudniejsze niż próbki z testu. Pierwszy wynik nie gwarantuje kolejnych trafień.",remember:"Wynik 100 procent dotyczy konkretnego testu, nie całej przyszłości.",wrong:{A:"Accuracy 1.0 oznacza wszystkie poprawne odpowiedzi na danym zbiorze. Połowa poprawnych odpowiedzi dałaby 0.5.",C:"Random Forest może osiągnąć wynik większy niż 0.5. W przykładzie Iris osiągnął 1.0 na konkretnym teście.",D:"Wysoki wynik nie dowodzi underfittingu. Trzeba ocenić model szerzej i pamiętać o rozmiarze testu."}}},
+{n:11,difficulty:"łatwe",category:"ML",prompt:"Co oznacza `Gini = 0` w węźle drzewa klasyfikacyjnego?",options:{A:"Klasy są wymieszane po równo",B:"Model jest gorszy niż przewidywanie średniej",C:"Węzeł jest czysty i zawiera obserwacje jednej klasy",D:"Entropia węzła jest maksymalna"},correct:"C",why:"Gini równe zero oznacza czysty węzeł zawierający obserwacje jednej klasy.",lesson:{correct:"Gini mierzy wymieszanie klas w węźle. Wartość zero oznacza brak wymieszania. Wszystkie obserwacje należą do jednej klasy. Taki węzeł nazywamy czystym.",example:"W liściu znajduje się trzydzieści próbek Setosa. Nie ma tam Versicolor ani Virginica. Udział jednej klasy wynosi sto procent. Gini ma wartość zero.",remember:"Gini zero oznacza czysty węzeł.",wrong:{A:"Równe wymieszanie daje wysoką nieczystość. Nie prowadzi do Gini równego zero.",B:"Porównanie ze średnią dotyczy R² w regresji. Gini opisuje mieszanie klas.",D:"Maksymalna entropia pojawia się przy równym wymieszaniu klas. Czysty węzeł ma entropię równą zero."}}},
+{n:12,difficulty:"łatwe",category:"ML",prompt:"Jak poprawnie użyć `StandardScaler` po podziale train/test?",options:{A:"Dopasować osobny scaler na zbiorze testowym",B:"Dopasować scaler na całych danych przed podziałem",C:"Dopasować scaler tylko na teście, a train jedynie transformować",D:"Dopasować scaler na train, a następnie tym samym scalerem transformować train i test"},correct:"D",why:"Scaler należy dopasować tylko na train, a potem tymi samymi parametrami transformować oba zbiory.",lesson:{correct:"StandardScaler uczy się średniej i odchylenia podczas fit. Powinien poznać tylko dane treningowe. Potem ten sam scaler transformuje train i test. Dzięki temu test pozostaje niewidziany podczas dopasowania.",example:"Najpierw dzielisz dane na train i test. Wywołujesz scaler.fit na X_train. Następnie wywołujesz transform na X_train i X_test. Oba zbiory korzystają z parametrów policzonych na train.",remember:"Scaler fit tylko na train, a transform na train i test.",wrong:{A:"Osobny fit na teście wykorzystuje informacje z testu. Zmienia też skalę względem treningu.",B:"Fit przed podziałem pozwala testowi wpłynąć na średnią i odchylenie. To jest data leakage.",C:"Model uczy się na train, więc to train wyznacza parametry skalowania. Test nie może być źródłem dopasowania."}}},
+{n:13,difficulty:"łatwe",category:"ML",prompt:"Jaki jest typowy skutek ustawienia małego `k` w KNN?",options:{A:"Poszarpane granice i większe ryzyko overfittingu",B:"Zawsze silny underfitting i maksymalnie gładkie granice",C:"Budowa drzewa z jednym poziomem",D:"Brak potrzeby skalowania cech"},correct:"A",why:"Małe k daje bardzo lokalne decyzje, poszarpane granice i większe ryzyko overfittingu.",lesson:{correct:"KNN klasyfikuje na podstawie najbliższych sąsiadów. Małe k wykorzystuje bardzo małą grupę punktów. Pojedyncze obserwacje mogą wtedy zmieniać decyzję. Granice stają się poszarpane i podatne na przeuczenie.",example:"Dla k równego jeden decyduje pojedynczy najbliższy punkt. Nietypowa próbka może utworzyć małą wyspę klasy. Dla większego k głosuje większa grupa. Granica zwykle się wygładza.",remember:"Małe k oznacza lokalne, poszarpane decyzje i ryzyko overfittingu.",wrong:{B:"Gładkie granice są typowe raczej dla większego k. Małe k mocno reaguje na lokalne punkty.",C:"KNN nie buduje drzewa. Wyszukuje najbliższych sąsiadów podczas predykcji.",D:"KNN używa odległości, więc skala cech ma znaczenie. Małe k nie usuwa potrzeby rozważenia skalowania."}}},
+{n:14,difficulty:"średnie",category:"ML",prompt:"Jaka jest relacja między RMSE i MSE?",options:{A:"RMSE jest kwadratem MSE",B:"RMSE jest pierwiastkiem kwadratowym z MSE",C:"RMSE jest różnicą między R² i MSE",D:"RMSE jest średnią wartością targetu"},correct:"B",why:"RMSE jest pierwiastkiem kwadratowym z MSE.",lesson:{correct:"MSE jest średnią kwadratów błędów. RMSE powstaje przez wyciągnięcie pierwiastka z MSE. Dzięki temu RMSE ma jednostki zmiennej docelowej. Obie metryki mocniej reagują na duże błędy.",example:"Załóżmy, że MSE wynosi 25. Pierwiastek z 25 wynosi 5. RMSE ma więc wartość 5. Jeśli target jest w centymetrach, RMSE także jest w centymetrach.",remember:"RMSE równa się pierwiastek z MSE.",wrong:{A:"Podniesienie MSE do kwadratu jeszcze bardziej zwiększyłoby skalę. RMSE wykonuje działanie odwrotne, czyli pierwiastek.",C:"R² i MSE są oddzielnymi metrykami. RMSE nie jest ich różnicą.",D:"Średnia targetu może być naiwną predykcją. Nie definiuje jednak RMSE."}}},
+{n:15,difficulty:"średnie",category:"ML",prompt:"Co oznacza `R² = 0` dla modelu regresji?",options:{A:"Idealne dopasowanie do obserwacji",B:"Wynik gorszy od każdego możliwego modelu",C:"Zerowy błąd każdej predykcji",D:"Model nie jest lepszy od przewidywania średniej targetu"},correct:"D",why:"R² równe zero oznacza jakość na poziomie przewidywania średniej targetu.",lesson:{correct:"R² porównuje model z naiwnym przewidywaniem średniej. Wartość zero oznacza ten sam poziom jakości. Wartość jeden oznacza idealne dopasowanie. Wartość ujemna oznacza wynik gorszy od średniej.",example:"Naiwny model zawsze podaje średnią cenę. Badany model uzyskuje R² równe zero. Nie wyjaśnia wahań lepiej od tej prostej reguły. R² poniżej zera byłoby jeszcze gorsze.",remember:"R² zero oznacza poziom średniej.",wrong:{A:"Idealne dopasowanie odpowiada R² równemu jeden. Zero ma słabszą interpretację.",B:"R² zero nie jest najgorszym możliwym wynikiem. R² może być ujemne.",C:"Zerowe błędy dałyby idealne dopasowanie i R² równe jeden. R² zero nie oznacza braku błędów."}}},
+{n:16,difficulty:"średnie",category:"ML",prompt:"Co grozi przy wysokim stopniu `PolynomialFeatures` i małej liczbie obserwacji?",options:{A:"Model staje się zawsze linią prostą",B:"Wszystkie błędy testowe spadają do zera",C:"Rośnie elastyczność modelu i ryzyko overfittingu",D:"Automatycznie znika potrzeba zbioru testowego"},correct:"C",why:"Wysoki stopień zwiększa elastyczność modelu i przy małej próbie sprzyja dopasowaniu szumu.",lesson:{correct:"PolynomialFeatures dodaje potęgi i interakcje cech. Wysoki stopień tworzy bardzo elastyczny model. Mała liczba obserwacji słabo ogranicza tę elastyczność. Model może dopasować szum zamiast ogólnej zależności.",example:"Masz niewiele punktów i wielomian wysokiego stopnia. Krzywa może przechodzić niemal przez każdy punkt treningowy. Między punktami może jednak mocno falować. Na nowych danych wynik może być słaby.",remember:"Wysoki stopień i mało danych zwiększają ryzyko overfittingu.",wrong:{A:"Wyższe potęgi pozwalają tworzyć zakrzywioną zależność. Model nie musi pozostać prostą względem oryginalnej cechy.",B:"Dopasowanie treningu nie gwarantuje zerowych błędów testowych. Overfitting często pogarsza test.",D:"Elastyczny model szczególnie wymaga niezależnej oceny. Zbiór testowy nadal jest potrzebny."}}},
+{n:17,difficulty:"średnie",category:"ML",prompt:"Który podział wybiera drzewo podczas budowy?",options:{A:"Podział z największym zyskiem informacyjnym, czyli największym spadkiem ważonej nieczystości",B:"Podział z najmniejszym zyskiem informacyjnym",C:"Podział dający największą nieczystość dzieci",D:"Losowy podział bez oceny klas"},correct:"A",why:"Drzewo wybiera podział z największym zyskiem informacyjnym, czyli największą redukcją ważonej nieczystości.",lesson:{correct:"Drzewo porównuje możliwe podziały. Każdy podział tworzy węzły potomne. Dobry podział zmniejsza ważoną nieczystość dzieci. Algorytm wybiera największy zysk informacyjny.",example:"Nieczystość rodzica wynosi 1.0. Po jednym podziale ważona nieczystość dzieci wynosi 0.3. Zysk wynosi 0.7. Podział z większym zyskiem wygrywa.",remember:"Największy spadek nieczystości oznacza najlepszy podział.",wrong:{B:"Mały zysk prawie nie porządkuje klas. Drzewo szuka największej poprawy.",C:"Duża nieczystość dzieci oznacza silne wymieszanie klas. Algorytm chce ją zmniejszyć.",D:"Miary Gini lub entropii oceniają kandydatów. Wybór nie jest wykonywany bez oceny klas."}}},
+{n:18,difficulty:"trudne",category:"ML",prompt:"Co zwraca `predict_proba()` klasyfikatora?",options:{A:"Wyłącznie końcowe etykiety klas",B:"Współczynnik R² dla każdej próbki",C:"Macierz korelacji cech",D:"Prawdopodobieństwa przynależności do poszczególnych klas"},correct:"D",why:"predict_proba zwraca dla każdej próbki prawdopodobieństwa poszczególnych klas.",lesson:{correct:"Metoda predict zwraca wybraną etykietę. Metoda predict_proba pokazuje rozkład prawdopodobieństw klas. Wartości w jednym wierszu sumują się do jednego. Dzięki nim widać pewność decyzji.",example:"Klasyfikator zwraca parę 0.08 i 0.92. Pierwsza liczba dotyczy pierwszej klasy. Druga dotyczy drugiej klasy. Predict wybierze klasę z większym prawdopodobieństwem.",remember:"predict daje etykietę, a predict_proba daje prawdopodobieństwa klas.",wrong:{A:"Końcowe etykiety zwraca predict. predict_proba daje więcej informacji o każdej klasie.",B:"R² jest metryką regresji. predict_proba nie oblicza R².",C:"Macierz korelacji opisuje zależności między cechami. Nie jest wynikiem predykcji prawdopodobieństw."}}},
+{n:19,difficulty:"trudne",category:"ML",prompt:"Po co stosuje się `drop_first=True` przy one-hot encodingu?",options:{A:"Aby utworzyć K+1 kolumn dla K kategorii",B:"Aby pozostawić K−1 kolumn i ograniczyć kolinearność",C:"Aby zamienić target ciągły na klasy",D:"Aby zwiększyć stopień wielomianu"},correct:"B",why:"drop_first usuwa jedną kolumnę bazową, pozostawia K−1 kolumn i ogranicza kolinearność.",lesson:{correct:"One-hot encoding tworzy kolumny zero-jedynkowe dla kategorii. Pełne K kolumn zawiera zbędną zależność. drop_first usuwa jedną kategorię jako bazę. Zostaje K minus jeden kolumn i mniejsza kolinearność.",example:"Kolor ma wartości czerwony, zielony i niebieski. Zostawiasz kolumny zielony i niebieski. Dwa zera oznaczają wtedy czerwony. Trzecia kolumna nie jest potrzebna.",remember:"Dla K kategorii drop_first pozostawia K−1 kolumn.",wrong:{A:"drop_first usuwa jedną kolumnę. Nie tworzy dodatkowej kolumny.",C:"Ta opcja dotyczy kodowania kategorii wejściowych. Nie zamienia automatycznie targetu regresyjnego w klasy.",D:"Stopień wielomianu ustawia PolynomialFeatures. drop_first dotyczy kolumn kategorii."}}},
+{n:20,difficulty:"trudne",category:"ML",prompt:"Które porównanie KNN i drzewa decyzyjnego jest poprawne?",options:{A:"Oba modele budują identyczną strukturę progów podczas `fit()`",B:"Drzewo jest lazy learning, a KNN buduje strukturę podziałów",C:"KNN głównie zapamiętuje dane podczas `fit()`, a drzewo buduje wtedy strukturę podziałów",D:"Oba modele odkładają całą pracę wyłącznie na `predict()`"},correct:"C",why:"KNN jest lazy learning, natomiast drzewo buduje strukturę progów już podczas fit.",lesson:{correct:"KNN jest algorytmem lazy learning. Podczas fit głównie zapamiętuje dane. Sąsiadów wyszukuje podczas predict. Drzewo podczas fit buduje strukturę pytań i progów.",example:"Po dopasowaniu KNN przechowuje punkty treningowe. Nowa próbka uruchamia szukanie najbliższych punktów. Po dopasowaniu drzewa istnieje gotowa ścieżka od korzenia do liścia. Predykcja przechodzi przez zbudowane progi.",remember:"KNN odkłada wyszukiwanie na predict, a drzewo buduje reguły w fit.",wrong:{A:"KNN nie buduje drzewa progów. Zapamiętuje przykłady i później liczy odległości.",B:"Role są odwrócone. KNN jest lazy learning, a drzewo uczy strukturę.",D:"Drzewo wykonuje ważną pracę podczas fit. Wtedy wybiera cechy i progi podziałów."}}}
+]};
+const form=document.getElementById("quiz");
+const answered=document.getElementById("answered");
+const results=document.getElementById("results");
+let lastGrade=null;
+const esc=value=>String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+function render(){
+form.innerHTML=QUIZ.questions.map(q=>`<article class="card" id="card-${q.n}"><div class="meta"><span class="tag">#${q.n}</span><span class="tag diff-${q.difficulty}">${q.difficulty}</span><span class="tag">${q.category}</span></div><p class="prompt">${q.n}. ${esc(q.prompt)}</p><div class="options">${["A","B","C","D"].map(letter=>`<label class="opt"><input type="radio" name="q${q.n}" value="${letter}"><span class="letter">${letter})</span><span>${esc(q.options[letter])}</span></label>`).join("")}<label class="opt idk-option"><input type="radio" name="q${q.n}" value="?"><span class="letter">?</span><span>Nie mam pojęcia — bez zgadywania, chcę się nauczyć</span></label></div><label class="confidence">Pewność:<select name="c${q.n}" aria-label="Pewność pytania ${q.n}"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label><div class="feedback" id="feedback-${q.n}" hidden></div></article>`).join("");
+}
+function collect(){
+return QUIZ.questions.map(q=>{const selected=form.querySelector(`input[name="q${q.n}"]:checked`);const confidence=form.querySelector(`select[name="c${q.n}"]`).value;return{n:q.n,answer:selected?selected.value:"",confidence:confidence||"—"}});
+}
+function updateProgress(){
+answered.textContent=String(collect().filter(row=>row.answer).length);
+}
+function lessonBlocks(q,wrong){
+return `<div class="lesson">${wrong?`<div class="lesson-block wrong"><h3>Twoja odpowiedź</h3><p>${esc(q.lesson.wrong[wrong])}</p></div>`:""}<div class="lesson-block"><h3>Poprawna myśl</h3><p>${esc(q.lesson.correct)}</p></div><div class="lesson-block"><h3>Przykład</h3><p>${esc(q.lesson.example)}</p></div><div class="lesson-block remember"><h3>Zapamiętaj</h3><p>${esc(q.lesson.remember)}</p></div></div>`;
+}
+function grade(){
+const rows=collect();
+const missing=rows.filter(row=>!row.answer).map(row=>row.n);
+if(missing.length){alert(`Brak odpowiedzi w pytaniach: ${missing.join(", ")}`);return null}
+let score=0;
+let unknown=0;
+const detail=rows.map(row=>{
+const q=QUIZ.questions[row.n-1];
+const isUnknown=row.answer==="?";
+const isCorrect=row.answer===q.correct;
+if(isCorrect)score+=1;
+if(isUnknown)unknown+=1;
+const status=isCorrect?"OK":isUnknown?"NIE WIEM":"BŁĄD";
+const card=document.getElementById(`card-${q.n}`);
+const feedback=document.getElementById(`feedback-${q.n}`);
+card.classList.remove("ok","bad","idk");
+card.classList.add(isCorrect?"ok":isUnknown?"idk":"bad");
+feedback.hidden=false;
+feedback.innerHTML=isCorrect?`<p class="status-ok">OK</p><p>${esc(q.why)}</p>`:isUnknown?`<p class="status-idk">NIE WIEM · Poprawna: ${q.correct}</p>${lessonBlocks(q,"")}`:`<p class="status-bad">BŁĄD · Twoja: ${row.answer} · Poprawna: ${q.correct}</p>${lessonBlocks(q,row.answer)}`;
+return{...row,correct:q.correct,status,why:q.why,prompt:q.prompt,isCorrect,isUnknown};
+});
+const percentage=Math.round(score/20*100);
+document.getElementById("score").textContent=`${score}/20`;
+document.getElementById("percentage").textContent=`Skuteczność: ${percentage}%`;
+document.getElementById("unknown").textContent=`Nie wiem: ${unknown}`;
+document.getElementById("state").textContent="Sprawdzono";
+results.classList.add("show");
+lastGrade={score,percentage,unknown,detail};
+results.scrollIntoView({behavior:"smooth",block:"start"});
+return lastGrade;
+}
+function download(filename,content){
+const url=URL.createObjectURL(new Blob([content],{type:"text/markdown;charset=utf-8"}));
+const link=document.createElement("a");
+link.href=url;
+link.download=filename;
+link.click();
+URL.revokeObjectURL(url);
+}
+function buildAnswers(detail){
+const lines=[`# Moje odpowiedzi – ${QUIZ.date}`,"","| # | Twoja odpowiedź (A/B/C/D/?) | Pewność (1-5) | Uwagi |","|---|------------------------------|---------------|-------|"];
+detail.forEach(row=>lines.push(`| ${row.n} | ${row.answer} | ${row.confidence==="—"?"":row.confidence} |  |`));
+lines.push("","## Notatki","");
+return lines.join("\n");
+}
+function buildResults(gradeResult){
+const lines=[`# Wynik quizu — ${QUIZ.date}`,"","## Wynik","",`- Poprawne odpowiedzi: ${gradeResult.score}/20`,`- Skuteczność: ${gradeResult.percentage}%`,`- Nie wiem: ${gradeResult.unknown}`,"","## Szczegóły","","| # | Twoja odpowiedź | Poprawna odpowiedź | Wynik | Pewność | Komentarz |","|---|---|---|---|---|---|"];
+gradeResult.detail.forEach(row=>lines.push(`| ${row.n} | ${row.answer} | ${row.correct} | ${row.status} | ${row.confidence} | ${row.why} |`));
+const strong=gradeResult.detail.filter(row=>row.status==="OK");
+const review=gradeResult.detail.filter(row=>row.status==="BŁĄD"||row.status==="NIE WIEM");
+lines.push("","## Mocne strony","");
+if(strong.length)strong.forEach(row=>lines.push(`- Pytanie ${row.n}: ${row.prompt}`));else lines.push("- Brak poprawnych odpowiedzi w tym podejściu.");
+lines.push("","## Obszary do powtórki","");
+if(review.length)review.forEach(row=>lines.push(`- ${row.status} · Pytanie ${row.n}: ${row.why}`));else lines.push("- Brak — wszystkie odpowiedzi są poprawne.");
+lines.push("");
+return lines.join("\n");
+}
+form.addEventListener("change",updateProgress);
+document.getElementById("grade").addEventListener("click",grade);
+document.getElementById("reset").addEventListener("click",()=>{
+form.reset();
+lastGrade=null;
+results.classList.remove("show");
+document.getElementById("state").textContent="W trakcie";
+QUIZ.questions.forEach(q=>{const card=document.getElementById(`card-${q.n}`);const feedback=document.getElementById(`feedback-${q.n}`);card.classList.remove("ok","bad","idk");feedback.hidden=true;feedback.innerHTML=""});
+updateProgress();
+});
+document.getElementById("download-answers").addEventListener("click",()=>{const current=lastGrade||grade();if(current)download("25.09.2026_my_answers.md",buildAnswers(current.detail))});
+document.getElementById("download-results").addEventListener("click",()=>{const current=lastGrade||grade();if(current)download("25.09.2026_results.md",buildResults(current))});
+render();
+updateProgress();
+</script>
+</body>
+</html>
