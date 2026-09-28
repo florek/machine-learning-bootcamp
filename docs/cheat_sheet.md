@@ -389,6 +389,8 @@ with open('model.pickle', 'rb') as f:
 - **P16** → K-Nearest Neighbors (KNeighborsClassifier, n_neighbors, granice decyzyjne, Iris)
 - **P17** → Wskaźnik Gini, entropia Shannona, zysk informacyjny (kryteria podziału drzew)
 - **P18** → DecisionTreeClassifier, granice 2D, export_graphviz, wpływ max_depth
+- **Random Forest** → Ensemble Learning, RandomForestClassifier, n_estimators, głosowanie, feature_importances_
+- **SVM** → margines, support vectors, hard/soft margin, parametr C, kernel (linear / rbf / poly), SVC
 
 ---
 
@@ -527,6 +529,54 @@ Drzewo wybiera podział z **największym IG** (największy spadek ważonej entro
 - struktura: `export_graphviz(..., feature_names=..., class_names=..., filled=True, rounded=True)` → DOT → render PNG (np. pydotplus)
 - Iris: klasy zrównoważone (po 50); przy 2 cechach działka `versicolor`/`virginica` często się nakładają
 - ocena tylko na train nie wykrywa overfittingu przy dużym `max_depth`
+
+---
+
+## 🌲 Random Forest (las losowy)
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+model.feature_importances_
+```
+
+**Kluczowe koncepty:**
+- **Ensemble Learning:** wiele drzew decyzyjnych zamiast jednego
+- **`n_estimators`:** liczba drzew w lesie
+- **głosowanie:** w klasyfikacji końcową klasę wybiera większość drzew
+- **`feature_importances_`:** względna ważność cech (większa wartość → większe znaczenie; wartości sumują się ≈ 1.0)
+- **Iris:** `petal length` / `petal width` zwykle ważniejsze niż cechy działki kielicha
+- **ocena:** `score()` / `accuracy_score` na danych treningowych nie jest rzetelną oceną generalizacji — używaj zbioru testowego
+- **accuracy = 1.0** na małym teście Iris nie oznacza modelu idealnego na zawsze
+
+---
+
+## 📐 Support Vector Machine (SVM)
+
+```python
+from sklearn.svm import SVC
+
+model = SVC(
+    C=1,
+    kernel="rbf"
+)
+model.fit(X_train, y_train)
+```
+
+**Kluczowe koncepty:**
+- **cel:** granica decyzyjna z **najszerszym możliwym marginesem** między klasami
+- **support vectors:** próbki najbliżej granicy — one w największym stopniu wyznaczają jej położenie
+- **hard margin:** bez błędów klasyfikacji (dobrze tylko przy czystych, liniowo separowalnych danych)
+- **soft margin:** pozwala naruszyć margines i zaakceptować część błędów (lepiej przy outlierach)
+- **parametr `C`:** mniejsze C → szerszy margines, większa tolerancja błędów; większe C → węższy margines, mniejsza tolerancja
+- **kernel:** `linear` (granica liniowa), `rbf` (nieliniowa, domyślny w `SVC`), `poly` (wielomianowa, np. `degree=3`)
+- **intuicja jądra:** dane nieliniowo separowalne w jednej przestrzeni mogą stać się liniowo separowalne po przekształceniu (np. R² → R³)
 
 ---
 

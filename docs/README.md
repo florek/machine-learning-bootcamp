@@ -31,6 +31,8 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`summary_p16.md`** → K-Nearest Neighbors: KNeighborsClassifier, n_neighbors, granice decyzyjne, klasyfikacja wieloklasowa (Iris)
 - **`summary_p17.md`** → Wskaźnik Gini, entropia Shannona, zysk informacyjny – kryteria podziału drzew decyzyjnych
 - **`summary_p18.md`** → DecisionTreeClassifier: granice decyzyjne 2D, export_graphviz, wpływ max_depth
+- **`random_forest_iris_notatki.md`** → Random Forest: ensemble, n_estimators, głosowanie, feature_importances_, Iris
+- **`svm_support_vector_machine_notatki.md`** → SVM: margines, support vectors, hard/soft margin, C, kernele, SVC
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -78,6 +80,8 @@ Struktura dokumentacji i jak z niej korzystać.
 | P16 | `summary_p16.md` | KNN: KNeighborsClassifier, n_neighbors, lazy learning, granice decyzyjne, Iris |
 | P17 | `summary_p17.md` | Wskaźnik Gini, entropia, zysk informacyjny, kryteria podziału drzew klasyfikacyjnych |
 | P18 | `summary_p18.md` | DecisionTreeClassifier, granice 2D (plot_decision_regions), export_graphviz, max_depth |
+| Random Forest | `random_forest_iris_notatki.md` | Ensemble, RandomForestClassifier, n_estimators, głosowanie, feature_importances_ |
+| SVM | `svm_support_vector_machine_notatki.md` | Margines, support vectors, hard/soft margin, C, kernel, SVC |
 
 ---
 
@@ -126,7 +130,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18 → Random Forest → SVM**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -142,6 +146,8 @@ Każda lekcja buduje na poprzedniej:
 - **P16:** K-Nearest Neighbors – klasyfikacja wieloklasowa, parametr n_neighbors, wizualizacja granic decyzyjnych
 - **P17:** Wskaźnik Gini, entropia Shannona, zysk informacyjny – miary nieczystości węzła drzewa klasyfikacyjnego
 - **P18:** Klasyfikacyjne drzewo decyzyjne – DecisionTreeClassifier, granice 2D, export_graphviz, wpływ max_depth
+- **Random Forest:** Las losowy – ensemble drzew, głosowanie, ważność cech, ocena na teście
+- **SVM:** Maszyna wektorów nośnych – maksymalny margines, soft margin, C, kernele, SVC
 
 ---
 
@@ -162,6 +168,8 @@ Każda lekcja buduje na poprzedniej:
 - [P16: K-Nearest Neighbors](summary_p16.md)
 - [P17: Gini, entropia, zysk informacyjny](summary_p17.md)
 - [P18: Klasyfikacyjne drzewo decyzyjne](summary_p18.md)
+- [Random Forest na Iris](random_forest_iris_notatki.md)
+- [SVM — Support Vector Machine](svm_support_vector_machine_notatki.md)
 
 ---
 

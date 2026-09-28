@@ -223,6 +223,36 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 Random Forest (las losowy)
+
+**Co robi:** Ensemble wielu drzew decyzyjnych; klasyfikacja (Iris), ważne cechy, ocena na zbiorze testowym.
+
+**Kluczowe elementy:**
+- `RandomForestClassifier` z `sklearn.ensemble` → uczenie zespołowe
+- `n_estimators` → liczba drzew (np. 100)
+- końcowa klasa = głosowanie większościowe drzew
+- 2 cechy → granice na wykresie 2D; 4 cechy → więcej informacji, bez wygodnej wizualizacji 2D
+- `train_test_split` + `accuracy_score` na teście (nie oceniaj wyłącznie na train)
+- `feature_importances_` → względna ważność cech (w Iris zwykle petal length / petal width)
+- accuracy = 1.0 na małym teście ≠ gwarancja idealnego modelu na nowych danych
+
+---
+
+## 📌 SVM (Support Vector Machine)
+
+**Co robi:** Szuka granicy decyzyjnej z maksymalnym marginesem; kernele umożliwiają problemy nieliniowe.
+
+**Kluczowe elementy:**
+- margines = pas między klasami; SVM maksymalizuje jego szerokość
+- support vectors = punkty najbliżej granicy
+- hard margin vs soft margin (elastyczność przy outlierach)
+- `C` → kompromis: małe C = szerszy margines / większa tolerancja błędów; duże C = węższy margines
+- `SVC` z `sklearn.svm`; domyślny `kernel="rbf"`
+- kernele: `linear`, `rbf`, `poly` (np. `degree=3`)
+- kernel = przekształcenie przestrzeni → problem nieliniowy może stać się liniowo separowalny
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -288,6 +318,10 @@ score_test = regressor.score(X_test, y_test)
 **Przed P17:** Gini = 1 − Σp_i²; entropia = −Σ p_i·log₂(p_i); IG = spadek ważonej entropii po podziale; criterion='gini' vs 'entropy'; scipy.stats.entropy(..., base=2)
 
 **Przed P18:** DecisionTreeClassifier(max_depth=k), score=accuracy; 2 cechy do granic 2D; plot_decision_regions; export_graphviz; duże max_depth + ocena tylko na train = ryzyko ukrytego overfittingu
+
+**Przed Random Forest:** Ensemble = wiele drzew + głosowanie; n_estimators; oceniaj na teście; feature_importances_; accuracy 1.0 na małym Iris ≠ model idealny
+
+**Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni przy problemach nieliniowych
 
 ---
 
