@@ -185,10 +185,19 @@ Porównanie `score(X_train)` vs `score(X_test)` diagnozuje problem.
 
 ---
 
+## Support Vector Machine (praktyka)
+
+`SVC` z `sklearn.svm` klasyfikuje metodą SVM. Typowy workflow: wybór cech (często 2 do wizualizacji 2D), `train_test_split`, `StandardScaler.fit(X_train)` + `transform` train/test, `SVC(C=1, kernel="linear"|"rbf").fit(...)`, `score()` (accuracy), `plot_decision_regions`.
+
+Skalowanie: fit scalera wyłącznie na train — fit na teście to data leakage. Kernel `linear` daje prostą granicę; `rbf` — bardziej złożoną. Dwie klasy Iris bywają łatwo separowalne; trzy klasy trudniejsze. Przy 150 próbkach pojedyncze obserwacje mocno zmieniają %; bez `random_state` podział się zmienia, a test czasem wypada lepiej niż train.
+
+---
+
 ## Wizualizacja
 
 - **matplotlib** — `scatter`, `plot`, `contourf`, `contour`, `subplots`
 - **seaborn** — `pairplot`, `heatmap` (mapa korelacji z maską górnego trójkąta)
 - **plotly** — interaktywne wykresy (`px.scatter`, `px.histogram`, `px.bar`, `ff.create_annotated_heatmap`)
+- **mlxtend** — `plot_decision_regions` do regionów klas w 2D
 
 `np.random.seed(42)` zapewnia powtarzalność losowych operacji.

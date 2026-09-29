@@ -577,6 +577,11 @@ model.fit(X_train, y_train)
 - **parametr `C`:** mniejsze C → szerszy margines, większa tolerancja błędów; większe C → węższy margines, mniejsza tolerancja
 - **kernel:** `linear` (granica liniowa), `rbf` (nieliniowa, domyślny w `SVC`), `poly` (wielomianowa, np. `degree=3`)
 - **intuicja jądra:** dane nieliniowo separowalne w jednej przestrzeni mogą stać się liniowo separowalne po przekształceniu (np. R² → R³)
+- **skalowanie:** SVM zwykle wymaga `StandardScaler` — `fit` tylko na train, potem `transform` train i test
+- **Iris 2D:** często `petal length` + `sepal width`; 2 cechy umożliwiają `plot_decision_regions`
+- **linear vs rbf:** linear → prosta granica; rbf → bardziej złożona; na łatwych 2 klasach accuracy może być podobne
+- **3 klasy Iris:** trudniejszy problem (nakładanie się klas); wynik zależy też od losowego podziału
+- **mały zbiór:** 150 próbek → pojedyncze próbki mocno wpływają na %; ustaw `random_state` dla powtarzalności
 
 ---
 

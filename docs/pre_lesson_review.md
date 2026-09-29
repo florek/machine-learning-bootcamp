@@ -250,6 +250,11 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 - `SVC` z `sklearn.svm`; domyślny `kernel="rbf"`
 - kernele: `linear`, `rbf`, `poly` (np. `degree=3`)
 - kernel = przekształcenie przestrzeni → problem nieliniowy może stać się liniowo separowalny
+- praktyka Iris: często 2 cechy (np. petal length, sepal width) → granice 2D
+- SVM zwykle wymaga `StandardScaler` (`fit` tylko na train, `transform` na train i test)
+- `kernel="linear"` vs `kernel="rbf"` → inny kształt granicy; na łatwych 2 klasach wynik może być podobny
+- 2 klasy Iris bywają łatwo liniowo separowalne (~100% accuracy); 3 klasy trudniejsze
+- mały zbiór (150 próbek) + brak `random_state` → zmienne wyniki; test czasem > train
 
 ---
 
@@ -321,7 +326,7 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed Random Forest:** Ensemble = wiele drzew + głosowanie; n_estimators; oceniaj na teście; feature_importances_; accuracy 1.0 na małym Iris ≠ model idealny
 
-**Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni przy problemach nieliniowych
+**Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni; StandardScaler (fit tylko train); 2 cechy do granic 2D; linear vs rbf; mały Iris → ostrożna interpretacja accuracy; `random_state`
 
 ---
 
