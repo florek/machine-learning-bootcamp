@@ -391,6 +391,7 @@ with open('model.pickle', 'rb') as f:
 - **P18** → DecisionTreeClassifier, granice 2D, export_graphviz, wpływ max_depth
 - **Random Forest** → Ensemble Learning, RandomForestClassifier, n_estimators, głosowanie, feature_importances_
 - **SVM** → margines, support vectors, hard/soft margin, parametr C, kernel (linear / rbf / poly), SVC
+- **Naive Bayes** → twierdzenie Bayesa, niezależność cech, prior/likelihood/evidence/posterior, Gaussian/Multinomial
 
 ---
 
@@ -582,6 +583,29 @@ model.fit(X_train, y_train)
 - **linear vs rbf:** linear → prosta granica; rbf → bardziej złożona; na łatwych 2 klasach accuracy może być podobne
 - **3 klasy Iris:** trudniejszy problem (nakładanie się klas); wynik zależy też od losowego podziału
 - **mały zbiór:** 150 próbek → pojedyncze próbki mocno wpływają na %; ustaw `random_state` dla powtarzalności
+
+---
+
+## 🎲 Naive Bayes (naiwny klasyfikator Bayesa)
+
+**Twierdzenie Bayesa:**
+```
+P(A|B) = P(B|A) * P(A) / P(B)
+```
+
+**Kluczowe koncepty:**
+- **podstawa:** klasyfikacja oparta na twierdzeniu Bayesa
+- **„naiwność”:** założenie niezależności cech (często nieidealne, a mimo to model bywa skuteczny)
+- **niezależność zdarzeń:** `P(A ∩ B) = P(A) * P(B)`
+- **prior:** `P(Y)` — prawdopodobieństwo klasy przed cechami
+- **likelihood:** `P(Xi|Y)` — prawdopodobieństwo cechy przy danej klasie
+- **evidence:** `P(X1,...,Xn)` — prawdopodobieństwo obserwowanych danych
+- **posterior:** `P(Y|X1,...,Xn)` — prawdopodobieństwo klasy po uwzględnieniu cech
+- **uproszczenie:** `P(X1,...,Xn|Y) ≈ P(X1|Y) * ... * P(Xn|Y)`
+- **porównanie klas:** mianownik `P(X)` jest wspólny → wystarczy porównać liczniki
+- **decyzja:** wybór klasy z największym posterior
+- **odmiany:** Gaussian / Multinomial (i inne) — różnica w założeniu o rozkładzie cech
+- **zastosowania:** klasyfikacja dokumentów, filtrowanie spamu; szybkość przy wielu cechach i dużych zbiorach
 
 ---
 

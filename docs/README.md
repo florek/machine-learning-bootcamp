@@ -34,6 +34,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`random_forest_iris_notatki.md`** → Random Forest: ensemble, n_estimators, głosowanie, feature_importances_, Iris
 - **`svm_support_vector_machine_notatki.md`** → SVM: margines, support vectors, hard/soft margin, C, kernele, SVC
 - **`svm_iris_python_praktyka.md`** → SVM w praktyce: Iris, StandardScaler, SVC linear/rbf, granice, accuracy na małym zbiorze
+- **`naive_bayes_notatki.md`** → Naive Bayes: twierdzenie Bayesa, założenie niezależności, prior/likelihood/evidence/posterior, odmiany
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -84,6 +85,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | Random Forest | `random_forest_iris_notatki.md` | Ensemble, RandomForestClassifier, n_estimators, głosowanie, feature_importances_ |
 | SVM | `svm_support_vector_machine_notatki.md` | Margines, support vectors, hard/soft margin, C, kernel, SVC |
 | SVM (praktyka Iris) | `svm_iris_python_praktyka.md` | StandardScaler, SVC linear/rbf, granice 2D, mały zbiór, random_state |
+| Naive Bayes | `naive_bayes_notatki.md` | Twierdzenie Bayesa, niezależność cech, prior/likelihood/posterior, Gaussian/Multinomial |
 
 ---
 
@@ -132,7 +134,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18 → Random Forest → SVM → SVM (praktyka Iris)**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18 → Random Forest → SVM → SVM (praktyka Iris) → Naive Bayes**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -151,6 +153,7 @@ Każda lekcja buduje na poprzedniej:
 - **Random Forest:** Las losowy – ensemble drzew, głosowanie, ważność cech, ocena na teście
 - **SVM:** Maszyna wektorów nośnych – maksymalny margines, soft margin, C, kernele, SVC
 - **SVM (praktyka Iris):** StandardScaler, `SVC(kernel="linear"|"rbf")`, granice 2D, ostrożna interpretacja accuracy na małym zbiorze
+- **Naive Bayes:** twierdzenie Bayesa, naiwne założenie niezależności cech, prior × likelihoods / evidence, wybór klasy o największym posterior, odmiany (Gaussian, Multinomial)
 
 ---
 
@@ -174,6 +177,7 @@ Każda lekcja buduje na poprzedniej:
 - [Random Forest na Iris](random_forest_iris_notatki.md)
 - [SVM — Support Vector Machine](svm_support_vector_machine_notatki.md)
 - [SVM w Pythonie na Iris](svm_iris_python_praktyka.md)
+- [Naive Bayes](naive_bayes_notatki.md)
 
 ---
 

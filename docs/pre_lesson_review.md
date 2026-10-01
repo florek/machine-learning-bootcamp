@@ -258,6 +258,23 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 Naive Bayes (naiwny klasyfikator Bayesa)
+
+**Co robi:** Liczy prawdopodobieństwo klasy na podstawie cech, korzystając z twierdzenia Bayesa i silnego uproszczenia o niezależności cech.
+
+**Kluczowe elementy:**
+- twierdzenie Bayesa: `P(A|B) = P(B|A) * P(A) / P(B)`
+- „naiwny” = założenie, że cechy są (warunkowo) niezależne względem klasy
+- założenie często nie jest dokładnie spełnione, a mimo to model bywa skuteczny
+- `prior` = `P(Y)`; `likelihood` = `P(Xi|Y)`; `evidence` = `P(X)`; `posterior` = `P(Y|X)`
+- wspólne `P(X1,...,Xn|Y)` upraszcza się do iloczynu `P(X1|Y) * ... * P(Xn|Y)`
+- przy porównaniu klas mianownik `P(X)` jest ten sam → wystarczy porównać liczniki
+- klasyfikacja: wybór klasy z największym posterior
+- odmiany (Gaussian, Multinomial, …) różnią się założeniem o rozkładzie cech
+- typowe zastosowania: klasyfikacja dokumentów, filtrowanie spamu
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -327,6 +344,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed Random Forest:** Ensemble = wiele drzew + głosowanie; n_estimators; oceniaj na teście; feature_importances_; accuracy 1.0 na małym Iris ≠ model idealny
 
 **Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni; StandardScaler (fit tylko train); 2 cechy do granic 2D; linear vs rbf; mały Iris → ostrożna interpretacja accuracy; `random_state`
+
+**Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech)
 
 ---
 
