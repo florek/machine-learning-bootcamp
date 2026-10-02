@@ -271,6 +271,9 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 - przy porównaniu klas mianownik `P(X)` jest ten sam → wystarczy porównać liczniki
 - klasyfikacja: wybór klasy z największym posterior
 - odmiany (Gaussian, Multinomial, …) różnią się założeniem o rozkładzie cech
+- cechy dyskretne → częstości; cechy ciągłe → potrzebne założenie o rozkładzie (np. Gauss)
+- Gaussian Naive Bayes: rozkład normalny cechy w obrębie klasy; w sklearn: `GaussianNB`
+- przy samym wyborze klasy wystarczą liczniki; normalizacja (dzielenie przez sumę) daje % sumujące się do 1
 - typowe zastosowania: klasyfikacja dokumentów, filtrowanie spamu
 
 ---
@@ -345,7 +348,7 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni; StandardScaler (fit tylko train); 2 cechy do granic 2D; linear vs rbf; mały Iris → ostrożna interpretacja accuracy; `random_state`
 
-**Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech)
+**Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech); dyskretne vs ciągłe; `GaussianNB`; opcjonalna normalizacja do %
 
 ---
 

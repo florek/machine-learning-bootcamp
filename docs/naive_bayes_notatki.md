@@ -478,13 +478,25 @@ Różnica polega głównie na tym:
 
 # 20. Gaussian Naive Bayes
 
-W kolejnej części ma zostać pokazany:
-
 ## Gaussian Naive Bayes
 
-Czyli wersja, w której zakładamy dla cech odpowiedni rozkład gaussowski.
+To odmiana Naive Bayes dla cech ciągłych.
 
-To będzie praktyczny przykład wykorzystania Naive Bayes.
+Zakładamy, że wartości cechy w obrębie danej klasy mają **rozkład normalny** (Gaussa).
+
+Model sprawdza, jak prawdopodobna jest konkretna wartość cechy w każdej klasie, a potem wybiera klasę z najwyższym wynikiem.
+
+W scikit-learn używamy klasy:
+
+```python
+from sklearn.naive_bayes import GaussianNB
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+model.predict(X_test)
+```
+
+Dla cech dyskretnych (np. kategorie pogody) liczymy częstości. Dla cech ciągłych (np. temperatura w °C) potrzebujemy założenia o rozkładzie — stąd właśnie wariant gaussowski.
 
 ---
 

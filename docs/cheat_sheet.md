@@ -604,8 +604,19 @@ P(A|B) = P(B|A) * P(A) / P(B)
 - **uproszczenie:** `P(X1,...,Xn|Y) ≈ P(X1|Y) * ... * P(Xn|Y)`
 - **porównanie klas:** mianownik `P(X)` jest wspólny → wystarczy porównać liczniki
 - **decyzja:** wybór klasy z największym posterior
+- **normalizacja (opcjonalna):** jeśli chcemy %, dzielimy wyniki klas przez ich sumę (sumują się do 1)
+- **dyskretne vs ciągłe:** kategorie → częstości; wartości ciągłe → potrzebne założenie o rozkładzie
 - **odmiany:** Gaussian / Multinomial (i inne) — różnica w założeniu o rozkładzie cech
+- **Gaussian Naive Bayes:** `P(Xi|Y)` z rozkładu normalnego w obrębie klasy; w sklearn: `GaussianNB`
 - **zastosowania:** klasyfikacja dokumentów, filtrowanie spamu; szybkość przy wielu cechach i dużych zbiorach
+
+```python
+from sklearn.naive_bayes import GaussianNB
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+```
 
 ---
 

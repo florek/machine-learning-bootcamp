@@ -35,6 +35,7 @@ Struktura dokumentacji i jak z niej korzystać.
 - **`svm_support_vector_machine_notatki.md`** → SVM: margines, support vectors, hard/soft margin, C, kernele, SVC
 - **`svm_iris_python_praktyka.md`** → SVM w praktyce: Iris, StandardScaler, SVC linear/rbf, granice, accuracy na małym zbiorze
 - **`naive_bayes_notatki.md`** → Naive Bayes: twierdzenie Bayesa, założenie niezależności, prior/likelihood/evidence/posterior, odmiany
+- **`naive_bayes_spacer_gaussian_przyklad.md`** → przykład „spacer”: liczniki, normalizacja, GaussianNB dla cech ciągłych
 
 ### Ogólne
 - **`summary.md`** → Ogólne koncepty przygotowania danych
@@ -86,6 +87,7 @@ Struktura dokumentacji i jak z niej korzystać.
 | SVM | `svm_support_vector_machine_notatki.md` | Margines, support vectors, hard/soft margin, C, kernel, SVC |
 | SVM (praktyka Iris) | `svm_iris_python_praktyka.md` | StandardScaler, SVC linear/rbf, granice 2D, mały zbiór, random_state |
 | Naive Bayes | `naive_bayes_notatki.md` | Twierdzenie Bayesa, niezależność cech, prior/likelihood/posterior, Gaussian/Multinomial |
+| Naive Bayes (spacer + GaussianNB) | `naive_bayes_spacer_gaussian_przyklad.md` | Przykład liczenia, normalizacja %, `GaussianNB` |
 
 ---
 
@@ -134,7 +136,7 @@ Dokumentacja została zoptymalizowana, aby uniknąć duplikatów:
 
 ## 🎓 Progresja nauki
 
-**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18 → Random Forest → SVM → SVM (praktyka Iris) → Naive Bayes**
+**P6 → P7 → P8 → P9 → P10 → P11 → P12 → P13 → P14 → P15 → P16 → P17 → P18 → Random Forest → SVM → SVM (praktyka Iris) → Naive Bayes → Naive Bayes (przykład spacer + GaussianNB)**
 
 Każda lekcja buduje na poprzedniej:
 - **P6:** Zrozumienie matematyki (gradient descent)
@@ -154,6 +156,7 @@ Każda lekcja buduje na poprzedniej:
 - **SVM:** Maszyna wektorów nośnych – maksymalny margines, soft margin, C, kernele, SVC
 - **SVM (praktyka Iris):** StandardScaler, `SVC(kernel="linear"|"rbf")`, granice 2D, ostrożna interpretacja accuracy na małym zbiorze
 - **Naive Bayes:** twierdzenie Bayesa, naiwne założenie niezależności cech, prior × likelihoods / evidence, wybór klasy o największym posterior, odmiany (Gaussian, Multinomial)
+- **Naive Bayes (przykład spacer + GaussianNB):** liczenie priorów i likelihoodów na przykładzie, pomijanie wspólnego mianownika, normalizacja do %, `GaussianNB` dla cech ciągłych
 
 ---
 
@@ -178,6 +181,7 @@ Każda lekcja buduje na poprzedniej:
 - [SVM — Support Vector Machine](svm_support_vector_machine_notatki.md)
 - [SVM w Pythonie na Iris](svm_iris_python_praktyka.md)
 - [Naive Bayes](naive_bayes_notatki.md)
+- [Naive Bayes — przykład spacer + GaussianNB](naive_bayes_spacer_gaussian_przyklad.md)
 
 ---
 
