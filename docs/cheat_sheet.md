@@ -609,13 +609,22 @@ P(A|B) = P(B|A) * P(A) / P(B)
 - **odmiany:** Gaussian / Multinomial (i inne) — różnica w założeniu o rozkładzie cech
 - **Gaussian Naive Bayes:** `P(Xi|Y)` z rozkładu normalnego w obrębie klasy; w sklearn: `GaussianNB`
 - **zastosowania:** klasyfikacja dokumentów, filtrowanie spamu; szybkość przy wielu cechach i dużych zbiorach
+- **praktyka (spacer w Pythonie):** target tekstowy → `LabelEncoder` (`nie→0`, `tak→1`); cechy kategoryczne → `pd.get_dummies(..., drop_first=True)`; target oddzielamy przez `pop()`
+- **ocena / predykcja:** `score()` ≈ 77,7% (ok. 7/9 na pokazanym zbiorze); `predict()` → klasa; `predict_proba()` → P(nie), P(tak); etykietę tekstową odtwarzamy przez `encoder.classes_`
+- **pułapka:** wynik `GaussianNB` może różnić się od ręcznego liczenia na kategoriach — to wariant z założeniem rozkładu normalnego, nie dyskretne częstości
 
 ```python
 from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder
 
+encoder = LabelEncoder()
+y = encoder.fit_transform(y_text)
+X = pd.get_dummies(df, columns=["pogoda", "temperatura"], drop_first=True)
 model = GaussianNB()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
+model.fit(X, y)
+y_pred = model.predict(X_sample)
+y_proba = model.predict_proba(X_sample)
+label = encoder.classes_[y_pred[0]]
 ```
 
 ---

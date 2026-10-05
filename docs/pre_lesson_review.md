@@ -275,6 +275,9 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 - Gaussian Naive Bayes: rozkład normalny cechy w obrębie klasy; w sklearn: `GaussianNB`
 - przy samym wyborze klasy wystarczą liczniki; normalizacja (dzielenie przez sumę) daje % sumujące się do 1
 - typowe zastosowania: klasyfikacja dokumentów, filtrowanie spamu
+- praktyka Python (spacer): `LabelEncoder` dla targetu (`nie→0`, `tak→1`); `get_dummies(..., drop_first=True)` dla cech; `pop()` oddziela target
+- `GaussianNB().fit` → `score` ≈ 77,7% (ok. 7/9); `predict` zwraca klasę (np. `1` = tak); `predict_proba` zwraca P(nie), P(tak); `encoder.classes_` odtwarza etykietę tekstową
+- prawdopodobieństwa z `GaussianNB` mogą różnić się od ręcznego przykładu dyskretnego — inny wariant modelu
 
 ---
 
@@ -348,7 +351,7 @@ score_test = regressor.score(X_test, y_test)
 
 **Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni; StandardScaler (fit tylko train); 2 cechy do granic 2D; linear vs rbf; mały Iris → ostrożna interpretacja accuracy; `random_state`
 
-**Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech); dyskretne vs ciągłe; `GaussianNB`; opcjonalna normalizacja do %
+**Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech); dyskretne vs ciągłe; `GaussianNB`; opcjonalna normalizacja do %; w Pythonie: LabelEncoder + get_dummies + pop → fit/score/predict/predict_proba; wynik Gauss ≠ zawsze wynik ręcznych częstości
 
 ---
 
