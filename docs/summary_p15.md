@@ -139,6 +139,8 @@ Regresja logistyczna zakłada zależność liniową między cechami a logitem sz
 
 **F1-score:** średnia harmoniczna precision i recall; przydatna, gdy klasy są niezbalansowane i sama accuracy może być myląca.
 
+**FPR / FNR:** FPR = FP / (FP + TN) (fałszywe alarmy wśród prawdziwych negatywów); FNR = FN / (FN + TP) (pominięte pozytywy). Koszt FP i FN zależy od problemu — w chorobie zakaźnej FN bywa groźniejszy.
+
 **Support:** liczba prawdziwych obserwacji danej klasy w zbiorze oceny.
 
 ---

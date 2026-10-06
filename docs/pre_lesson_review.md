@@ -281,6 +281,21 @@ Ultra-skondensowane przypomnienie najważniejszych rzeczy z każdej lekcji. Uży
 
 ---
 
+## 📌 Ocena klasyfikacji: accuracy, confusion matrix, precision, recall, F1
+
+**Co robi:** Rozbija ocenę modelu binarnego (np. choroba: 0 = zdrowy, 1 = zakażony) na typy trafień i błędów oraz metryki z nich wynikające.
+
+**Kluczowe elementy:**
+- Accuracy = odsetek wszystkich poprawnych predykcji = (TP + TN) / wszystkie
+- Macierz: TN, FP, FN, TP (suma komórek = liczba próbek)
+- FPR = FP / (FP + TN); FNR = FN / (FN + TP)
+- Precision = TP / (TP + FP); Recall = TP / (TP + FN)
+- F1 = średnia harmoniczna precision i recall
+- Przykład: accuracy 70%, FPR 25%, FNR ≈ 33,3%, precision 80%, recall ≈ 66,7%, F1 ≈ 72,7%
+- W chorobie zakaźnej FN jest zwykle groźniejszy niż FP — nie wystarczy sama accuracy
+
+---
+
 ## 🔄 Powtarzające się koncepty (wszystkie lekcje)
 
 ### Importy (standardowe)
@@ -352,6 +367,8 @@ score_test = regressor.score(X_test, y_test)
 **Przed SVM:** maksymalny margines; support vectors; hard vs soft margin; C; kernel linear/rbf/poly; SVC; transformacja przestrzeni; StandardScaler (fit tylko train); 2 cechy do granic 2D; linear vs rbf; mały Iris → ostrożna interpretacja accuracy; `random_state`
 
 **Przed Naive Bayes:** twierdzenie Bayesa; „naiwność” = niezależność cech; prior × likelihoods / evidence = posterior; mianownik często niepotrzebny przy porównaniu klas; wybór max posterior; Gaussian vs Multinomial (różny rozkład cech); dyskretne vs ciągłe; `GaussianNB`; opcjonalna normalizacja do %; w Pythonie: LabelEncoder + get_dummies + pop → fit/score/predict/predict_proba; wynik Gauss ≠ zawsze wynik ręcznych częstości
+
+**Przed oceną klasyfikacji:** accuracy = (TP+TN)/n; komórki TN/FP/FN/TP; FPR i FNR; precision vs recall (dwa różne pytania); F1 = średnia harmoniczna; koszt FN vs FP zależy od problemu (w zakażeniu groźniejszy FN)
 
 ---
 

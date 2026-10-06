@@ -365,7 +365,19 @@ with open('model.pickle', 'rb') as f:
 
 **Confusion matrix (sklearn):** wiersze = prawdziwe etykiety, kolumny = predykcje; diagonala = trafienia.
 
-**Accuracy przy niezbalansowanych klasach:** może być myląco wysoka – analizuj precision/recall/F1 per klasa.
+**Komórki binarne (klasa 1 = pozytyw):** TN = prawdziwy 0 i pred 0; FP = prawdziwy 0 i pred 1 (fałszywy alarm); FN = prawdziwy 1 i pred 0 (pominięty pozytyw); TP = prawdziwy 1 i pred 1.
+
+**Wzory:**
+- Accuracy = (TP + TN) / (TP + TN + FP + FN)
+- FPR = FP / (FP + TN) — odsetek prawdziwych negatywów błędnie uznanych za pozytyw
+- FNR = FN / (FN + TP) — odsetek prawdziwych pozytywów pominiętych
+- Precision = TP / (TP + FP) — wśród przewidzianych pozytywów, ile naprawdę było pozytywnych
+- Recall = TP / (TP + FN) — wśród wszystkich prawdziwych pozytywów, ile model wykrył
+- F1 = 2 · precision · recall / (precision + recall) — średnia harmoniczna (balans precision i recall)
+
+**Koszt błędów nie jest równy:** w wykrywaniu choroby zakaźnej FN (chory uznany za zdrowego) jest zwykle groźniejszy niż FP (zdrowy idzie na dodatkowe badania).
+
+**Accuracy przy niezbalansowanych klasach:** może być myląco wysoka – analizuj precision/recall/F1 per klasa oraz macierz konfuzji, nie samą accuracy.
 
 ### Train/Test Split
 - **80/20** lub **75/25** to standard
@@ -392,6 +404,7 @@ with open('model.pickle', 'rb') as f:
 - **Random Forest** → Ensemble Learning, RandomForestClassifier, n_estimators, głosowanie, feature_importances_
 - **SVM** → margines, support vectors, hard/soft margin, parametr C, kernel (linear / rbf / poly), SVC
 - **Naive Bayes** → twierdzenie Bayesa, niezależność cech, prior/likelihood/evidence/posterior, Gaussian/Multinomial
+- **Ocena klasyfikacji** → accuracy, TN/FP/FN/TP, FPR, FNR, precision, recall, F1, nierówny koszt błędów
 
 ---
 
